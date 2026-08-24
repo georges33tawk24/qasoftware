@@ -306,6 +306,7 @@ def test_the_engine_finds_them_again_against_the_live_application(
             maxPages=8,
             maxDepth=2,
             settleMs=150,
+            vitalsSamples=1,
             authorisedBy="Jo Blake (client CTO)",
             authorisedHosts=[base.split("//")[1]],
         )

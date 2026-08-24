@@ -241,6 +241,7 @@ def test_the_report_opens_clean_and_filters(
         maxPages=3,
         maxDepth=1,
         settleMs=100,
+        vitalsSamples=1,
         include=[r"/broken/"],
     )
     run = asyncio.run(capture(f"{broken_site_url}broken/index.html", tmp_path, config=config))

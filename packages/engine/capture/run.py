@@ -153,19 +153,34 @@ async def _open(context: BrowserContext, viewport: Viewport) -> Page:
     return page
 
 
-async def _sample_vitals(page: Page, config: RunConfig, *, url: str) -> Metrics:
-    """Load the page a few more times and take the median.
+VITALS_SETTLE_MS = 3_000
+"""How long a re-load is given to produce its numbers.
+
+Deliberately not `pageTimeoutMs`: a page that polls never reaches network-idle, so
+waiting the full page budget on every sample cost 150s per page against 8s for the load
+itself. LCP and CLS have landed long before this.
+"""
+
+
+async def _sample_vitals(
+    page: Page, config: RunConfig, *, url: str, first: dict[str, float | None]
+) -> Metrics:
+    """Re-load the page a few times and take the median of what it reports.
 
     One load measures a moment, not a page. Between two runs of an unchanged site LCP
     moved 850ms here and CLS moved 0.09 — enough to carry findings back and forth across
     their budgets and make a liar of SPEC §20. The extra loads are the price; the dial is
     `vitalsSamples`, and 1 buys the old behaviour back.
+
+    Runs *after* console, network, coverage and axe are already stored, because every one
+    of these loads is recorded too: taken any earlier they tripled the page weight and
+    reported each console error three times.
     """
-    samples = [await snapshot.read_vitals(page)]
+    samples = [first]
     for _ in range(max(0, config.vitalsSamples - 1)):
         try:
             await page.goto(url, wait_until="load", timeout=config.pageTimeoutMs)
-            await stability.settle(page, timeout_ms=config.pageTimeoutMs, settle_ms=config.settleMs)
+            await stability.settle(page, timeout_ms=VITALS_SETTLE_MS, settle_ms=config.settleMs)
         except PlaywrightError:
             break  # one bad reload is not worth losing the samples already taken
         samples.append(await snapshot.read_vitals(page))
@@ -275,7 +290,7 @@ async def _capture_page(
             if is_primary:
                 # After the screenshots: a full-page capture can pull in lazy assets, and
                 # a network log that stops early under-reports page weight.
-                artifact.vitals = await _sample_vitals(page, config, url=record.url)
+                first_vitals = await snapshot.read_vitals(page)
                 if session is not None:
                     # Before axe: injecting its bundle would add 580KB of unused
                     # JavaScript to the page's own coverage numbers.
@@ -285,6 +300,10 @@ async def _capture_page(
                 await recorder.drain()
                 artifact.console = recorder.console
                 artifact.network = recorder.network
+                # Last of all: these re-loads are recorded like any other navigation.
+                artifact.vitals = await _sample_vitals(
+                    page, config, url=record.url, first=first_vitals
+                )
         finally:
             await page.close()
 

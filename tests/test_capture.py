@@ -25,6 +25,7 @@ def fast_config(**over: object) -> RunConfig:
         "maxPages": 4,
         "maxDepth": 2,
         "settleMs": 100,
+        "vitalsSamples": 1,
     }
     defaults.update(over)
     return RunConfig(**defaults)  # type: ignore[arg-type]

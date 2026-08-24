@@ -71,6 +71,7 @@ def _capture(args: argparse.Namespace) -> int:
         respectRobots=not args.ignore_robots,
         maskSelectors=args.mask,
         pageTimeoutMs=args.timeout,
+        vitalsSamples=args.vitals_samples,
     )
 
     def announce(page: PageRecord) -> None:
@@ -459,6 +460,12 @@ def build_parser() -> argparse.ArgumentParser:
     cap.add_argument("--any-origin", action="store_true", help="follow links off the seed origin")
     cap.add_argument("--ignore-robots", action="store_true", help="override robots.txt")
     cap.add_argument("--timeout", type=int, default=RunConfig().pageTimeoutMs)
+    cap.add_argument(
+        "--vitals-samples",
+        type=int,
+        default=RunConfig().vitalsSamples,
+        help="page loads used to measure web vitals; 1 disables sampling",
+    )
     cap.set_defaults(handler=_capture)
 
     fig = sub.add_parser("figma", help="ingest a Figma file and match it to the run")

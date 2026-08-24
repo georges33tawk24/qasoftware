@@ -88,6 +88,10 @@ def summarise_vitals(samples: list[dict[str, float | None]]) -> Metrics:
         if not values:
             continue
         setattr(metrics, name, median(values))
-        metrics.low[name] = values[0]
-        metrics.high[name] = values[-1]
+        if len(values) > 1:
+            # A spread is only recorded when there is one. With a single load `low` and
+            # `high` would just restate the value, and an artifact that carries the same
+            # number three times invites a reader to believe it was measured three times.
+            metrics.low[name] = values[0]
+            metrics.high[name] = values[-1]
     return metrics

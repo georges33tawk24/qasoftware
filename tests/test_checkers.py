@@ -190,6 +190,7 @@ def test_a_live_capture_still_finds_the_planted_defects(
         maxPages=10,
         maxDepth=3,
         settleMs=120,
+        vitalsSamples=1,
         include=[r"/broken/"],
         dictionary=["stylesheet", "noindex", "viewport"],
     )

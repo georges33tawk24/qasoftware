@@ -202,6 +202,7 @@ def test_the_agent_layer_survives_the_worker_s_event_loop(
                 "maxPages": 1,
                 "maxDepth": 0,
                 "settleMs": 120,
+                "vitalsSamples": 1,
                 "flows": False,
                 "apiProbes": False,
             },

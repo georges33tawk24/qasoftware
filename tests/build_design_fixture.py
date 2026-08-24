@@ -175,6 +175,7 @@ async def build() -> None:
             maxPages=1,
             maxDepth=0,
             settleMs=150,
+            vitalsSamples=1,
             include=[r"/index\.html"],
         )
         result = await capture(base + "index.html", OUT.parent / "_design_tmp", config=config)

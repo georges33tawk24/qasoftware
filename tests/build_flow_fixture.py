@@ -77,6 +77,7 @@ async def build() -> None:
             maxPages=8,
             maxDepth=2,
             settleMs=150,
+            vitalsSamples=1,
             authorisedBy="Jo Blake (client CTO)",
             authorisedHosts=[base.split("//")[1]],
         )
