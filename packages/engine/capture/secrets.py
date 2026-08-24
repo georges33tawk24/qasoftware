@@ -51,17 +51,24 @@ class SecretError(RuntimeError):
     pass
 
 
-def resolve(ref: str) -> str:
-    """Resolve `env:NAME` or `keychain:service/account` to a value.
+def check_reference(ref: str) -> None:
+    """Refuse anything that is not `env:NAME` or `keychain:service/account`.
 
-    A bare literal is refused on purpose: if it were allowed, credentials would end up
-    pasted into project JSON, which is the thing this rule exists to prevent.
+    Split out from `resolve` so the API can refuse a pasted credential at the boundary.
+    Refusing only at resolve time is too late: by then the literal is already in the
+    database and coming back out of `GET /api/projects/{id}`.
     """
-    match = _REF.match(ref)
-    if not match:
+    if not _REF.match(ref):
         raise SecretError(
             f"{ref!r} is not a secret reference; use 'env:NAME' or 'keychain:service/account'"
         )
+
+
+def resolve(ref: str) -> str:
+    """Resolve `env:NAME` or `keychain:service/account` to a value."""
+    check_reference(ref)
+    match = _REF.match(ref)
+    assert match is not None  # check_reference just proved it
     scheme, rest = match.groups()
     if scheme == "env":
         value = os.environ.get(rest)

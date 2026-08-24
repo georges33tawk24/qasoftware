@@ -5,7 +5,36 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator, model_validator
+
+from engine.capture.secrets import SecretError, check_reference
+
+
+def _reference(value: str) -> None:
+    """`check_reference`, but as a ValueError so FastAPI answers 422 and not 500."""
+    try:
+        check_reference(value)
+    except SecretError as exc:
+        raise ValueError(str(exc)) from exc
+
+
+def _refs_only(value: Any) -> Any:
+    """Refuse a credential pasted where a reference belongs.
+
+    Walks nested config because a persona keeps its refs inside `basicAuth`, `login`
+    and `cookies[]`. Refusing here means the literal never reaches the database —
+    refusing at resolve time leaves it stored and readable from the API.
+    """
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if key.endswith("Ref") and isinstance(item, str) and item:
+                _reference(item)
+            else:
+                _refs_only(item)
+    elif isinstance(value, list):
+        for item in value:
+            _refs_only(item)
+    return value
 
 
 class ProjectIn(BaseModel):
@@ -17,6 +46,18 @@ class ProjectIn(BaseModel):
     modelTokenRef: str | None = None
     provider: str | None = None
     config: dict[str, Any] = Field(default_factory=dict)
+
+    @field_validator("figmaTokenRef", "modelTokenRef")
+    @classmethod
+    def _reference_not_literal(cls, value: str | None) -> str | None:
+        if value:
+            _reference(value)
+        return value
+
+    @field_validator("config")
+    @classmethod
+    def _config_holds_no_literals(cls, value: dict[str, Any]) -> dict[str, Any]:
+        return dict(_refs_only(value))
 
 
 class ProjectOut(BaseModel):
@@ -43,6 +84,11 @@ class PersonaIn(BaseModel):
     config: dict[str, Any] = Field(default_factory=dict)
     """Selectors and `env:` / `keychain:` references. A credential never comes through
     this endpoint (CLAUDE.md)."""
+
+    @field_validator("config")
+    @classmethod
+    def _config_holds_no_literals(cls, value: dict[str, Any]) -> dict[str, Any]:
+        return dict(_refs_only(value))
 
 
 class PersonaOut(BaseModel):
@@ -219,6 +265,18 @@ class ChannelIn(BaseModel):
     config: dict[str, Any] = {}
     minSeverity: str | None = None
     enabled: bool = True
+
+    @model_validator(mode="after")
+    def _slack_url_is_a_credential(self) -> ChannelIn:
+        """A Slack webhook URL authenticates on its own, so it is named, never stored
+        (CLAUDE.md). A plain webhook URL is not necessarily a secret, so it stays legal.
+        """
+        if self.kind == "slack" and self.config.get("url"):
+            raise ValueError(
+                "a Slack webhook URL is itself a credential; set url_env to the name of "
+                "an environment variable instead of storing the URL"
+            )
+        return self
 
 
 class ChannelOut(BaseModel):

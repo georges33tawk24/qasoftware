@@ -130,14 +130,6 @@ def test_an_unset_reference_says_so_without_failing_the_project(client: TestClie
     assert _secret("env:NOT_SET_ANYWHERE", "figma") is None, "a run continues without it"
 
 
-def test_a_literal_credential_is_refused(client: TestClient) -> None:
-    """`resolve` rejects a bare value, so pasting a token into project config cannot work
-    — which is the point of it being a reference (CLAUDE.md)."""
-    created = make(client, figmaTokenRef="figd_pasted_straight_in")
-    status = client.get(f"/api/projects/{created['id']}").json()["credentials"]
-    assert "not a secret reference" in status["figma"]
-
-
 def test_with_no_key_anywhere_the_run_is_deterministic_only(client: TestClient) -> None:
     """A normal way to run this product, not a failure: the sweep runs, the agents do
     not, and nothing raises."""
@@ -236,3 +228,43 @@ def _await(client: TestClient, run_id: str, timeout: float = 300) -> dict[str, o
             return body
         time.sleep(0.25)
     raise AssertionError(f"run {run_id} did not finish: {body}")
+
+
+def test_a_literal_credential_never_reaches_the_database(client: TestClient) -> None:
+    """Refusing at resolve time is too late — by then it is stored and readable.
+
+    CLAUDE.md: no secrets anywhere durable, project JSON included.
+    """
+    response = client.post(
+        "/api/projects",
+        json={"name": "acme", "target": "https://acme.test/", "figmaTokenRef": "figd_real_token"},
+    )
+    assert response.status_code == 422
+    assert "not a secret reference" in response.text
+    assert "figd_real_token" not in str(client.get("/api/projects").json())
+
+
+def test_a_literal_inside_persona_config_is_refused_too(client: TestClient) -> None:
+    """Personas keep their refs nested, so the walk has to go down into them."""
+    project = make(client)
+    response = client.post(
+        f"/api/projects/{project['id']}/personas",
+        json={
+            "name": "ada",
+            "config": {"login": {"usernameRef": "env:ADA_USER", "passwordRef": "hunter2"}},
+        },
+    )
+    assert response.status_code == 422
+    assert "not a secret reference" in response.text
+
+
+def test_a_proper_reference_still_passes(client: TestClient) -> None:
+    project = make(client)
+    response = client.post(
+        f"/api/projects/{project['id']}/personas",
+        json={
+            "name": "ada",
+            "config": {"login": {"usernameRef": "env:ADA_USER", "passwordRef": "env:ADA_PASS"}},
+        },
+    )
+    assert response.status_code < 300, response.text

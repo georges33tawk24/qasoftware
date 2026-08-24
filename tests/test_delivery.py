@@ -537,3 +537,24 @@ def test_a_second_run_compares_itself_with_the_first(
     assert compared, "there were surfaces in common"
     assert all(s["ssim"] == 1.0 for s in compared), [(s["pagePath"], s["ssim"]) for s in compared]
     assert all(not s["changes"] for s in compared), "nothing moved on an unchanged site"
+
+
+def test_a_slack_webhook_url_cannot_be_stored(client: TestClient) -> None:
+    """CLAUDE.md: a Slack webhook URL is itself a credential, so it is named not stored."""
+    project = client.post(
+        "/api/projects", json={"name": "acme", "target": "https://acme.test/"}
+    ).json()
+    literal = client.post(
+        f"/api/projects/{project['id']}/channels",
+        json={"kind": "slack", "config": {"url": "https://hooks.slack.com/services/T/B/xxx"}},
+    )
+    assert literal.status_code == 422
+    assert "hooks.slack.com" not in str(
+        client.get(f"/api/projects/{project['id']}/channels").json()
+    )
+
+    named = client.post(
+        f"/api/projects/{project['id']}/channels",
+        json={"kind": "slack", "config": {"url_env": "ACME_SLACK_WEBHOOK"}},
+    )
+    assert named.status_code == 201, named.text
