@@ -38,12 +38,27 @@ def checker[C: type[Checker]](cls: C) -> C:
     instance = cls()
     if instance.id in _REGISTRY:
         raise ValueError(f"duplicate checker id {instance.id!r}")
+    # Deterministic unless a checker says otherwise: the default has to be the safe one,
+    # or a checker that forgets to declare quietly leaves the determinism set.
+    if not hasattr(instance, "deterministic"):
+        instance.deterministic = True  # type: ignore[attr-defined]  # optional, see non_deterministic
     _REGISTRY[instance.id] = instance
     return cls
 
 
 def registry() -> dict[str, Checker]:
     return dict(_REGISTRY)
+
+
+def non_deterministic() -> set[str]:
+    """Checkers whose findings two runs over an unchanged site may legitimately disagree
+    on — measurements taken from the world rather than from the artifact.
+
+    Not a Protocol member: making it one would leave two dozen existing checkers
+    structurally incomplete for a flag only one of them sets. The guarantee that nobody
+    joins this set unnoticed lives in `test_hardening`, which asserts its exact contents.
+    """
+    return {i for i, c in _REGISTRY.items() if not getattr(c, "deterministic", True)}
 
 
 def discover(package: str = "engine.checkers") -> dict[str, Checker]:

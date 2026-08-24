@@ -30,6 +30,7 @@
     "respectRobots": true,
     "maskSelectors": [],
     "consentSelectors": [],
+    "vitalsSamples": 3,
     "maskRegions": [],
     "figmaFileKey": null,
     "figmaFrameMap": {},

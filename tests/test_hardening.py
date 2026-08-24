@@ -333,6 +333,19 @@ def test_a_dry_run_removes_nothing(tmp_path: Path) -> None:
 # --------------------------------------------------- the line that actually matters
 
 
+def test_only_web_vitals_are_outside_the_determinism_set() -> None:
+    """SPEC §20 names exactly one exclusion, so exactly one is what this asserts.
+
+    A new checker that measures the world instead of the artifact has to come here and
+    change this line, which is the point: the alternative is someone quietly adding a
+    second wobbling checker and the byte-identical promise becoming folklore.
+    """
+    from engine.checkers.base import discover, non_deterministic
+
+    discover()
+    assert non_deterministic() == {"performance.vitals"}
+
+
 def test_two_runs_on_an_unchanged_site_agree(tmp_path: Path, browser_ready: None) -> None:
     """SPEC §20's definition of done, and the one everything else rests on.
 

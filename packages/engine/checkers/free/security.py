@@ -12,6 +12,7 @@ from urllib.parse import urlsplit
 
 from engine.artifact.context import Capability, RunContext
 from engine.artifact.models import NetworkEntry, PageRecord
+from engine.checkers import resolution
 from engine.checkers.base import checker
 from engine.checkers.support import live_pages, page_finding, synthetic_key
 from engine.issues.models import Category, Finding, Severity
@@ -189,6 +190,28 @@ class SourceMaps:
                 )
 
 
+SIGNATURES = {
+    "/.git/config": ("[core]", "repositoryformatversion"),
+    "/.git/HEAD": ("ref:",),
+    "/.env": ("=",),
+    "/.DS_Store": ("Bud1",),
+    "/config.json": ("{",),
+    "/backup.sql": ("CREATE TABLE", "INSERT INTO", "-- MySQL", "-- PostgreSQL"),
+    "/.htaccess": ("RewriteEngine", "Order ", "Deny ", "<Files"),
+}
+"""What the real file starts with. A single-page app answers 200 with its own HTML for
+every path on the site, so `critical` has to be earned by the body and not the status."""
+
+
+def _looks_like(path: str, sample: str | None) -> bool:
+    if not sample:
+        return False
+    markers = SIGNATURES.get(path)
+    if markers is None:
+        return "<html" not in sample[:400].lower()
+    return any(marker.lower() in sample.lower() for marker in markers)
+
+
 @checker
 class ExposedPaths:
     id = "free.exposed-paths"
@@ -202,17 +225,36 @@ class ExposedPaths:
         if probes is None or not pages:
             return
         seed = min(pages, key=lambda p: p.depth)
+        missing = next(
+            (p.bodyHash for p in probes.paths if p.kind == "not-found-handling" and p.bodyHash),
+            None,
+        )
         for probe in probes.paths:
             if probe.kind != "exposed-path" or probe.status != 200:
                 continue
+            if missing and probe.bodyHash == missing:
+                # The app shell, wearing a 200. Not a file.
+                continue
+            looks_right = _looks_like(probe.path, probe.bodySample)
             yield page_finding(
                 self,
                 seed,
                 kind="exposed-path",
                 title=f"{probe.path} is publicly readable",
-                description="Served with a 200 to an anonymous request.",
+                description=(
+                    "Served with a 200 to an anonymous request, and the body looks like "
+                    "the file it was asked for."
+                    if looks_right
+                    else "Served with a 200 to an anonymous request."
+                ),
                 expected="404 or 403",
                 actual="200",
+                severity=self.default_severity if looks_right else Severity.minor,
                 stable_key=synthetic_key(self.id, probe.path),
-                data={"path": probe.path, "sample": probe.bodySample},
+                data={
+                    "path": probe.path,
+                    "sample": probe.bodySample,
+                    resolution.BODY_HASH: probe.bodyHash,
+                    resolution.EXISTENCE_BASIS: "content" if looks_right else "status",
+                },
             )

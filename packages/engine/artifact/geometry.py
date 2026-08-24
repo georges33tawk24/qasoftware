@@ -44,6 +44,30 @@ def contains(outer: Box, inner: Box, *, slack: float = 1.0) -> bool:
     )
 
 
+def inside_svg(elements: list[ElementRecord]) -> set[str]:
+    """Everything under an `<svg>`. The `<svg>` itself stays; its internals do not.
+
+    A logo's glyph outlines are not a card grid, not a pair of overlapping controls, and
+    not an element overflowing its container. Lives here rather than in `layout.py`
+    because both the derived record and `Surface.laid_out` have to agree on it — when
+    only the derived record knew, `occluded-clickable` went on reporting one `<path>` as
+    covering another, 443 times, at critical.
+    """
+    by_id = {e.id: e for e in elements}
+    inside: set[str] = set()
+    for element in elements:
+        parent_id = element.parentId
+        while parent_id:
+            parent = by_id.get(parent_id)
+            if parent is None:
+                break
+            if parent.tag == "svg" or parent.id in inside:
+                inside.add(element.id)
+                break
+            parent_id = parent.parentId
+    return inside
+
+
 def by_parent(elements: list[ElementRecord]) -> dict[str | None, list[ElementRecord]]:
     groups: dict[str | None, list[ElementRecord]] = {}
     for element in elements:

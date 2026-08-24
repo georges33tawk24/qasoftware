@@ -3,5 +3,8 @@
   "cls": 0.0,
   "tbt": 0.0,
   "ttfb": 0.9000000059604645,
-  "inp": null
+  "inp": null,
+  "sampleCount": 1,
+  "low": {},
+  "high": {}
 }

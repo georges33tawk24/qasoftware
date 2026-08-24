@@ -50,6 +50,10 @@ class RunPaths:
         return self.root / "issues.json"
 
     @property
+    def resolution(self) -> Path:
+        return self.root / "resolution.json"
+
+    @property
     def probes(self) -> Path:
         return self.root / "probes.json"
 

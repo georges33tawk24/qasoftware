@@ -42,37 +42,43 @@
       "path": "/bureau-not-found-probe",
       "status": 200,
       "kind": "not-found-handling",
-      "bodySample": null
+      "bodySample": null,
+      "bodyHash": null
     },
     {
       "path": "/.env",
       "status": 200,
       "kind": "exposed-path",
-      "bodySample": "DATABASE_URL=postgres://user:hunter2@db.internal/prod\nSTRIPE_KEY=sk_live_x\n"
+      "bodySample": "DATABASE_URL=postgres://user:hunter2@db.internal/prod\nSTRIPE_KEY=sk_live_x\n",
+      "bodyHash": null
     },
     {
       "path": "/.git/config",
       "status": 200,
       "kind": "exposed-path",
-      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>"
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>",
+      "bodyHash": null
     },
     {
       "path": "/.DS_Store",
       "status": 404,
       "kind": "exposed-path",
-      "bodySample": null
+      "bodySample": null,
+      "bodyHash": null
     },
     {
       "path": "/server-status",
       "status": 200,
       "kind": "exposed-path",
-      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>"
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>",
+      "bodyHash": null
     },
     {
       "path": "/debug",
       "status": 200,
       "kind": "exposed-path",
-      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>"
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>",
+      "bodyHash": null
     }
   ]
 }

@@ -632,5 +632,14 @@ Each phase ends in something runnable. Do not begin the next until the previous 
 - Point it at a URL with a Figma file and a login → get design deltas, functional failures, and API findings in one report.
 - Dismiss fifteen issues, re-run, see zero of them again.
 - A developer comments on an issue; the next run accounts for it.
-- Two consecutive runs on an unchanged site produce byte-identical issue sets.
+- Two consecutive runs on an unchanged site produce byte-identical issue sets, for every
+  checker that reads only the artifact. **Web vitals are excluded and are the only
+  exclusion.** They are measured from the world rather than derived from the capture, and
+  an unchanged site genuinely does load differently twice — on one real site LCP moved
+  850ms and CLS moved 0.09 between consecutive runs, enough to walk findings across their
+  budgets. They are sampled `vitalsSamples` times (default 3), reported as a median with
+  the observed range, and only ever reported when the *whole* range is past budget, which
+  removes the straddling case without pretending the measurement is stable. The exclusion
+  is declared in code — `checkers.base.non_deterministic()` — and `tests/test_hardening.py`
+  asserts its exact contents, so nothing joins it quietly.
 - The whole thing runs from one `docker compose up`.

@@ -12,7 +12,7 @@ from functools import cached_property
 from hashlib import sha1
 
 from engine.artifact.context import RunContext
-from engine.artifact.geometry import contains
+from engine.artifact.geometry import contains, inside_svg
 from engine.artifact.models import Box, ElementRecord, LayoutRecord, PageRecord, Viewport
 from engine.checkers.base import Checker
 from engine.issues.models import Category, Evidence, Finding, Severity, Source
@@ -44,7 +44,7 @@ class Surface:
             groups.setdefault(element.parentId, []).append(element)
         return groups
 
-    @property
+    @cached_property
     def laid_out(self) -> list[ElementRecord]:
         """The elements a visual checker may reason about.
 
@@ -52,9 +52,16 @@ class Surface:
         region — and it is not laid out in any sense a layout checker means. Left in, it
         reports itself as clipped text and as an undersized tap target on every site that
         does accessibility properly, which is precisely backwards.
+
+        The internals of an `<svg>` are excluded for the same reason and by the same rule
+        the derived layout record uses: a glyph outline is not a control, not a sibling
+        and not a container. The `<svg>` itself stays and is judged as one element.
         """
+        excluded = inside_svg(self.elements)
         return [
-            e for e in self.elements if e.visible and e.box.w > SR_ONLY_PX and e.box.h > SR_ONLY_PX
+            e
+            for e in self.elements
+            if e.visible and e.box.w > SR_ONLY_PX and e.box.h > SR_ONLY_PX and e.id not in excluded
         ]
 
 

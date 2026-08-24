@@ -8,6 +8,7 @@ probe are all in this file for exactly that reason.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 from urllib.parse import urlsplit, urlunsplit
 
 from playwright.async_api import APIRequestContext
@@ -32,6 +33,11 @@ which quietly ruins every other broken-link check."""
 PROBE_TIMEOUT_MS = 10_000
 PROBE_CONCURRENCY = 8
 BODY_SAMPLE = 300
+
+
+def body_hash(text: str) -> str:
+    """Whitespace-collapsed, so a re-rendered shell still hashes the same."""
+    return hashlib.sha1(" ".join(text.split()).encode(), usedforsecurity=False).hexdigest()
 
 
 async def _status(request: APIRequestContext, url: str) -> tuple[int, str | None]:
@@ -73,20 +79,40 @@ async def probe_paths(request: APIRequestContext, seed: str) -> list[PathProbe]:
 
     results: list[PathProbe] = []
 
+    async def body(url: str) -> tuple[str | None, str | None]:
+        """A sample to show a person, and a hash of the whole thing to compare."""
+        try:
+            response = await request.get(url, timeout=PROBE_TIMEOUT_MS)
+            text = await response.text()
+        except PlaywrightError:
+            return None, None
+        return text[:BODY_SAMPLE], body_hash(text)
+
     status, _ = await _status(request, absolute(NOT_FOUND_PROBE))
-    results.append(PathProbe(path=NOT_FOUND_PROBE, status=status, kind="not-found-handling"))
+    sample, digest = await body(absolute(NOT_FOUND_PROBE)) if status == 200 else (None, None)
+    results.append(
+        PathProbe(
+            path=NOT_FOUND_PROBE,
+            status=status,
+            kind="not-found-handling",
+            bodySample=sample,
+            bodyHash=digest,
+        )
+    )
 
     for path in EXPOSED_PATHS:
         url = absolute(path)
         status, _ = await _status(request, url)
-        sample: str | None = None
-        if status == 200:
-            try:
-                response = await request.get(url, timeout=PROBE_TIMEOUT_MS)
-                sample = (await response.text())[:BODY_SAMPLE]
-            except PlaywrightError:
-                sample = None
-        results.append(PathProbe(path=path, status=status, kind="exposed-path", bodySample=sample))
+        sample, digest = await body(url) if status == 200 else (None, None)
+        results.append(
+            PathProbe(
+                path=path,
+                status=status,
+                kind="exposed-path",
+                bodySample=sample,
+                bodyHash=digest,
+            )
+        )
     return results
 
 

@@ -67,37 +67,43 @@
       "path": "/bureau-not-found-probe",
       "status": 404,
       "kind": "not-found-handling",
-      "bodySample": null
+      "bodySample": null,
+      "bodyHash": null
     },
     {
       "path": "/.env",
       "status": 404,
       "kind": "exposed-path",
-      "bodySample": null
+      "bodySample": null,
+      "bodyHash": null
     },
     {
       "path": "/.git/config",
       "status": 404,
       "kind": "exposed-path",
-      "bodySample": null
+      "bodySample": null,
+      "bodyHash": null
     },
     {
       "path": "/.DS_Store",
       "status": 404,
       "kind": "exposed-path",
-      "bodySample": null
+      "bodySample": null,
+      "bodyHash": null
     },
     {
       "path": "/server-status",
       "status": 404,
       "kind": "exposed-path",
-      "bodySample": null
+      "bodySample": null,
+      "bodyHash": null
     },
     {
       "path": "/debug",
       "status": 404,
       "kind": "exposed-path",
-      "bodySample": null
+      "bodySample": null,
+      "bodyHash": null
     }
   ]
 }

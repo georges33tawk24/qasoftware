@@ -113,6 +113,22 @@ class ClippedContent:
                 )
 
 
+def gutter_row(element: ElementRecord, parent: ElementRecord) -> bool:
+    """The negative-margin row idiom, which is the framework working as designed.
+
+    Bootstrap, Foundation and every grid built the same way give `.row` a negative
+    horizontal margin exactly cancelling the padding its container adds, so columns line
+    up with content outside the grid. The row genuinely overhangs its parent's content
+    box by the gutter and genuinely paints nothing there. Reporting it means reporting
+    every page of every site built on a grid.
+    """
+    overhang = -min(element.styles.marginLeft, element.styles.marginRight)
+    if overhang <= 0:
+        return False
+    padding = min(parent.styles.paddingLeft, parent.styles.paddingRight)
+    return padding + SLACK_PX >= overhang
+
+
 @checker
 class ContainerOverflow:
     id = "layout.container-overflow"
@@ -129,6 +145,8 @@ class ContainerOverflow:
                 if element.styles.position in ("absolute", "fixed", "sticky"):
                     continue
                 if parent.styles.overflow in HIDDEN_OVERFLOW or parent.box.w <= 0:
+                    continue
+                if gutter_row(element, parent):
                     continue
                 spill = right(element.box) - right(parent.box)
                 if spill <= SLACK_PX:

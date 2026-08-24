@@ -107,6 +107,9 @@ class RunConfig(ArtifactModel):
     carousels, randomised content, A/B variants (SPEC §5)."""
 
     consentSelectors: list[str] = Field(default_factory=list)
+    vitalsSamples: int = 3
+    """Loads per page used to measure web vitals. Each one costs a page load, so this is
+    the dial between a run that is fast and a run whose performance findings hold still."""
     """Per-project overlay dismissers, tried before the heuristic pass (SPEC §5). Someone
     who has looked at the site knows better than any heuristic."""
 
@@ -259,13 +262,24 @@ class NetworkEntry(ArtifactModel):
 
 
 class Metrics(ArtifactModel):
-    """`vitals.json` — SPEC §4. INP is a proxy until a real interaction happens."""
+    """`vitals.json` — SPEC §4. INP is a proxy until a real interaction happens.
+
+    Each value is the *median* of `sampleCount` loads, with the observed spread beside
+    it. One load of a real site does not measure a page, it measures a moment: LCP moved
+    850ms and CLS moved 0.09 between two runs of an unchanged site here, which is enough
+    to walk findings across a threshold and break SPEC §20's byte-identical promise.
+    """
 
     lcp: float | None = None
     cls: float | None = None
     tbt: float | None = None
     ttfb: float | None = None
     inp: float | None = None
+
+    sampleCount: int = 1
+    low: dict[str, float] = Field(default_factory=dict)
+    high: dict[str, float] = Field(default_factory=dict)
+    """Best and worst seen per metric. A finding needs the *whole* range past budget."""
 
 
 # ---------------------------------------------------------------------- elements.json
@@ -612,6 +626,14 @@ class PathProbe(ArtifactModel):
     """`not-found-handling` or `exposed-path`."""
 
     bodySample: str | None = None
+    bodyHash: str | None = None
+    """SHA1 of the whole body, whitespace-collapsed.
+
+    A soft-404 site answers 200 to everything, so a status alone cannot tell an exposed
+    file from the app shell. The hash of what the 404 probe got back is what makes the
+    difference checkable — by this checker and, through the resolution pass, by any other
+    finding that rests on a 200 meaning "this exists".
+    """
 
 
 class ProbeReport(ArtifactModel):

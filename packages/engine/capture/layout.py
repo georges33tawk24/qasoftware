@@ -12,6 +12,7 @@ from statistics import median
 from typing import Literal
 
 from engine.artifact.geometry import by_parent as _group_by_parent
+from engine.artifact.geometry import inside_svg as _inside_svg
 from engine.artifact.geometry import sibling_gaps
 from engine.artifact.models import (
     AlignmentSet,
@@ -52,9 +53,9 @@ inside its top edge on purpose. Aligning it to the image is measuring a decision
 
 
 def derive(page_id: str, viewport: str, elements: list[ElementRecord]) -> LayoutRecord:
-    inside_svg = _inside_svg(elements)
+    excluded = _inside_svg(elements)
     laid_out = [
-        e for e in elements if e.visible and e.box.w > 0 and e.box.h > 0 and e.id not in inside_svg
+        e for e in elements if e.visible and e.box.w > 0 and e.box.h > 0 and e.id not in excluded
     ]
     return LayoutRecord(
         pageId=page_id,
@@ -65,28 +66,6 @@ def derive(page_id: str, viewport: str, elements: list[ElementRecord]) -> Layout
         typeInventory=type_inventory(laid_out),
         colourInventory=colour_inventory(laid_out),
     )
-
-
-def _inside_svg(elements: list[ElementRecord]) -> set[str]:
-    """Everything under an `<svg>`. The `<svg>` itself stays; its internals do not.
-
-    A logo's glyph outlines are not a card grid. Left in, the four `<path>` elements of
-    an icon become a repeated group whose uneven gaps are reported as a spacing defect on
-    every page that shows the icon — which is every page.
-    """
-    by_id = {e.id: e for e in elements}
-    inside: set[str] = set()
-    for element in elements:
-        parent_id = element.parentId
-        while parent_id:
-            parent = by_id.get(parent_id)
-            if parent is None:
-                break
-            if parent.tag == "svg" or parent.id in inside:
-                inside.add(element.id)
-                break
-            parent_id = parent.parentId
-    return inside
 
 
 def _by_parent(elements: Iterable[ElementRecord]) -> dict[str | None, list[ElementRecord]]:
@@ -110,6 +89,13 @@ _AXES: list[tuple[Literal["x", "y"], Callable[[ElementRecord], float]]] = [
     ("x", lambda e: e.box.x),
     ("y", lambda e: e.box.y),
 ]
+
+
+def _pulled_outside(element: ElementRecord) -> bool:
+    """A negative horizontal margin puts an element outside its container's content box
+    on purpose — the grid-row idiom. Its left edge is not where its in-flow siblings'
+    edges are, and an `<hr>` that respects the padding they negate is not misaligned."""
+    return min(element.styles.marginLeft, element.styles.marginRight) < 0
 
 
 def _size(axis: Literal["x", "y"], element: ElementRecord) -> float:
@@ -140,7 +126,9 @@ def _measure(
 def alignment_sets(elements: list[ElementRecord]) -> list[AlignmentSet]:
     """Siblings that were meant to line up, with each member's deviation from the median."""
     sets: list[AlignmentSet] = []
-    in_flow = [e for e in elements if e.styles.position not in OVERLAY_POSITIONS]
+    in_flow = [
+        e for e in elements if e.styles.position not in OVERLAY_POSITIONS and not _pulled_outside(e)
+    ]
     for parent, siblings in sorted(_by_parent(in_flow).items(), key=lambda kv: kv[0] or ""):
         if len(siblings) < ALIGNMENT_MIN_MEMBERS:
             continue

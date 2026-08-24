@@ -8,11 +8,12 @@ never open a browser.
 from __future__ import annotations
 
 from pathlib import Path
+from statistics import median
 from typing import Any
 
 from playwright.async_api import Locator, Page
 
-from engine.artifact.models import ElementRecord
+from engine.artifact.models import ElementRecord, Metrics
 from engine.issues.fingerprint import element_stable_key
 
 _HERE = Path(__file__).parent
@@ -70,3 +71,23 @@ async def capture_screenshots(
 async def read_vitals(page: Page) -> dict[str, float | None]:
     raw: dict[str, float | None] | None = await page.evaluate("() => window.__bureauVitals || null")
     return raw or {}
+
+
+VITAL_NAMES = ("lcp", "cls", "tbt", "ttfb", "inp")
+
+
+def summarise_vitals(samples: list[dict[str, float | None]]) -> Metrics:
+    """Median per metric, with the best and worst seen beside it.
+
+    Median rather than mean because one slow load — a cold cache, a GC pause, a shared
+    runner having a bad second — should not drag the number it reports.
+    """
+    metrics = Metrics(sampleCount=len(samples))
+    for name in VITAL_NAMES:
+        values = sorted(v for s in samples if (v := s.get(name)) is not None)
+        if not values:
+            continue
+        setattr(metrics, name, median(values))
+        metrics.low[name] = values[0]
+        metrics.high[name] = values[-1]
+    return metrics

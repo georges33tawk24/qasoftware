@@ -51,6 +51,11 @@ class WebVitals:
     category = Category.performance
     requires = frozenset({Capability.VITALS})
     default_severity = Severity.minor
+    deterministic = False
+    """Measured from the world, not from the artifact. Two runs over an unchanged site
+    disagree because the site really did load differently, and no amount of care here
+    changes that — so this checker is out of SPEC §20's byte-identical set by declaration
+    rather than by anyone remembering."""
 
     def run(self, ctx: RunContext) -> Iterable[Finding]:
         for page in live_pages(ctx):
@@ -61,17 +66,42 @@ class WebVitals:
                 value = getattr(vitals, name)
                 if value is None or value <= budget:
                     continue
+                # The median being past budget is not enough. If the best of several
+                # loads came in under it, this page straddles the line and saying so on
+                # the runs that happen to land high is how a threshold becomes a coin
+                # toss between two runs of an unchanged site.
+                best = vitals.low.get(name)
+                if vitals.sampleCount > 1 and best is not None and best <= budget:
+                    continue
                 yield page_finding(
                     self,
                     page,
                     kind=f"vital-{name}",
                     title=f"{label} is {value:g}{unit}",
-                    description="Measured on an unthrottled connection, so a real visitor "
-                    "sees this or worse.",
+                    description=(
+                        "Measured on an unthrottled connection, so a real visitor sees "
+                        "this or worse."
+                        + (
+                            f" Median of {vitals.sampleCount} loads; the best was "
+                            f"{vitals.low.get(name, value):g}{unit} and the worst "
+                            f"{vitals.high.get(name, value):g}{unit}, so every load was "
+                            "over budget."
+                            if vitals.sampleCount > 1
+                            else ""
+                        )
+                    ),
                     expected=f"{budget:g}{unit} or less",
                     actual=f"{value:g}{unit}",
                     stable_key=synthetic_key(self.id, name),
-                    data={"metric": name, "value": value, "budget": budget},
+                    groupAs=name,
+                    data={
+                        "metric": name,
+                        "value": value,
+                        "budget": budget,
+                        "low": vitals.low.get(name),
+                        "high": vitals.high.get(name),
+                        "samples": vitals.sampleCount,
+                    },
                 )
 
 
