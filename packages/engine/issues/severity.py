@@ -21,6 +21,14 @@ SENSITIVE_PATH = re.compile(
 WIDESPREAD_PAGES = 5
 """SPEC §8.3: the same finding on this many pages is a systemic problem, not a one-off."""
 
+ESCALATION_FLOOR = Severity.major
+"""Escalation applies to findings already this severe, and never below it.
+
+Volume of a cosmetic problem is still cosmetic. Letting the page-count rule promote a
+5px misalignment to `critical` does more damage than a false positive does: it corrupts
+the sort order, and the sort order is the only reason the report is readable at all.
+"""
+
 ESCALATION_CEILING = Severity.critical
 """Escalation may raise a severity but never to `blocker`.
 
@@ -43,6 +51,8 @@ def on_sensitive_path(paths: Iterable[str]) -> bool:
 
 def escalate(severity: Severity, *, paths: Iterable[str]) -> Severity:
     """The two rules from §8.3, applied once at grouping time."""
+    if severity.rank > ESCALATION_FLOOR.rank:
+        return severity
     unique = sorted(set(paths))
     steps = 0
     if len(unique) >= WIDESPREAD_PAGES:

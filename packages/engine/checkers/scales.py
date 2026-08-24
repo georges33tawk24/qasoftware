@@ -22,6 +22,18 @@ the scale. Below that it is an accident, not a decision."""
 
 MIN_USES = 2
 
+FONT_SIZE_CLUSTER_PX = 1.0
+"""Sizes within this of each other are one step. A fluid heading lands on 27.85px at one
+width and 28px at another; that is one decision, not two."""
+
+MIN_SIZE_USES = 2
+"""A size worn by exactly one element is a slip. Two is a decision.
+
+Note this is a floor, not a share. The share threshold is what broke: body copy is 90%
+of a page's text nodes, so every heading fell under 5% and the scale ended up describing
+only the body. Every size a page genuinely uses now counts the same, whatever its volume.
+"""
+
 
 def _dominant(counts: Counter[float] | Counter[int] | Counter[str]) -> list[object]:
     total = sum(counts.values())
@@ -75,7 +87,6 @@ def derive(layouts: list[LayoutRecord], tokens: Tokens | None = None) -> Scales:
 
 def _from_pages(layouts: list[LayoutRecord]) -> Scales:
     spacing: Counter[float] = Counter()
-    sizes: Counter[float] = Counter()
     weights: Counter[int] = Counter()
     families: Counter[str] = Counter()
     leading: Counter[float] = Counter()
@@ -86,7 +97,6 @@ def _from_pages(layouts: list[LayoutRecord]) -> Scales:
             if bucket.gap > 0:
                 spacing[bucket.gap] += bucket.count
         for style in layout.typeInventory:
-            sizes[style.fontSize] += style.count
             weights[style.fontWeight] += style.count
             families[style.fontFamily] += style.count
             if style.lineHeight:
@@ -96,11 +106,44 @@ def _from_pages(layouts: list[LayoutRecord]) -> Scales:
 
     return Scales(
         spacing=sorted(v for v in _dominant(spacing) if isinstance(v, float)),
-        fontSizes=sorted(v for v in _dominant(sizes) if isinstance(v, float)),
+        fontSizes=_type_scale(layouts),
         weights=sorted(v for v in _dominant(weights) if isinstance(v, int)),
         families=[v for v in _dominant(families) if isinstance(v, str)],
         palette=[v for v in _dominant(palette) if isinstance(v, str)],
         lineHeights=sorted(v for v in _dominant(leading) if isinstance(v, float)),
+    )
+
+
+def _type_scale(layouts: list[LayoutRecord]) -> list[float]:
+    """The distinct sizes this site actually chose, clustered, not weighted by volume.
+
+    Counting nodes lets body copy bury the headings: a page with four hundred paragraphs
+    and two headings derives a scale containing no heading size, and then reports every
+    heading on the site as off-scale. What matters is how many separate *decisions* used
+    a size, so each distinct style counts once, however many nodes wear it.
+
+    A size that only one style used, only once, is an accident and stays off the scale.
+    A site with no coherent scale gets an empty one, and `off_scale` then flags nothing —
+    silence beats flagging every heading on the page.
+    """
+    styles: Counter[float] = Counter()
+    elements: Counter[float] = Counter()
+    for layout in layouts:
+        for style in layout.typeInventory:
+            styles[style.fontSize] += 1
+            elements[style.fontSize] += style.count
+
+    clusters: list[list[float]] = []
+    for size in sorted(elements):
+        if clusters and size - clusters[-1][-1] <= FONT_SIZE_CLUSTER_PX:
+            clusters[-1].append(size)
+        else:
+            clusters.append([size])
+
+    return sorted(
+        max(cluster, key=lambda s: (styles[s], elements[s], -s))
+        for cluster in clusters
+        if sum(elements[s] for s in cluster) >= MIN_SIZE_USES
     )
 
 

@@ -86,14 +86,25 @@ def test_sorting_puts_the_worst_first() -> None:
 
 
 def test_a_finding_on_five_pages_is_escalated() -> None:
-    assert escalate(Severity.minor, paths=["/a", "/b", "/c", "/d"]) is Severity.minor
-    assert escalate(Severity.minor, paths=["/a", "/b", "/c", "/d", "/e"]) is Severity.major
+    assert escalate(Severity.major, paths=["/a", "/b", "/c", "/d"]) is Severity.major
+    assert escalate(Severity.major, paths=["/a", "/b", "/c", "/d", "/e"]) is Severity.critical
 
 
 def test_checkout_and_auth_paths_are_escalated() -> None:
-    assert escalate(Severity.minor, paths=["/checkout"]) is Severity.major
-    assert escalate(Severity.minor, paths=["/account/login"]) is Severity.major
-    assert escalate(Severity.minor, paths=["/blog/checkout-tips"]) is Severity.minor
+    assert escalate(Severity.major, paths=["/checkout"]) is Severity.critical
+    assert escalate(Severity.major, paths=["/account/login"]) is Severity.critical
+    assert escalate(Severity.major, paths=["/blog/checkout-tips"]) is Severity.major
+
+
+def test_volume_of_a_cosmetic_problem_is_still_cosmetic() -> None:
+    """A 5px misalignment on fifty pages is a 5px misalignment.
+
+    Letting the page-count rule promote it to `critical` corrupts the sort order, and
+    the sort order is the only thing that makes a 329-issue report readable.
+    """
+    everywhere = ["/a", "/b", "/c", "/d", "/e", "/checkout"]
+    assert escalate(Severity.minor, paths=everywhere) is Severity.minor
+    assert escalate(Severity.trivial, paths=everywhere) is Severity.trivial
 
 
 def test_escalation_never_reaches_blocker() -> None:

@@ -16,6 +16,15 @@ from engine.issues.models import Category, Finding, Severity
 MAX_REDIRECT_HOPS = 2
 
 
+UNVERIFIABLE_STATUS = frozenset({401, 403, 405, 429, 999})
+"""What a bot gets, not what a visitor gets.
+
+LinkedIn answers 999 to anything automated and Cloudflare answers 403; reporting either
+as a broken link sends someone to check a link that works perfectly in a browser. Said
+out loud as unverifiable rather than dropped, because a real 403 is also possible.
+"""
+
+
 @checker
 class BrokenLinks:
     id = "free.broken-link"
@@ -31,7 +40,20 @@ class BrokenLinks:
         for link in probes.links:
             if link.status and link.status < 400:
                 continue
-            kind = "broken-internal-link" if link.internal else "broken-external-link"
+            unverifiable = not link.internal and link.status in UNVERIFIABLE_STATUS
+            if unverifiable:
+                kind, title = (
+                    "unverifiable-external-link",
+                    "Link to another site could not be checked",
+                )
+                detail = (
+                    f"{link.url} answered {link.status} to an automated request, which is "
+                    "what bot protection looks like. It may well work in a browser."
+                )
+            else:
+                kind = "broken-internal-link" if link.internal else "broken-external-link"
+                title = "Broken link" if link.internal else "Broken link to another site"
+                detail = f"{link.url} — linked from {{path}}."
             for page_id in link.foundOn:
                 page = pages.get(page_id)
                 if page is None:
@@ -40,12 +62,19 @@ class BrokenLinks:
                     self,
                     page,
                     kind=kind,
-                    title=("Broken link" if link.internal else "Broken link to another site"),
-                    description=f"Linked from {page.path}.",
+                    title=title,
+                    description=detail.format(path=page.path),
                     expected="2xx or 3xx",
-                    actual=link.error or str(link.status),
-                    # An external site being down is not this team's emergency.
-                    severity=Severity.major if link.internal else Severity.minor,
+                    actual=f"{link.error or link.status} — {link.url}",
+                    # An external site being down is not this team's emergency, and one we
+                    # were not allowed to check is not a defect at all.
+                    severity=(
+                        Severity.trivial
+                        if unverifiable
+                        else Severity.major
+                        if link.internal
+                        else Severity.minor
+                    ),
                     stable_key=synthetic_key(self.id, link.url),
                     data={"url": link.url, "status": link.status, "error": link.error},
                 )

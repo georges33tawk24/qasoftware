@@ -35,9 +35,27 @@ from their own average and the arithmetic cannot say which one moved."""
 MAX_MEANINGFUL_GAP = 400.0
 TRANSPARENT = "rgba(0, 0, 0, 0)"
 
+ALIGNMENT_SIZE_TOLERANCE = 0.10
+"""Past this much size spread, a set is measured on its centres instead of its edges.
+
+An emphasised member of a rating scale is deliberately bigger than its neighbours, so
+its top edge is *supposed* to sit higher — and its centre is not. Measuring edges turns
+correct vertical centring into a finding on every page the widget appears on.
+"""
+
+OVERLAY_POSITIONS = frozenset({"absolute", "fixed"})
+"""Overlays are placed against their container, not lined up with their siblings.
+
+A badge pinned to the corner of a card image shares that image's parent and sits 8px
+inside its top edge on purpose. Aligning it to the image is measuring a decision.
+"""
+
 
 def derive(page_id: str, viewport: str, elements: list[ElementRecord]) -> LayoutRecord:
-    laid_out = [e for e in elements if e.visible and e.box.w > 0 and e.box.h > 0]
+    inside_svg = _inside_svg(elements)
+    laid_out = [
+        e for e in elements if e.visible and e.box.w > 0 and e.box.h > 0 and e.id not in inside_svg
+    ]
     return LayoutRecord(
         pageId=page_id,
         viewport=viewport,
@@ -47,6 +65,28 @@ def derive(page_id: str, viewport: str, elements: list[ElementRecord]) -> Layout
         typeInventory=type_inventory(laid_out),
         colourInventory=colour_inventory(laid_out),
     )
+
+
+def _inside_svg(elements: list[ElementRecord]) -> set[str]:
+    """Everything under an `<svg>`. The `<svg>` itself stays; its internals do not.
+
+    A logo's glyph outlines are not a card grid. Left in, the four `<path>` elements of
+    an icon become a repeated group whose uneven gaps are reported as a spacing defect on
+    every page that shows the icon — which is every page.
+    """
+    by_id = {e.id: e for e in elements}
+    inside: set[str] = set()
+    for element in elements:
+        parent_id = element.parentId
+        while parent_id:
+            parent = by_id.get(parent_id)
+            if parent is None:
+                break
+            if parent.tag == "svg" or parent.id in inside:
+                inside.add(element.id)
+                break
+            parent_id = parent.parentId
+    return inside
 
 
 def _by_parent(elements: Iterable[ElementRecord]) -> dict[str | None, list[ElementRecord]]:
@@ -72,21 +112,40 @@ _AXES: list[tuple[Literal["x", "y"], Callable[[ElementRecord], float]]] = [
 ]
 
 
+def _size(axis: Literal["x", "y"], element: ElementRecord) -> float:
+    return element.box.h if axis == "y" else element.box.w
+
+
+def _measure(
+    axis: Literal["x", "y"], cluster: list[ElementRecord], start: Callable[[ElementRecord], float]
+) -> tuple[Literal["start", "centre"], Callable[[ElementRecord], float]]:
+    """Edges when the members are the same size, centres when they are not."""
+    sizes = [_size(axis, e) for e in cluster]
+    middle = median(sizes)
+    if middle <= 0:
+        return "start", start
+    if all(abs(s - middle) / middle <= ALIGNMENT_SIZE_TOLERANCE for s in sizes):
+        return "start", start
+    return "centre", lambda e: start(e) + _size(axis, e) / 2
+
+
 def alignment_sets(elements: list[ElementRecord]) -> list[AlignmentSet]:
     """Siblings that were meant to line up, with each member's deviation from the median."""
     sets: list[AlignmentSet] = []
-    for parent, siblings in sorted(_by_parent(elements).items(), key=lambda kv: kv[0] or ""):
+    in_flow = [e for e in elements if e.styles.position not in OVERLAY_POSITIONS]
+    for parent, siblings in sorted(_by_parent(in_flow).items(), key=lambda kv: kv[0] or ""):
         if len(siblings) < ALIGNMENT_MIN_MEMBERS:
             continue
-        for axis, value in _AXES:
-            for cluster in _cluster(siblings, value):
+        for axis, start in _AXES:
+            for cluster in _cluster(siblings, start):
                 if len(cluster) < ALIGNMENT_MIN_MEMBERS:
                     continue
+                edge, value = _measure(axis, cluster, start)
                 centre = round(median([value(e) for e in cluster]), 2)
                 sets.append(
                     AlignmentSet(
                         axis=axis,
-                        edge="start",
+                        edge=edge,
                         parentId=parent,
                         median=centre,
                         elementIds=[e.id for e in cluster],

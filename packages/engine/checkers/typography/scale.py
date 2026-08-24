@@ -27,6 +27,10 @@ MIN_MEASURE = 45
 MAX_MEASURE = 95
 BODY_COPY_MIN_CHARS = 200
 BODY_COPY_SIZES = (12.0, 24.0)
+PROSE_TAGS = frozenset({"p", "li", "dd", "dt", "blockquote", "figcaption", "td", "th"})
+"""Where a line-height ratio means something. A badge, a pill or a button sets its line
+height to control its own height, and 1.0x there is the design working, not failing."""
+
 SPRAWL_FONT_SIZES = 12
 SPRAWL_COLOURS = 20
 
@@ -111,6 +115,8 @@ class LineHeight:
             for element in surface.laid_out:
                 styles = element.styles
                 if not element.text or not styles.lineHeight or styles.fontSize <= 0:
+                    continue
+                if element.tag not in PROSE_TAGS:
                     continue
                 ratio = styles.lineHeight / styles.fontSize
                 if MIN_LINE_HEIGHT_RATIO <= ratio <= MAX_LINE_HEIGHT_RATIO:

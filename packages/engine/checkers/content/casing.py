@@ -14,6 +14,21 @@ from engine.issues.models import Category, Finding, Severity
 MIN_MEMBERS = 3
 CONTROL_ROLES = frozenset({"link", "button", "menuitem", "tab"})
 
+EITHER_WAY = frozenset({"Title Case", "Sentence case"})
+"""What a single capitalised word could equally be.
+
+Only `Capitalised` is ambiguous against these two — `Title Case` and `Sentence case` are
+still very much distinguishable from each other, and a group mixing *those* is the
+finding this checker exists for.
+"""
+
+
+def compatible(one: str, other: str) -> bool:
+    if one == other:
+        return True
+    pair = {one, other}
+    return "Capitalised" in pair and bool(pair & EITHER_WAY)
+
 
 def casing_of(text: str) -> str | None:
     words = [w for w in text.split() if any(c.isalpha() for c in w)]
@@ -24,6 +39,11 @@ def casing_of(text: str) -> str | None:
         return "UPPERCASE"
     if letters.islower():
         return "lowercase"
+    if len(words) == 1:
+        # "Compare" is Title Case and Sentence case at once. Calling it either makes
+        # every single-word button in a mixed group a finding — but it is still plainly
+        # not lower case and not shouting, and that much is worth keeping.
+        return "Capitalised" if words[0][0].isupper() else None
     # Short connecting words are lower case in title case too, so judge on the rest.
     significant = [w for w in words if len(w) > 3]
     if significant and all(w[0].isupper() for w in significant):
@@ -56,7 +76,7 @@ class ControlCasing:
                     continue
                 for member in members:
                     style = styles.get(member.id)
-                    if style is None or style == expected:
+                    if style is None or compatible(style, expected):
                         continue
                     yield element_finding(
                         self,

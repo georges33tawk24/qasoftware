@@ -51,7 +51,8 @@ class SiblingAlignment:
                 agreed = sum(1 for d in deviations.values() if abs(d) <= ALIGNMENT_TOLERANCE_PX)
                 if agreed / len(deviations) < CONSENSUS:
                     continue
-                edge = "left" if group.axis == "x" else "top"
+                axis_edge = "left" if group.axis == "x" else "top"
+                edge = "centre" if group.edge == "centre" else axis_edge
                 for element_id, deviation in sorted(deviations.items()):
                     if abs(deviation) <= ALIGNMENT_TOLERANCE_PX:
                         continue
@@ -63,10 +64,18 @@ class SiblingAlignment:
                         surface,
                         element,
                         kind=f"misaligned-{group.axis}",
-                        title=f"{edge.capitalize()} edge is {abs(deviation):g}px off its siblings",
+                        title=(
+                            f"{edge.capitalize()} is {abs(deviation):g}px off its siblings"
+                            if group.edge == "centre"
+                            else f"{edge.capitalize()} edge is {abs(deviation):g}px off its "
+                            "siblings"
+                        ),
                         description=(
-                            f"{agreed} of {len(deviations)} siblings share a {edge} edge at "
+                            f"{agreed} of {len(deviations)} siblings share a {edge} at "
                             f"{group.median:g}px. This one does not."
+                            if group.edge == "centre"
+                            else f"{agreed} of {len(deviations)} siblings share a {edge} edge "
+                            f"at {group.median:g}px. This one does not."
                         ),
                         expected=f"{edge} edge at {group.median:g}px",
                         actual=f"{group.median + deviation:g}px",
