@@ -119,7 +119,15 @@ def _size(axis: Literal["x", "y"], element: ElementRecord) -> float:
 def _measure(
     axis: Literal["x", "y"], cluster: list[ElementRecord], start: Callable[[ElementRecord], float]
 ) -> tuple[Literal["start", "centre"], Callable[[ElementRecord], float]]:
-    """Edges when the members are the same size, centres when they are not."""
+    """Edges when the members are the same size, centres when they are not.
+
+    Only on the y axis. A set sharing a top edge is a row, so members of different
+    heights are a vertical-centring question. A set sharing a *left* edge is a stack of
+    blocks that are meant to be left-aligned, and comparing the centres of a narrow
+    input and a full-width paragraph reports the layout working as a 92px defect.
+    """
+    if axis == "x":
+        return "start", start
     sizes = [_size(axis, e) for e in cluster]
     middle = median(sizes)
     if middle <= 0:

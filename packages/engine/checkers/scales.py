@@ -135,15 +135,20 @@ def _type_scale(layouts: list[LayoutRecord]) -> list[float]:
 
     clusters: list[list[float]] = []
     for size in sorted(elements):
-        if clusters and size - clusters[-1][-1] <= FONT_SIZE_CLUSTER_PX:
+        # Against the anchor, not the last member: chained on the last, 11.2 reaches 12
+        # reaches 13 reaches 14, and a whole page of body sizes collapses into one step.
+        if clusters and size - clusters[-1][0] <= FONT_SIZE_CLUSTER_PX:
             clusters[-1].append(size)
         else:
             clusters.append([size])
 
+    # Every member of a surviving cluster is on the scale, not just its busiest. Keeping
+    # one representative and dropping the rest reports 11.2px as off a scale it defines.
     return sorted(
-        max(cluster, key=lambda s: (styles[s], elements[s], -s))
+        size
         for cluster in clusters
         if sum(elements[s] for s in cluster) >= MIN_SIZE_USES
+        for size in cluster
     )
 
 

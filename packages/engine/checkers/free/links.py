@@ -76,6 +76,9 @@ class BrokenLinks:
                         else Severity.minor
                     ),
                     stable_key=synthetic_key(self.id, link.url),
+                    # One issue listing every link bot protection refused us, rather than
+                    # thirty-three identical trivial cards for one root cause.
+                    groupAs=kind if unverifiable else link.url,
                     data={"url": link.url, "status": link.status, "error": link.error},
                 )
 
