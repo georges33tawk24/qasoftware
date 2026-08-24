@@ -1,0 +1,10 @@
+[
+  {
+    "level": "error",
+    "text": "Uncaught TypeError: t.init is not a function",
+    "stack": null,
+    "url": "https://example.test/static/app.js",
+    "line": 41,
+    "ts": "2026-01-15T09:30:00Z"
+  }
+]

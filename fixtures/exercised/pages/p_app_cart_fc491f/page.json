@@ -1,0 +1,14 @@
+{
+  "id": "p_app_cart_fc491f",
+  "url": "http://127.0.0.1:63425/app/cart",
+  "path": "/app/cart",
+  "title": "Your cart",
+  "status": 200,
+  "redirectChain": [],
+  "depth": 1,
+  "discoveredFrom": "http://127.0.0.1:63425/app",
+  "persona": "anonymous",
+  "domNodeCount": 37,
+  "security": null,
+  "crawlBlocked": null
+}

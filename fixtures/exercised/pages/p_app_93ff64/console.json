@@ -1,0 +1,10 @@
+[
+  {
+    "level": "error",
+    "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "stack": null,
+    "url": "http://127.0.0.1:63425/api/me",
+    "line": 0,
+    "ts": "2026-08-23T11:20:31.496251Z"
+  }
+]

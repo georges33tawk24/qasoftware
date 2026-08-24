@@ -1,0 +1,117 @@
+{
+  "id": "ada-submit-the-contact-form-with-awkward-but-valid-values",
+  "name": "Submit the contact form with awkward but valid values",
+  "kind": "form",
+  "persona": "ada",
+  "pageId": "p_app_contact_5b717d",
+  "status": "failed",
+  "startedAt": "2026-08-23T11:20:58.693553Z",
+  "durationMs": 2623,
+  "attempts": 3,
+  "steps": [
+    {
+      "n": 1,
+      "text": "Open http://127.0.0.1:63425/app/contact",
+      "ts": "2026-08-23T11:21:00.484853Z",
+      "url": "about:blank",
+      "status": "ok",
+      "screenshot": "step_01.png",
+      "error": null,
+      "durationMs": 54.3
+    },
+    {
+      "n": 2,
+      "text": "Fill in Email address",
+      "ts": "2026-08-23T11:21:00.539177Z",
+      "url": "http://127.0.0.1:63425/app/contact",
+      "status": "ok",
+      "screenshot": "step_02.png",
+      "error": null,
+      "durationMs": 31.6
+    },
+    {
+      "n": 3,
+      "text": "Enter 5,000 characters in Your name",
+      "ts": "2026-08-23T11:21:00.570787Z",
+      "url": "http://127.0.0.1:63425/app/contact",
+      "status": "ok",
+      "screenshot": "step_03.png",
+      "error": null,
+      "durationMs": 27.9
+    },
+    {
+      "n": 4,
+      "text": "Enter unicode and right-to-left text in Your name",
+      "ts": "2026-08-23T11:21:00.598671Z",
+      "url": "http://127.0.0.1:63425/app/contact",
+      "status": "ok",
+      "screenshot": "step_04.png",
+      "error": null,
+      "durationMs": 36.3
+    },
+    {
+      "n": 5,
+      "text": "Enter a script tag in Your name",
+      "ts": "2026-08-23T11:21:00.634961Z",
+      "url": "http://127.0.0.1:63425/app/contact",
+      "status": "ok",
+      "screenshot": "step_05.png",
+      "error": null,
+      "durationMs": 31.1
+    },
+    {
+      "n": 6,
+      "text": "Enter a quote and an OR clause in Message",
+      "ts": "2026-08-23T11:21:00.666105Z",
+      "url": "http://127.0.0.1:63425/app/contact",
+      "status": "ok",
+      "screenshot": "step_06.png",
+      "error": null,
+      "durationMs": 33.0
+    },
+    {
+      "n": 7,
+      "text": "Submit the form",
+      "ts": "2026-08-23T11:21:00.699094Z",
+      "url": "http://127.0.0.1:63425/app/contact",
+      "status": "ok",
+      "screenshot": "step_07.png",
+      "error": null,
+      "durationMs": 84.4
+    },
+    {
+      "n": 8,
+      "text": "Wait for the page to settle",
+      "ts": "2026-08-23T11:21:00.783560Z",
+      "url": "http://127.0.0.1:63425/app/contact",
+      "status": "ok",
+      "screenshot": "step_08.png",
+      "error": null,
+      "durationMs": 448.4
+    }
+  ],
+  "failures": [
+    {
+      "kind": "unescaped-input-reflected",
+      "message": "A submitted value was written back into the page without escaping",
+      "step": 8,
+      "expected": "the value appears as text",
+      "actual": "the markup was rendered as markup",
+      "data": {
+        "payload": "<script>alert(1)</script>"
+      }
+    },
+    {
+      "kind": "submitted-markup-executed",
+      "message": "A submitted value executed as script",
+      "step": 8,
+      "expected": "the value is treated as text",
+      "actual": "a dialog appeared saying '1'",
+      "data": {}
+    }
+  ],
+  "trace": "trace.zip",
+  "video": "video.webm",
+  "skippedBecause": null,
+  "data": {}
+}

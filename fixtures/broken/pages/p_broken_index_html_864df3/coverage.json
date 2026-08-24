@@ -1,0 +1,16 @@
+{
+  "js": {
+    "usedBytes": 78,
+    "totalBytes": 78,
+    "byUrl": {
+      "http://127.0.0.1:56980/broken/app.js": {
+        "usedBytes": 78,
+        "totalBytes": 78
+      }
+    }
+  },
+  "css": {
+    "usedBytes": 1498,
+    "totalBytes": 1498
+  }
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "url": "http://127.0.0.1:63425/app/login",
+    "method": "GET",
+    "status": 200,
+    "type": "document",
+    "reqHeaders": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "host": "127.0.0.1:63425",
+      "pragma": "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "1372",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Sun, 23 Aug 2026 11:20:32 GMT",
+      "server": "BaseHTTP/0.6 Python/3.12.3"
+    },
+    "reqBody": null,
+    "resBodyHash": "115e65782a4ae2b67da7b0932e36c51e240d4503b82ec025fc6d6c564827bcbd",
+    "resBodySample": "<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Sign in</title><link rel=\"canonical\" href=\"/app/login\">\n<meta name=\"description\" content=\"Fixture application page.\">\n<link rel=\"icon\" href=\"data:,\">\n<style>body{font-family:-apple-system,Helvetica,Arial,sans-serif;margin:0;font-size:16px;\nline-height:24px;color:#111}main{max-width:640px;margin:0 auto;padding:24px}\nlabel{display:block;margin-bottom:8px;font-weight:600}\ninp",
+    "timing": {
+      "startMs": 1787484032834.56,
+      "ttfbMs": 0.37,
+      "durationMs": 0.87
+    },
+    "size": {
+      "transferBytes": 1526,
+      "resourceBytes": 1372
+    },
+    "initiator": "document",
+    "sourceMapUrl": null,
+    "failure": null
+  }
+]

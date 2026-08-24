@@ -1,0 +1,27 @@
+[
+  {
+    "url": "https://example.test/",
+    "method": "GET",
+    "status": 200,
+    "type": "document",
+    "reqHeaders": {},
+    "resHeaders": {
+      "content-type": "text/html; charset=utf-8"
+    },
+    "reqBody": null,
+    "resBodyHash": null,
+    "resBodySample": null,
+    "timing": {
+      "startMs": 0.0,
+      "ttfbMs": 88.0,
+      "durationMs": 142.0
+    },
+    "size": {
+      "transferBytes": 4210,
+      "resourceBytes": 9877
+    },
+    "initiator": "other",
+    "sourceMapUrl": null,
+    "failure": null
+  }
+]

@@ -1,0 +1,147 @@
+{
+  "id": "grace-sign-in-stay-signed-in-sign-out",
+  "name": "Sign in, stay signed in, sign out",
+  "kind": "auth",
+  "persona": "grace",
+  "pageId": "p_app_login_252c2b",
+  "status": "failed",
+  "startedAt": "2026-08-23T11:21:10.339453Z",
+  "durationMs": 4399,
+  "attempts": 3,
+  "steps": [
+    {
+      "n": 1,
+      "text": "Open http://127.0.0.1:63425/app/login",
+      "ts": "2026-08-23T11:21:13.306388Z",
+      "url": "about:blank",
+      "status": "ok",
+      "screenshot": "step_01.png",
+      "error": null,
+      "durationMs": 49.0
+    },
+    {
+      "n": 2,
+      "text": "Enter the email address grace@example.test",
+      "ts": "2026-08-23T11:21:13.355412Z",
+      "url": "http://127.0.0.1:63425/app/login",
+      "status": "ok",
+      "screenshot": "step_02.png",
+      "error": null,
+      "durationMs": 31.0
+    },
+    {
+      "n": 3,
+      "text": "Enter the password",
+      "ts": "2026-08-23T11:21:13.386471Z",
+      "url": "http://127.0.0.1:63425/app/login",
+      "status": "ok",
+      "screenshot": "step_03.png",
+      "error": null,
+      "durationMs": 72.0
+    },
+    {
+      "n": 4,
+      "text": "Submit the sign-in form",
+      "ts": "2026-08-23T11:21:13.458498Z",
+      "url": "http://127.0.0.1:63425/app/login",
+      "status": "ok",
+      "screenshot": "step_04.png",
+      "error": null,
+      "durationMs": 93.6
+    },
+    {
+      "n": 5,
+      "text": "Wait for the page to settle",
+      "ts": "2026-08-23T11:21:13.552122Z",
+      "url": "http://127.0.0.1:63425/app/account",
+      "status": "ok",
+      "screenshot": "step_05.png",
+      "error": null,
+      "durationMs": 445.0
+    },
+    {
+      "n": 6,
+      "text": "Reload the page",
+      "ts": "2026-08-23T11:21:14.016218Z",
+      "url": "http://127.0.0.1:63425/app/account",
+      "status": "ok",
+      "screenshot": "step_06.png",
+      "error": null,
+      "durationMs": 43.9
+    },
+    {
+      "n": 7,
+      "text": "Expect the session to survive a refresh",
+      "ts": "2026-08-23T11:21:14.060095Z",
+      "url": "http://127.0.0.1:63425/app/account",
+      "status": "ok",
+      "screenshot": "step_07.png",
+      "error": null,
+      "durationMs": 32.9
+    },
+    {
+      "n": 8,
+      "text": "Sign out",
+      "ts": "2026-08-23T11:21:14.105579Z",
+      "url": "http://127.0.0.1:63425/app/account",
+      "status": "ok",
+      "screenshot": "step_08.png",
+      "error": null,
+      "durationMs": 50.4
+    },
+    {
+      "n": 9,
+      "text": "Wait for the page to settle",
+      "ts": "2026-08-23T11:21:14.156013Z",
+      "url": "http://127.0.0.1:63425/app/",
+      "status": "ok",
+      "screenshot": "step_09.png",
+      "error": null,
+      "durationMs": 439.5
+    },
+    {
+      "n": 10,
+      "text": "Open http://127.0.0.1:63425/app/account",
+      "ts": "2026-08-23T11:21:14.595578Z",
+      "url": "http://127.0.0.1:63425/app/",
+      "status": "ok",
+      "screenshot": "step_10.png",
+      "error": null,
+      "durationMs": 41.5
+    },
+    {
+      "n": 11,
+      "text": "Expect the signed-in page to be closed to us now",
+      "ts": "2026-08-23T11:21:14.637064Z",
+      "url": "http://127.0.0.1:63425/app/login",
+      "status": "ok",
+      "screenshot": "step_11.png",
+      "error": null,
+      "durationMs": 26.1
+    },
+    {
+      "n": 12,
+      "text": "Replay the old session token to see whether it still works",
+      "ts": "2026-08-23T11:21:14.674994Z",
+      "url": "http://127.0.0.1:63425/app/login",
+      "status": "ok",
+      "screenshot": "step_12.png",
+      "error": null,
+      "durationMs": 18.3
+    }
+  ],
+  "failures": [
+    {
+      "kind": "logout-does-not-invalidate-session",
+      "message": "The session token still works after signing out",
+      "step": 12,
+      "expected": "the token is rejected once signed out",
+      "actual": "the server answered the old token in full",
+      "data": {}
+    }
+  ],
+  "trace": "trace.zip",
+  "video": "video.webm",
+  "skippedBecause": null,
+  "data": {}
+}

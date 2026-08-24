@@ -1,0 +1,14 @@
+{
+  "id": "p_broken_mobile_html_17d869",
+  "url": "http://127.0.0.1:56980/broken/mobile.html",
+  "path": "/broken/mobile.html",
+  "title": "Broken fixture — responsive",
+  "status": 200,
+  "redirectChain": [],
+  "depth": 1,
+  "discoveredFrom": "http://127.0.0.1:56980/broken/index.html",
+  "persona": "anonymous",
+  "domNodeCount": 40,
+  "security": null,
+  "crawlBlocked": null
+}

@@ -1,0 +1,216 @@
+{
+  "name": "Other product",
+  "version": "1",
+  "lastModified": "2026-01-15T09:00:00Z",
+  "document": {
+    "id": "0:0",
+    "name": "Document",
+    "type": "DOCUMENT",
+    "children": [
+      {
+        "id": "0:1",
+        "name": "Page 1",
+        "type": "CANVAS",
+        "children": [
+          {
+            "id": "2:1",
+            "name": "Pricing",
+            "type": "FRAME",
+            "visible": true,
+            "opacity": 1.0,
+            "absoluteBoundingBox": {
+              "x": 0,
+              "y": 0,
+              "width": 1440,
+              "height": 1200
+            },
+            "fills": [
+              {
+                "blendMode": "NORMAL",
+                "type": "SOLID",
+                "color": {
+                  "r": 1.0,
+                  "g": 1.0,
+                  "b": 1.0,
+                  "a": 1.0
+                }
+              }
+            ],
+            "children": [
+              {
+                "id": "2:10",
+                "name": "Heading/Plans",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1.0,
+                "characters": "Choose the plan that fits your team",
+                "absoluteBoundingBox": {
+                  "x": 80,
+                  "y": 120,
+                  "width": 400,
+                  "height": 61.599999999999994
+                },
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.078431,
+                      "g": 0.078431,
+                      "b": 0.078431,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 600,
+                  "fontSize": 44,
+                  "lineHeightPx": 61.599999999999994,
+                  "letterSpacing": 0.0,
+                  "textAlignHorizontal": "LEFT"
+                }
+              },
+              {
+                "id": "2:11",
+                "name": "Body/Starter",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1.0,
+                "characters": "Starter \u2014 five seats, one project",
+                "absoluteBoundingBox": {
+                  "x": 80,
+                  "y": 260,
+                  "width": 400,
+                  "height": 25.2
+                },
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.078431,
+                      "g": 0.078431,
+                      "b": 0.078431,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 600,
+                  "fontSize": 18,
+                  "lineHeightPx": 25.2,
+                  "letterSpacing": 0.0,
+                  "textAlignHorizontal": "LEFT"
+                }
+              },
+              {
+                "id": "2:12",
+                "name": "Body/Growth",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1.0,
+                "characters": "Growth \u2014 twenty seats, unlimited projects",
+                "absoluteBoundingBox": {
+                  "x": 80,
+                  "y": 320,
+                  "width": 400,
+                  "height": 25.2
+                },
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.078431,
+                      "g": 0.078431,
+                      "b": 0.078431,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 600,
+                  "fontSize": 18,
+                  "lineHeightPx": 25.2,
+                  "letterSpacing": 0.0,
+                  "textAlignHorizontal": "LEFT"
+                }
+              },
+              {
+                "id": "2:13",
+                "name": "Button/Trial",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1.0,
+                "characters": "Start a 14 day trial",
+                "absoluteBoundingBox": {
+                  "x": 80,
+                  "y": 420,
+                  "width": 400,
+                  "height": 22.4
+                },
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.078431,
+                      "g": 0.078431,
+                      "b": 0.078431,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 600,
+                  "fontSize": 16,
+                  "lineHeightPx": 22.4,
+                  "letterSpacing": 0.0,
+                  "textAlignHorizontal": "LEFT"
+                }
+              },
+              {
+                "id": "2:14",
+                "name": "Body/Invoicing",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1.0,
+                "characters": "Annual invoicing available on request",
+                "absoluteBoundingBox": {
+                  "x": 80,
+                  "y": 500,
+                  "width": 400,
+                  "height": 19.599999999999998
+                },
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.078431,
+                      "g": 0.078431,
+                      "b": 0.078431,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 600,
+                  "fontSize": 14,
+                  "lineHeightPx": 19.599999999999998,
+                  "letterSpacing": 0.0,
+                  "textAlignHorizontal": "LEFT"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

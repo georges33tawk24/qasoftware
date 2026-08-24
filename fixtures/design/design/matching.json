@@ -1,0 +1,17 @@
+{
+  "threshold": 0.55,
+  "surfaces": [
+    {
+      "pageId": "p_index_html_df5de2",
+      "viewport": "desktop_1440",
+      "frame": "Home / Desktop",
+      "scale": 1.0,
+      "anchors": 11,
+      "matched": 19,
+      "unmatchedNodes": 1,
+      "unmatchedElements": 1,
+      "confident": true,
+      "detail": "mapping/p_index_html_df5de2.desktop_1440.json"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "p_broken_redirect_3_1110c5",
+  "url": "http://127.0.0.1:56980/broken/deep.html",
+  "path": "/broken/deep.html",
+  "title": "Broken fixture — accessibility",
+  "status": 200,
+  "redirectChain": [
+    "http://127.0.0.1:56980/broken/redirect/3",
+    "http://127.0.0.1:56980/broken/redirect/2",
+    "http://127.0.0.1:56980/broken/redirect/1"
+  ],
+  "depth": 1,
+  "discoveredFrom": "http://127.0.0.1:56980/broken/index.html",
+  "persona": "anonymous",
+  "domNodeCount": 21,
+  "security": null,
+  "crawlBlocked": null
+}

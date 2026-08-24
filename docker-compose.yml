@@ -1,0 +1,131 @@
+name: bureau
+
+# One image for the API and the worker: the worker needs a browser, the API needs the
+# same engine code to read artifacts, and two images to keep in step is one too many.
+x-engine: &engine
+  image: mcr.microsoft.com/playwright/python:v1.49.0-noble
+  working_dir: /srv
+  volumes:
+    - .:/srv
+    - artifacts:/srv/runs
+  environment: &engine-env
+    DATABASE_URL: postgresql://bureau:bureau@postgres:5432/bureau
+    REDIS_URL: redis://redis:6379/0
+    ARTIFACTS_DIR: /srv/runs
+    PYTHONPATH: /srv/packages:/srv/apps/api
+    PIP_ROOT_USER_ACTION: ignore
+    # How many runs keep their screenshots. Issues are kept forever either way.
+    BUREAU_KEEP_MEDIA_RUNS: ${BUREAU_KEEP_MEDIA_RUNS:-10}
+    # Where a digest's links point. Left unset, digests carry no links.
+    BUREAU_PUBLIC_ORIGIN: ${BUREAU_PUBLIC_ORIGIN:-}
+    # A hosted browser for the `remote` driver; the URL usually carries the key.
+    BUREAU_REMOTE_WS: ${BUREAU_REMOTE_WS:-}
+    # Credentials are named by each project, never held by it. A project stores
+    # `figmaTokenRef: "env:ACME_FIGMA_TOKEN"`; the operator puts the value here, in a
+    # secrets manager, or in the OS keychain. Two clients mean two variables, and
+    # neither ever reaches the database or an artifact.
+    #
+    # The deployment's own model key is the fallback for projects that name none —
+    # usually the right arrangement, since whoever runs this pays for the models.
+    ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+    OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    # Everything a project's `env:` reference might name, passed straight through.
+    ACME_FIGMA_TOKEN: ${ACME_FIGMA_TOKEN:-}
+    ACME_JIRA_TOKEN: ${ACME_JIRA_TOKEN:-}
+    FIGMA_TOKEN: ${FIGMA_TOKEN:-}
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bureau
+      POSTGRES_PASSWORD: bureau
+      POSTGRES_DB: bureau
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bureau -d bureau"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    <<: *engine
+    ports:
+      - "${API_PORT:-8000}:8000"
+    command:
+      - bash
+      - -lc
+      - >-
+        pip install -q -e '.[api]' &&
+        exec uvicorn bureau_api.main:app --host 0.0.0.0 --port 8000
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request as r; r.urlopen('http://127.0.0.1:8000/api/health')\""]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  worker:
+    <<: *engine
+    environment:
+      <<: *engine-env
+      # The scheduler ticks in the API, which is the process that is always up.
+      BUREAU_SCHEDULER: "0"
+    command:
+      - bash
+      - -lc
+      - >-
+        pip install -q -e '.[api]' &&
+        exec rq worker --url "$$REDIS_URL" bureau
+
+  web:
+    image: node:22-alpine
+    working_dir: /srv/apps/web
+    volumes:
+      - .:/srv
+      # Container-local, not bind-mounted. A developer's `node_modules` holds
+      # darwin-arm64 binaries — esbuild, the Next SWC plugin, lightningcss — which do not
+      # run on Linux, and an `npm ci` in here would overwrite the host's working copy on
+      # the way past. `.next` is excluded for the same reason in reverse.
+      - web_node_modules:/srv/apps/web/node_modules
+      - web_next:/srv/apps/web/.next
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    environment:
+      # Inlined by `next build`, so the browser's URL for the API is decided here. It is
+      # the URL as seen from the *browser*, not from inside the compose network.
+      NEXT_PUBLIC_API_ORIGIN: ${API_ORIGIN:-http://localhost:8000}
+    command:
+      - sh
+      - -lc
+      - >-
+        npm ci --no-audit --no-fund &&
+        npm run build &&
+        exec npm run start -- --hostname 0.0.0.0
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  artifacts:
+  web_node_modules:
+  web_next:

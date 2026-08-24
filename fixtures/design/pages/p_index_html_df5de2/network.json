@@ -1,0 +1,191 @@
+[
+  {
+    "url": "http://127.0.0.1:59800/index.html",
+    "method": "GET",
+    "status": 200,
+    "type": "document",
+    "reqHeaders": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:59800",
+      "pragma": "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "1402",
+      "content-type": "text/html",
+      "date": "Sat, 22 Aug 2026 23:42:00 GMT",
+      "last-modified": "Sat, 22 Aug 2026 12:07:59 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": "19ce556ed78efe69713d3db5201e20e42a7ca742310ea55e900a249c7a20dcc0",
+    "resBodySample": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Fixture site — Home</title>\n    <meta name=\"description\" content=\"A small static site the capture tests run against.\" />\n    <link rel=\"canonical\" href=\"/index.html\" />\n    <link rel=\"stylesheet\" href=\"/assets/site.css\" />\n    <script src=\"/assets/app.js\" defer></script>\n  </head>\n  <body>\n    <nav><ul>\n      <li><a href=\"/index.html\">Home</a></li>\n    ",
+    "timing": {
+      "startMs": 1787442120639.9,
+      "ttfbMs": 0.4,
+      "durationMs": 1.27
+    },
+    "size": {
+      "transferBytes": 1633,
+      "resourceBytes": 1402
+    },
+    "initiator": "document",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:59800/assets/site.css",
+    "method": "GET",
+    "status": 200,
+    "type": "stylesheet",
+    "reqHeaders": {
+      "accept": "text/css,*/*;q=0.1",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:59800",
+      "pragma": "no-cache",
+      "referer": "http://127.0.0.1:59800/index.html",
+      "sec-fetch-dest": "style",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "1370",
+      "content-type": "text/css",
+      "date": "Sat, 22 Aug 2026 23:42:00 GMT",
+      "last-modified": "Sat, 22 Aug 2026 12:07:59 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": "3497cd283fb207c4ffdf3ee48e035c0d5267d629fe5085319df08e10427ee45c",
+    "resBodySample": ":root { --ink: #111111; --muted: #6a6e78; --line: #e5e7eb; --accent: #3b7dd8; }\n* { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: -apple-system, \"Segoe UI\", Helvetica, Arial, sans-serif;\n  font-size: 16px;\n  line-height: 24px;\n  color: var(--ink);\n  background: #ffffff;\n}\n.wrap { max-width: 960px; margin: 0 auto; padding: 24px; }\nnav { border-bottom: 1px solid var(--line); }\nnav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 16px 24px; }\nnav a { color: var(--ink); text-d",
+    "timing": {
+      "startMs": 1787442120643.62,
+      "ttfbMs": 0.79,
+      "durationMs": 1.86
+    },
+    "size": {
+      "transferBytes": 1600,
+      "resourceBytes": 1370
+    },
+    "initiator": "stylesheet",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:59800/assets/app.js",
+    "method": "GET",
+    "status": 200,
+    "type": "script",
+    "reqHeaders": {
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:59800",
+      "pragma": "no-cache",
+      "referer": "http://127.0.0.1:59800/index.html",
+      "sec-fetch-dest": "script",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "207",
+      "content-type": "application/javascript",
+      "date": "Sat, 22 Aug 2026 23:42:00 GMT",
+      "last-modified": "Sat, 22 Aug 2026 12:07:59 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": "61fd98bf31bf702e4ff9e53e862eb4a45dbc67e8f45375083e534a7bd5081eb5",
+    "resBodySample": "// A real console error, so group A has something honest to find later.\nwindow.addEventListener(\"DOMContentLoaded\", function () {\n  console.error(\"Uncaught TypeError: analytics.init is not a function\");\n});\n",
+    "timing": {
+      "startMs": 1787442120643.84,
+      "ttfbMs": 1.56,
+      "durationMs": 2.45
+    },
+    "size": {
+      "transferBytes": 450,
+      "resourceBytes": 207
+    },
+    "initiator": "script",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:59800/assets/logo.png",
+    "method": "GET",
+    "status": 200,
+    "type": "image",
+    "reqHeaders": {
+      "accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:59800",
+      "pragma": "no-cache",
+      "referer": "http://127.0.0.1:59800/index.html",
+      "sec-fetch-dest": "image",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "725",
+      "content-type": "image/png",
+      "date": "Sat, 22 Aug 2026 23:42:00 GMT",
+      "last-modified": "Sat, 22 Aug 2026 12:07:59 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": null,
+    "resBodySample": null,
+    "timing": {
+      "startMs": 1787442120644.14,
+      "ttfbMs": 0.83,
+      "durationMs": 2.01
+    },
+    "size": {
+      "transferBytes": 955,
+      "resourceBytes": null
+    },
+    "initiator": "image",
+    "sourceMapUrl": null,
+    "failure": null
+  }
+]

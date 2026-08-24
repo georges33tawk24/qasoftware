@@ -1,0 +1,33 @@
+{
+  "violations": [],
+  "incomplete": [],
+  "passes": [
+    "aria-hidden-body",
+    "button-name",
+    "bypass",
+    "color-contrast",
+    "document-title",
+    "empty-heading",
+    "empty-table-header",
+    "heading-order",
+    "html-has-lang",
+    "html-lang-valid",
+    "landmark-main-is-top-level",
+    "landmark-no-duplicate-main",
+    "landmark-one-main",
+    "landmark-unique",
+    "link-name",
+    "meta-viewport-large",
+    "meta-viewport",
+    "nested-interactive",
+    "page-has-heading-one",
+    "region",
+    "table-duplicate-name",
+    "td-headers-attr",
+    "th-has-data-cells"
+  ],
+  "testEngine": {
+    "name": "axe-core",
+    "version": "4.13.0"
+  }
+}

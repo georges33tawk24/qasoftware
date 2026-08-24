@@ -1,0 +1,59 @@
+{
+  "pageId": "p_home",
+  "viewport": "desktop_1440",
+  "alignmentSets": [
+    {
+      "axis": "x",
+      "edge": "start",
+      "parentId": "el_0001",
+      "median": 24.0,
+      "elementIds": [
+        "el_0002",
+        "el_0003"
+      ],
+      "deviations": {
+        "el_0002": 0.0,
+        "el_0003": 0.0
+      }
+    }
+  ],
+  "repeatedGroups": [],
+  "spacingHistogram": [
+    {
+      "gap": 24.0,
+      "count": 1
+    }
+  ],
+  "typeInventory": [
+    {
+      "fontFamily": "Inter",
+      "fontSize": 36.0,
+      "fontWeight": 700,
+      "lineHeight": 44.0,
+      "count": 1
+    },
+    {
+      "fontFamily": "Inter",
+      "fontSize": 16.0,
+      "fontWeight": 600,
+      "lineHeight": 24.0,
+      "count": 1
+    }
+  ],
+  "colourInventory": [
+    {
+      "colour": "rgb(17, 17, 17)",
+      "property": "color",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(59, 125, 216)",
+      "property": "backgroundColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    }
+  ]
+}

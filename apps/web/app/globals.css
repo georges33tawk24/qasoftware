@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* SPEC §16. The palette is the spec's, with four hues lifted far enough to clear 4.5:1
+   against both backgrounds — §16 also demands WCAG AA on our own UI, and at 11px the
+   spec's own tertiary grey misses it. `tests/test_ui.py` is what keeps us honest.
+
+   spec -> shipped:  text-3/trivial #6a6e78 -> #7d818b · blocker #c7443a -> #d9564c
+                     minor #5c7fa8 -> #6083ac · accent #3b7dd8 -> #3f81dc  */
+@theme {
+  --color-surface: #0e0f11;
+  --color-raised: #17181b;
+  --color-border: #26282d;
+  --color-text: #e6e7ea;
+  --color-text-2: #9296a0;
+  --color-text-3: #7d818b;
+  --color-accent: #3f81dc;
+
+  --color-blocker: #d9564c;
+  --color-critical: #d2683c;
+  --color-major: #c99a2e;
+  --color-minor: #6083ac;
+  --color-trivial: #7d818b;
+
+  --font-sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Light theme mirrors it — §16. The severity hues are darkened here for the same
+   reason: amber on white is 2.5:1, which is unreadable and fails AA outright.
+
+   Plain `:root`, not a second `@theme`: Tailwind hoists every `@theme` block to the top
+   level and merges it, so a themed media query silently becomes the only palette. The
+   utilities all read `var(--color-…)`, which a normal override reaches. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-surface: #fbfbfc;
+    --color-raised: #ffffff;
+    --color-border: #e3e5e9;
+    --color-text: #16181c;
+    --color-text-2: #5a606c;
+    --color-text-3: #6e7480;
+    --color-accent: #3173ce;
+
+    --color-blocker: #c7443a;
+    --color-critical: #be5428;
+    --color-major: #9a6b00;
+    --color-minor: #53769f;
+    --color-trivial: #6a6e78;
+  }
+}
+
+html,
+body {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 20px;
+  /* This app is full of measurements and misaligned digits look terrible. */
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible keyboard focus is part of the quality floor, not a feature. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-radius: 2px;
+}
+
+/* 120–160ms ease-out on state changes only. Nothing decorative. */
+* {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 5px;
+}
+
+/* A heading the screen reader announces and the page does not show. Tailwind ships this
+   as a utility; spelling it out keeps the token file self-contained. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

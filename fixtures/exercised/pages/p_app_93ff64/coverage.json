@@ -1,0 +1,16 @@
+{
+  "js": {
+    "usedBytes": 191,
+    "totalBytes": 195,
+    "byUrl": {
+      "http://127.0.0.1:63425/app": {
+        "usedBytes": 191,
+        "totalBytes": 195
+      }
+    }
+  },
+  "css": {
+    "usedBytes": 535,
+    "totalBytes": 535
+  }
+}

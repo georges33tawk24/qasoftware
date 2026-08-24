@@ -1,0 +1,14 @@
+{
+  "id": "p_index_html_df5de2",
+  "url": "http://127.0.0.1:59800/index.html",
+  "path": "/index.html",
+  "title": "Fixture site — Home",
+  "status": 200,
+  "redirectChain": [],
+  "depth": 0,
+  "discoveredFrom": null,
+  "persona": "anonymous",
+  "domNodeCount": 37,
+  "security": null,
+  "crawlBlocked": null
+}

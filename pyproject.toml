@@ -1,0 +1,104 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bureau-engine"
+version = "0.1.0"
+description = "Autonomous QA platform — capture, check, reason, report"
+requires-python = ">=3.12"
+dependencies = [
+  "pydantic>=2.7",
+  "playwright>=1.47",
+  "pyspellchecker>=0.8",
+  "pillow>=10.0",
+]
+
+[project.scripts]
+bureau = "engine.cli:main"
+
+[project.optional-dependencies]
+api = [
+  "fastapi>=0.115",
+  "sqlmodel>=0.0.22",
+  "uvicorn[standard]>=0.32",
+  "redis>=5.0",
+  "rq>=1.16",
+  # SPEC §17's database. SQLite needs no driver, which is how this went missing until
+  # compose was run for the first time and the API could not reach Postgres at all.
+  "psycopg[binary]>=3.2",
+]
+anthropic = ["anthropic>=0.40"]
+stealth = [
+  "patchright>=1.47",
+  "camoufox[geoip]>=0.4",
+]
+google = ["google-genai>=1.0"]
+openai = ["openai>=1.40"]
+dev = [
+  "pytest>=8.0",
+  "httpx>=0.27",
+  "ruff>=0.6",
+  "mypy>=1.11",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["packages/engine"]
+
+# ------------------------------------------------------------------------------- ruff
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["packages", "apps/api", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "RUF", "PTH", "TID"]
+# Findings are prose a human reads in a report: "480×240", "24px – 32px", "«redacted»".
+# The ambiguous-unicode rules are aimed at code, not at copy.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["engine", "bureau_api", "tests"]
+
+# ------------------------------------------------------------------------------ mypy
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+mypy_path = "packages:apps/api"
+files = ["packages", "apps/api/bureau_api", "tests"]
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = [
+  "keyring",
+  "spellchecker",
+  "anthropic",
+  "openai",
+  "google.*",
+  # Optional stealth drivers: real implementations, installed only where they are used.
+  "patchright.*",
+  "camoufox.*",
+]
+ignore_missing_imports = true
+
+# redis and rq ship type stubs that are stricter than the libraries are; treating them as
+# untyped keeps our own strictness without chasing theirs.
+[[tool.mypy.overrides]]
+module = ["redis", "redis.*", "rq", "rq.*"]
+ignore_missing_imports = true
+follow_imports = "skip"
+
+[tool.pydantic-mypy]
+init_typed = true
+warn_required_dynamic_aliases = true
+
+# ---------------------------------------------------------------------------- pytest
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["apps/api"]
+addopts = "-q --strict-markers"
+markers = ["browser: needs a real browser (make browsers)"]

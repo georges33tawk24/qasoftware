@@ -1,0 +1,300 @@
+{
+  "pageId": "p_broken_index_html_864df3",
+  "viewport": "desktop_1440",
+  "alignmentSets": [
+    {
+      "axis": "x",
+      "edge": "start",
+      "parentId": "el_00002",
+      "median": 294.0,
+      "elementIds": [
+        "el_00003",
+        "el_00013",
+        "el_00014",
+        "el_00015",
+        "el_00016",
+        "el_00017",
+        "el_00018",
+        "el_00019",
+        "el_00035",
+        "el_00046",
+        "el_00053",
+        "el_00054",
+        "el_00057",
+        "el_00059",
+        "el_00061",
+        "el_00063",
+        "el_00065"
+      ],
+      "deviations": {
+        "el_00003": 0.0,
+        "el_00013": 0.0,
+        "el_00014": 0.0,
+        "el_00015": 0.0,
+        "el_00016": 0.0,
+        "el_00017": 0.0,
+        "el_00018": 0.0,
+        "el_00019": 0.0,
+        "el_00035": 0.0,
+        "el_00046": 0.0,
+        "el_00053": 0.0,
+        "el_00054": 0.0,
+        "el_00057": 0.0,
+        "el_00059": 0.0,
+        "el_00061": 0.0,
+        "el_00063": 0.0,
+        "el_00065": 0.0
+      }
+    },
+    {
+      "axis": "y",
+      "edge": "start",
+      "parentId": "el_00004",
+      "median": 24.0,
+      "elementIds": [
+        "el_00005",
+        "el_00007",
+        "el_00009",
+        "el_00011"
+      ],
+      "deviations": {
+        "el_00005": 0.0,
+        "el_00007": 0.0,
+        "el_00009": 0.0,
+        "el_00011": 0.0
+      }
+    },
+    {
+      "axis": "x",
+      "edge": "start",
+      "parentId": "el_00019",
+      "median": 294.0,
+      "elementIds": [
+        "el_00020",
+        "el_00023",
+        "el_00029",
+        "el_00032",
+        "el_00026"
+      ],
+      "deviations": {
+        "el_00020": 0.0,
+        "el_00023": 0.0,
+        "el_00029": 0.0,
+        "el_00032": 0.0,
+        "el_00026": 5.0
+      }
+    },
+    {
+      "axis": "y",
+      "edge": "start",
+      "parentId": "el_00035",
+      "median": 1030.0,
+      "elementIds": [
+        "el_00036",
+        "el_00039",
+        "el_00042",
+        "el_00045"
+      ],
+      "deviations": {
+        "el_00036": 0.0,
+        "el_00039": 0.0,
+        "el_00042": 0.0,
+        "el_00045": 0.0
+      }
+    },
+    {
+      "axis": "x",
+      "edge": "start",
+      "parentId": "el_00046",
+      "median": 334.0,
+      "elementIds": [
+        "el_00047",
+        "el_00049",
+        "el_00051"
+      ],
+      "deviations": {
+        "el_00047": 0.0,
+        "el_00049": 0.0,
+        "el_00051": 0.0
+      }
+    }
+  ],
+  "repeatedGroups": [
+    {
+      "signature": "p",
+      "parentId": "el_00002",
+      "elementIds": [
+        "el_00014",
+        "el_00015",
+        "el_00016",
+        "el_00054",
+        "el_00057",
+        "el_00059",
+        "el_00061",
+        "el_00063",
+        "el_00065"
+      ]
+    },
+    {
+      "signature": "li",
+      "parentId": "el_00004",
+      "elementIds": [
+        "el_00005",
+        "el_00007",
+        "el_00009",
+        "el_00011"
+      ]
+    },
+    {
+      "signature": "div.row",
+      "parentId": "el_00019",
+      "elementIds": [
+        "el_00020",
+        "el_00023",
+        "el_00026",
+        "el_00029",
+        "el_00032"
+      ]
+    },
+    {
+      "signature": "article.tile",
+      "parentId": "el_00035",
+      "elementIds": [
+        "el_00036",
+        "el_00039",
+        "el_00042",
+        "el_00045"
+      ]
+    },
+    {
+      "signature": "li.item",
+      "parentId": "el_00046",
+      "elementIds": [
+        "el_00047",
+        "el_00049",
+        "el_00051"
+      ]
+    }
+  ],
+  "spacingHistogram": [
+    {
+      "gap": 16.0,
+      "count": 15
+    },
+    {
+      "gap": 8.0,
+      "count": 8
+    },
+    {
+      "gap": 24.0,
+      "count": 8
+    },
+    {
+      "gap": 0.0,
+      "count": 4
+    },
+    {
+      "gap": 4.5,
+      "count": 1
+    },
+    {
+      "gap": 40.0,
+      "count": 1
+    }
+  ],
+  "typeInventory": [
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "count": 18
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 20.0,
+      "fontWeight": 700,
+      "lineHeight": 28.0,
+      "count": 8
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 16.0,
+      "fontWeight": 600,
+      "lineHeight": 24.0,
+      "count": 4
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 14.0,
+      "count": 1
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 36.0,
+      "fontWeight": 700,
+      "lineHeight": 44.0,
+      "count": 1
+    },
+    {
+      "fontFamily": "Arial",
+      "fontSize": 13.33,
+      "fontWeight": 400,
+      "lineHeight": null,
+      "count": 1
+    }
+  ],
+  "colourInventory": [
+    {
+      "colour": "rgb(17, 17, 17)",
+      "property": "color",
+      "count": 26,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(229, 231, 235)",
+      "property": "borderColor",
+      "count": 9,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(0, 0, 238)",
+      "property": "color",
+      "count": 6,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(0, 0, 0)",
+      "property": "borderColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(0, 0, 0)",
+      "property": "color",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(239, 239, 239)",
+      "property": "backgroundColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(255, 255, 255)",
+      "property": "backgroundColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    }
+  ]
+}

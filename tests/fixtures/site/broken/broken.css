@@ -1,0 +1,33 @@
+:root { --ink: #111111; --line: #e5e7eb; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+       font-size: 16px; line-height: 24px; color: var(--ink); background: #fff; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 24px; }
+h1 { font-size: 36px; line-height: 44px; margin: 0 0 24px; }
+h2 { font-size: 20px; line-height: 28px; margin: 0 0 8px; }
+p  { margin: 0 0 16px; }
+nav ul { display: flex; gap: 24px; list-style: none; margin: 0 0 24px; padding: 0; }
+nav a { color: var(--ink); font-weight: 600; text-decoration: none; }
+
+/* A column of cards. DEFECT 1: one is indented. */
+.stack { display: flex; flex-direction: column; }
+.row { border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 24px; }
+/* Modifiers are positional, not extra classes: adding a class changes the element's
+   signature, which splits the repeated group the checkers are meant to compare. */
+.stack > .row:nth-child(3) { margin-left: 5px; }
+/* DEFECT: one gap in the group is wrong. */
+.stack > .row:nth-child(4) { margin-bottom: 40px; }
+
+/* DEFECT 8: line-height below any sane ratio. */
+.cramped { line-height: 14px; }
+
+/* DEFECT 10: padding on a zero-height box. */
+.collapsed { height: 0; padding: 12px 0; border: 0; }
+
+/* DEFECT 14: clipped text with no ellipsis. */
+.clip { width: 120px; overflow: hidden; white-space: nowrap; }
+
+/* DEFECT: decoration drifts inside a repeated group. */
+.tile { border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+.tiles > .tile:nth-child(3) { border-radius: 24px; }
+.tiles { display: flex; gap: 16px; }

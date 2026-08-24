@@ -1,0 +1,14 @@
+{
+  "id": "p_broken_seo_html_c77f7e",
+  "url": "http://127.0.0.1:56980/broken/seo.html",
+  "path": "/broken/seo.html",
+  "title": "",
+  "status": 200,
+  "redirectChain": [],
+  "depth": 1,
+  "discoveredFrom": "http://127.0.0.1:56980/broken/index.html",
+  "persona": "anonymous",
+  "domNodeCount": 12,
+  "security": null,
+  "crawlBlocked": null
+}

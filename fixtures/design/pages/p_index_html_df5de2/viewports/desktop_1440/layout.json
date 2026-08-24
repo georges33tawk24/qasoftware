@@ -1,0 +1,199 @@
+{
+  "pageId": "p_index_html_df5de2",
+  "viewport": "desktop_1440",
+  "alignmentSets": [
+    {
+      "axis": "y",
+      "edge": "start",
+      "parentId": "el_00003",
+      "median": 16.0,
+      "elementIds": [
+        "el_00004",
+        "el_00006",
+        "el_00008"
+      ],
+      "deviations": {
+        "el_00004": 0.0,
+        "el_00006": 0.0,
+        "el_00008": 0.0
+      }
+    },
+    {
+      "axis": "x",
+      "edge": "start",
+      "parentId": "el_00010",
+      "median": 264.0,
+      "elementIds": [
+        "el_00011",
+        "el_00012",
+        "el_00013",
+        "el_00023",
+        "el_00024",
+        "el_00026"
+      ],
+      "deviations": {
+        "el_00011": 0.0,
+        "el_00012": 0.0,
+        "el_00013": 0.0,
+        "el_00023": 0.0,
+        "el_00024": 0.0,
+        "el_00026": 0.0
+      }
+    },
+    {
+      "axis": "y",
+      "edge": "start",
+      "parentId": "el_00013",
+      "median": 189.0,
+      "elementIds": [
+        "el_00014",
+        "el_00017",
+        "el_00020"
+      ],
+      "deviations": {
+        "el_00014": 0.0,
+        "el_00017": 0.0,
+        "el_00020": 0.0
+      }
+    }
+  ],
+  "repeatedGroups": [
+    {
+      "signature": "li",
+      "parentId": "el_00003",
+      "elementIds": [
+        "el_00004",
+        "el_00006",
+        "el_00008"
+      ]
+    },
+    {
+      "signature": "p",
+      "parentId": "el_00010",
+      "elementIds": [
+        "el_00012",
+        "el_00024",
+        "el_00026"
+      ]
+    },
+    {
+      "signature": "article.card",
+      "parentId": "el_00013",
+      "elementIds": [
+        "el_00014",
+        "el_00017",
+        "el_00020"
+      ]
+    }
+  ],
+  "spacingHistogram": [
+    {
+      "gap": 24.0,
+      "count": 6
+    },
+    {
+      "gap": 8.0,
+      "count": 3
+    },
+    {
+      "gap": 0.0,
+      "count": 2
+    },
+    {
+      "gap": 16.0,
+      "count": 2
+    },
+    {
+      "gap": 7.0,
+      "count": 1
+    }
+  ],
+  "typeInventory": [
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "count": 6
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 16.0,
+      "fontWeight": 600,
+      "lineHeight": 24.0,
+      "count": 4
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 20.0,
+      "fontWeight": 600,
+      "lineHeight": 28.0,
+      "count": 3
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 36.0,
+      "fontWeight": 700,
+      "lineHeight": 44.0,
+      "count": 1
+    }
+  ],
+  "colourInventory": [
+    {
+      "colour": "rgb(17, 17, 17)",
+      "property": "color",
+      "count": 7,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(106, 110, 120)",
+      "property": "color",
+      "count": 5,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(229, 231, 235)",
+      "property": "borderColor",
+      "count": 4,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(255, 255, 255)",
+      "property": "backgroundColor",
+      "count": 4,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(0, 0, 238)",
+      "property": "color",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(17, 17, 17)",
+      "property": "borderColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(255, 255, 255)",
+      "property": "color",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(59, 125, 216)",
+      "property": "backgroundColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    }
+  ]
+}

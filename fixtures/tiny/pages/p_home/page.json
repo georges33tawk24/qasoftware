@@ -1,0 +1,14 @@
+{
+  "id": "p_home",
+  "url": "https://example.test/",
+  "path": "/",
+  "title": "Example — Latest news",
+  "status": 200,
+  "redirectChain": [],
+  "depth": 0,
+  "discoveredFrom": null,
+  "persona": "anonymous",
+  "domNodeCount": 0,
+  "security": null,
+  "crawlBlocked": null
+}

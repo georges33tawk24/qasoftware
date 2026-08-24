@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Broken fixture — accessibility</title>
+    <meta name="description" content="Accessibility defects for the checker suite." />
+    <link rel="canonical" href="/broken/deep.html" />
+    <link rel="icon" href="/broken/square.png" />
+    <link rel="stylesheet" href="/broken/broken.css" />
+    <style>
+      .overlay-host { position: relative; height: 80px; }
+      .under { position: absolute; left: 0; top: 0; width: 120px; height: 40px; }
+      .over  { position: absolute; left: 60px; top: 10px; width: 120px; height: 40px; }
+      .lid   { position: absolute; left: 0; top: 0; width: 260px; height: 60px; background: #eef; }
+      .wide  { max-width: none; }
+    </style>
+  </head>
+  <body>
+    <p class="wide">
+        This paragraph is deliberately allowed to run the full width of a desktop window
+        without any maximum, so the measure comes out far past ninety-five characters per
+        line, which is the point at which the eye starts losing its place on the return
+        sweep and people stop reading long before they reach the end of the argument you
+        were making. It repeats the same idea at length purely so that there is enough
+        text here for the measure to be worth calculating at all, because a single short
+        sentence would tell you nothing whatsoever about how the column actually reads.
+      </p>
+    <div class="wrap">
+      <h1>Reached only through three redirects</h1>
+
+
+      <p>Published 01/03/2024 and reviewed on 2024-03-15.</p>
+
+      <div class="overlay-host">
+        <button class="under" type="button">Underneath</button>
+        <button class="over" type="button">On top of it</button>
+      </div>
+
+      <div class="overlay-host">
+        <button type="button" style="width: 200px; height: 44px">Covered completely</button>
+        <div class="lid"></div>
+      </div>
+    </div>
+  </body>
+</html>

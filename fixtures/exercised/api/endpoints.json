@@ -1,0 +1,44 @@
+[
+  {
+    "id": "ep_87b839a1e3",
+    "method": "GET",
+    "template": "/api/items",
+    "sampleUrl": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+    "type": "fetch",
+    "status": 200,
+    "seenOn": [
+      "p_app_93ff64"
+    ],
+    "requestContentType": null,
+    "responseContentType": "application/json",
+    "hasAuthHeader": false
+  },
+  {
+    "id": "ep_a8feaa9ffc",
+    "method": "GET",
+    "template": "/api/me",
+    "sampleUrl": "http://127.0.0.1:63425/api/me",
+    "type": "fetch",
+    "status": 401,
+    "seenOn": [
+      "p_app_93ff64"
+    ],
+    "requestContentType": null,
+    "responseContentType": "application/json",
+    "hasAuthHeader": false
+  },
+  {
+    "id": "ep_93ddc8e4b8",
+    "method": "GET",
+    "template": "/api/orders",
+    "sampleUrl": "http://127.0.0.1:63425/api/orders?page=1",
+    "type": "fetch",
+    "status": 200,
+    "seenOn": [
+      "p_app_93ff64"
+    ],
+    "requestContentType": null,
+    "responseContentType": "application/json",
+    "hasAuthHeader": false
+  }
+]

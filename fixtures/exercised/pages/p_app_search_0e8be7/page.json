@@ -1,0 +1,14 @@
+{
+  "id": "p_app_search_0e8be7",
+  "url": "http://127.0.0.1:63425/app/search?q=tea",
+  "path": "/app/search",
+  "title": "Search",
+  "status": 200,
+  "redirectChain": [],
+  "depth": 1,
+  "discoveredFrom": "http://127.0.0.1:63425/app",
+  "persona": "anonymous",
+  "domNodeCount": 18,
+  "security": null,
+  "crawlBlocked": null
+}

@@ -1,0 +1,14 @@
+{
+  "id": "p_app_login_252c2b",
+  "url": "http://127.0.0.1:63425/app/login",
+  "path": "/app/login",
+  "title": "Sign in",
+  "status": 200,
+  "redirectChain": [],
+  "depth": 1,
+  "discoveredFrom": "http://127.0.0.1:63425/app",
+  "persona": "anonymous",
+  "domNodeCount": 23,
+  "security": null,
+  "crawlBlocked": null
+}

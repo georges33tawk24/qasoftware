@@ -1,0 +1,99 @@
+{
+  "links": [
+    {
+      "url": "http://127.0.0.1:56980/broken/a11y.html",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_broken_index_html_864df3"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:56980/broken/does-not-exist.html",
+      "status": 404,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_broken_index_html_864df3"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:56980/broken/index.html",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_broken_a11y_html_659718",
+        "p_broken_index_html_864df3",
+        "p_broken_mobile_html_17d869",
+        "p_broken_seo_html_c77f7e"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:56980/broken/mobile.html",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_broken_index_html_864df3"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:56980/broken/redirect/3",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_broken_index_html_864df3"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:56980/broken/seo.html",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_broken_index_html_864df3"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "path": "/bureau-not-found-probe",
+      "status": 200,
+      "kind": "not-found-handling",
+      "bodySample": null
+    },
+    {
+      "path": "/.env",
+      "status": 200,
+      "kind": "exposed-path",
+      "bodySample": "DATABASE_URL=postgres://user:hunter2@db.internal/prod\nSTRIPE_KEY=sk_live_x\n"
+    },
+    {
+      "path": "/.git/config",
+      "status": 200,
+      "kind": "exposed-path",
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>"
+    },
+    {
+      "path": "/.DS_Store",
+      "status": 404,
+      "kind": "exposed-path",
+      "bodySample": null
+    },
+    {
+      "path": "/server-status",
+      "status": 200,
+      "kind": "exposed-path",
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>"
+    },
+    {
+      "path": "/debug",
+      "status": 200,
+      "kind": "exposed-path",
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>"
+    }
+  ]
+}

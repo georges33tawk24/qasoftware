@@ -1,0 +1,421 @@
+{
+  "authorisedBy": "Jo Blake (client CTO)",
+  "authorisedHosts": [
+    "127.0.0.1",
+    "127.0.0.1:63425"
+  ],
+  "endpoints": [
+    {
+      "id": "ep_87b839a1e3",
+      "method": "GET",
+      "template": "/api/items",
+      "sampleUrl": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+      "type": "fetch",
+      "status": 200,
+      "seenOn": [
+        "p_app_93ff64"
+      ],
+      "requestContentType": null,
+      "responseContentType": "application/json",
+      "hasAuthHeader": false
+    },
+    {
+      "id": "ep_a8feaa9ffc",
+      "method": "GET",
+      "template": "/api/me",
+      "sampleUrl": "http://127.0.0.1:63425/api/me",
+      "type": "fetch",
+      "status": 401,
+      "seenOn": [
+        "p_app_93ff64"
+      ],
+      "requestContentType": null,
+      "responseContentType": "application/json",
+      "hasAuthHeader": false
+    },
+    {
+      "id": "ep_93ddc8e4b8",
+      "method": "GET",
+      "template": "/api/orders",
+      "sampleUrl": "http://127.0.0.1:63425/api/orders?page=1",
+      "type": "fetch",
+      "status": 200,
+      "seenOn": [
+        "p_app_93ff64"
+      ],
+      "requestContentType": null,
+      "responseContentType": "application/json",
+      "hasAuthHeader": false
+    }
+  ],
+  "probes": [
+    {
+      "endpointId": "ep_87b839a1e3",
+      "probe": "no-auth",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+      "status": 200,
+      "finding": false,
+      "detail": "answered an anonymous request in full",
+      "durationMs": 3.2,
+      "evidence": {
+        "sample": "{\"items\": [{\"id\": 1, \"title\": \"Ada's private note\", \"owner\": \"ada@example.test\"}]}"
+      }
+    },
+    {
+      "endpointId": "ep_87b839a1e3",
+      "probe": "malformed-input",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/items?owner=",
+      "status": 200,
+      "finding": false,
+      "detail": "responded 200",
+      "durationMs": 1.1,
+      "evidence": {
+        "leaked": [],
+        "sample": "{\"items\": []}"
+      }
+    },
+    {
+      "endpointId": "ep_87b839a1e3",
+      "probe": "method-tampering",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+      "status": 200,
+      "finding": true,
+      "detail": "DELETE on a GET endpoint answered 200",
+      "durationMs": 0.8,
+      "evidence": {}
+    },
+    {
+      "endpointId": "ep_87b839a1e3",
+      "probe": "cors",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+      "status": 200,
+      "finding": false,
+      "detail": "Access-Control-Allow-Origin: absent",
+      "durationMs": 0.9,
+      "evidence": {
+        "allowOrigin": "",
+        "allowCredentials": false
+      }
+    },
+    {
+      "endpointId": "ep_87b839a1e3",
+      "probe": "rate-limit",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+      "status": 200,
+      "finding": true,
+      "detail": "12 requests in a row, none refused",
+      "durationMs": 0.0,
+      "evidence": {
+        "statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ]
+      }
+    },
+    {
+      "endpointId": "ep_87b839a1e3",
+      "probe": "personal-data",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+      "status": 200,
+      "finding": true,
+      "detail": "an anonymous request returned 1 email",
+      "durationMs": 1.0,
+      "evidence": {
+        "categories": [
+          "email"
+        ]
+      }
+    },
+    {
+      "endpointId": "ep_87b839a1e3",
+      "probe": "latency",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+      "status": 200,
+      "finding": false,
+      "detail": "0.7ms",
+      "durationMs": 0.7,
+      "evidence": {
+        "budgetMs": 1000.0
+      }
+    },
+    {
+      "endpointId": "ep_87b839a1e3",
+      "probe": "cross-persona",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+      "status": 200,
+      "finding": true,
+      "detail": "grace received the same response as ada",
+      "durationMs": 0.7,
+      "evidence": {
+        "personas": [
+          "ada",
+          "grace"
+        ],
+        "sample": "{\"items\": [{\"id\": 1, \"title\": \"Ada's private note\", \"owner\": \"ada@example.test\"}]}"
+      }
+    },
+    {
+      "endpointId": "ep_a8feaa9ffc",
+      "probe": "no-auth",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/me",
+      "status": 401,
+      "finding": false,
+      "detail": "refused with 401",
+      "durationMs": 2.9,
+      "evidence": {
+        "sample": "{\"error\": \"unauthorised\"}"
+      }
+    },
+    {
+      "endpointId": "ep_a8feaa9ffc",
+      "probe": "malformed-input",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/me?id=not-a-number",
+      "status": 401,
+      "finding": false,
+      "detail": "responded 401",
+      "durationMs": 1.4,
+      "evidence": {
+        "leaked": [],
+        "sample": "{\"error\": \"unauthorised\"}"
+      }
+    },
+    {
+      "endpointId": "ep_a8feaa9ffc",
+      "probe": "method-tampering",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/me",
+      "status": 405,
+      "finding": false,
+      "detail": "DELETE on a GET endpoint answered 405",
+      "durationMs": 0.8,
+      "evidence": {}
+    },
+    {
+      "endpointId": "ep_a8feaa9ffc",
+      "probe": "cors",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/me",
+      "status": 200,
+      "finding": true,
+      "detail": "Access-Control-Allow-Origin: * with credentials",
+      "durationMs": 0.7,
+      "evidence": {
+        "allowOrigin": "*",
+        "allowCredentials": true
+      }
+    },
+    {
+      "endpointId": "ep_a8feaa9ffc",
+      "probe": "rate-limit",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/me",
+      "status": 401,
+      "finding": true,
+      "detail": "12 requests in a row, none refused",
+      "durationMs": 0.0,
+      "evidence": {
+        "statuses": [
+          401,
+          401,
+          401,
+          401,
+          401,
+          401,
+          401,
+          401,
+          401,
+          401,
+          401,
+          401
+        ]
+      }
+    },
+    {
+      "endpointId": "ep_a8feaa9ffc",
+      "probe": "personal-data",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/me",
+      "status": 401,
+      "finding": false,
+      "detail": "nothing that looks personal",
+      "durationMs": 0.6,
+      "evidence": {
+        "categories": []
+      }
+    },
+    {
+      "endpointId": "ep_a8feaa9ffc",
+      "probe": "latency",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/me",
+      "status": 401,
+      "finding": false,
+      "detail": "0.9ms",
+      "durationMs": 0.9,
+      "evidence": {
+        "budgetMs": 1000.0
+      }
+    },
+    {
+      "endpointId": "ep_a8feaa9ffc",
+      "probe": "cross-persona",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/me",
+      "status": 200,
+      "finding": false,
+      "detail": "grace received a different response (200)",
+      "durationMs": 1.1,
+      "evidence": {
+        "personas": [
+          "ada",
+          "grace"
+        ],
+        "sample": "{\"email\": \"grace@example.test\", \"phone\": \"+44 7700 900000\", \"items\": [{\"id\": 2, \"title\": \"Grace's private note\", \"owner\": \"grace@example.test\"}]}"
+      }
+    },
+    {
+      "endpointId": "ep_93ddc8e4b8",
+      "probe": "no-auth",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/orders?page=1",
+      "status": 200,
+      "finding": false,
+      "detail": "answered an anonymous request in full",
+      "durationMs": 2.7,
+      "evidence": {
+        "sample": "{\"page\": 1, \"orders\": []}"
+      }
+    },
+    {
+      "endpointId": "ep_93ddc8e4b8",
+      "probe": "malformed-input",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/orders?page=not-a-number",
+      "status": 500,
+      "finding": true,
+      "detail": "the error response contains '.py\", line '",
+      "durationMs": 1.0,
+      "evidence": {
+        "leaked": [
+          ".py\", line "
+        ],
+        "sample": "{\"error\": \"ValueError: invalid literal for int() with base 10\", \"trace\": \"File \\\"/srv/app/orders.py\\\", line 42, in list_orders\\\\n    page = int(request.args['page'])\"}"
+      }
+    },
+    {
+      "endpointId": "ep_93ddc8e4b8",
+      "probe": "method-tampering",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/orders?page=1",
+      "status": 405,
+      "finding": false,
+      "detail": "DELETE on a GET endpoint answered 405",
+      "durationMs": 0.8,
+      "evidence": {}
+    },
+    {
+      "endpointId": "ep_93ddc8e4b8",
+      "probe": "cors",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/orders?page=1",
+      "status": 200,
+      "finding": false,
+      "detail": "Access-Control-Allow-Origin: absent",
+      "durationMs": 0.8,
+      "evidence": {
+        "allowOrigin": "",
+        "allowCredentials": false
+      }
+    },
+    {
+      "endpointId": "ep_93ddc8e4b8",
+      "probe": "rate-limit",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/orders?page=1",
+      "status": 200,
+      "finding": true,
+      "detail": "12 requests in a row, none refused",
+      "durationMs": 0.0,
+      "evidence": {
+        "statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ]
+      }
+    },
+    {
+      "endpointId": "ep_93ddc8e4b8",
+      "probe": "personal-data",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/orders?page=1",
+      "status": 200,
+      "finding": false,
+      "detail": "nothing that looks personal",
+      "durationMs": 0.9,
+      "evidence": {
+        "categories": []
+      }
+    },
+    {
+      "endpointId": "ep_93ddc8e4b8",
+      "probe": "latency",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/orders?page=1",
+      "status": 200,
+      "finding": false,
+      "detail": "0.8ms",
+      "durationMs": 0.8,
+      "evidence": {
+        "budgetMs": 1000.0
+      }
+    },
+    {
+      "endpointId": "ep_93ddc8e4b8",
+      "probe": "cross-persona",
+      "method": "GET",
+      "url": "http://127.0.0.1:63425/api/orders?page=1",
+      "status": 200,
+      "finding": true,
+      "detail": "grace received the same response as ada",
+      "durationMs": 0.6,
+      "evidence": {
+        "personas": [
+          "ada",
+          "grace"
+        ],
+        "sample": "{\"page\": 1, \"orders\": []}"
+      }
+    }
+  ],
+  "skipped": {}
+}

@@ -1,0 +1,103 @@
+{
+  "links": [
+    {
+      "url": "http://127.0.0.1:63425/app/",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_app_93ff64",
+        "p_app_cart_fc491f",
+        "p_app_contact_5b717d",
+        "p_app_login_252c2b",
+        "p_app_search_0e8be7"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:63425/app/cart",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_app_93ff64",
+        "p_app_cart_fc491f",
+        "p_app_contact_5b717d",
+        "p_app_login_252c2b",
+        "p_app_search_0e8be7"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:63425/app/contact",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_app_93ff64",
+        "p_app_cart_fc491f",
+        "p_app_contact_5b717d",
+        "p_app_login_252c2b",
+        "p_app_search_0e8be7"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:63425/app/login",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_app_93ff64",
+        "p_app_cart_fc491f",
+        "p_app_contact_5b717d",
+        "p_app_login_252c2b",
+        "p_app_search_0e8be7"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:63425/app/search?q=tea",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_app_93ff64"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "path": "/bureau-not-found-probe",
+      "status": 404,
+      "kind": "not-found-handling",
+      "bodySample": null
+    },
+    {
+      "path": "/.env",
+      "status": 404,
+      "kind": "exposed-path",
+      "bodySample": null
+    },
+    {
+      "path": "/.git/config",
+      "status": 404,
+      "kind": "exposed-path",
+      "bodySample": null
+    },
+    {
+      "path": "/.DS_Store",
+      "status": 404,
+      "kind": "exposed-path",
+      "bodySample": null
+    },
+    {
+      "path": "/server-status",
+      "status": 404,
+      "kind": "exposed-path",
+      "bodySample": null
+    },
+    {
+      "path": "/debug",
+      "status": 404,
+      "kind": "exposed-path",
+      "bodySample": null
+    }
+  ]
+}

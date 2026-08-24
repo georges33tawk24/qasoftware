@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Broken fixture — responsive</title>
+    <meta name="description" content="Responsive defects for the checker suite." />
+    <link rel="canonical" href="/broken/mobile.html" />
+    <link rel="icon" href="/broken/square.png" />
+    <link rel="stylesheet" href="/broken/broken.css" />
+    <style>
+      .too-wide { width: 620px; background: #f3f4f6; padding: 16px; }
+      .tiny-button { width: 28px; height: 28px; padding: 0; }
+      table { border-collapse: collapse; }
+      td, th { border: 1px solid #e5e7eb; padding: 8px; white-space: nowrap; }
+      @media (max-width: 500px) { .desktop-only { display: none; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Responsive defects</h1>
+
+      <div class="too-wide">A fixed 620px block that a 390px phone cannot contain.</div>
+
+      <p class="desktop-only">
+        This paragraph is present on desktop and removed entirely on small screens, which
+        is content parity gone wrong rather than a navigation collapsing.
+      </p>
+
+      <p>
+        <button class="tiny-button" type="button">+</button>
+        <button class="tiny-button" type="button">-</button>
+      </p>
+
+      <table>
+        <tr><th>Reference</th><th>Description</th><th>Opened</th><th>Owner</th><th>Status</th></tr>
+        <tr><td>QA-1041</td><td>Checkout total is wrong</td><td>2024-03-01</td><td>Priya</td><td>Open</td></tr>
+        <tr><td>QA-1042</td><td>Mobile menu will not close</td><td>2024-03-02</td><td>Sam</td><td>Open</td></tr>
+      </table>
+
+      <p><a href="/broken/index.html">Back</a></p>
+    </div>
+  </body>
+</html>

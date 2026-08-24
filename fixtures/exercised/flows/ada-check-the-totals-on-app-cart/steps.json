@@ -1,0 +1,85 @@
+{
+  "id": "ada-check-the-totals-on-app-cart",
+  "name": "Check the totals on /app/cart",
+  "kind": "cart",
+  "persona": "ada",
+  "pageId": "p_app_cart_fc491f",
+  "status": "failed",
+  "startedAt": "2026-08-23T11:21:02.341748Z",
+  "durationMs": 1542,
+  "attempts": 3,
+  "steps": [
+    {
+      "n": 1,
+      "text": "Open http://127.0.0.1:63425/app/cart",
+      "ts": "2026-08-23T11:21:03.411282Z",
+      "url": "about:blank",
+      "status": "ok",
+      "screenshot": "step_01.png",
+      "error": null,
+      "durationMs": 48.1
+    },
+    {
+      "n": 2,
+      "text": "Wait for the page to settle",
+      "ts": "2026-08-23T11:21:03.459356Z",
+      "url": "http://127.0.0.1:63425/app/cart",
+      "status": "ok",
+      "screenshot": "step_02.png",
+      "error": null,
+      "durationMs": 325.0
+    },
+    {
+      "n": 3,
+      "text": "Read the line items and add them up independently",
+      "ts": "2026-08-23T11:21:03.784399Z",
+      "url": "http://127.0.0.1:63425/app/cart",
+      "status": "ok",
+      "screenshot": "step_03.png",
+      "error": null,
+      "durationMs": 33.1
+    }
+  ],
+  "failures": [
+    {
+      "kind": "total-does-not-match-line-items",
+      "message": "The displayed total is not the sum of the line items",
+      "step": 3,
+      "expected": "29.00",
+      "actual": "27.00",
+      "data": {
+        "lines": [
+          {
+            "unit": 12.5,
+            "quantity": 2,
+            "lineTotal": 25
+          },
+          {
+            "unit": 4,
+            "quantity": 1,
+            "lineTotal": 4
+          }
+        ]
+      }
+    }
+  ],
+  "trace": "trace.zip",
+  "video": "video.webm",
+  "skippedBecause": null,
+  "data": {
+    "lines": [
+      {
+        "unit": 12.5,
+        "quantity": 2,
+        "lineTotal": 25
+      },
+      {
+        "unit": 4,
+        "quantity": 1,
+        "lineTotal": 4
+      }
+    ],
+    "displayedTotal": 27,
+    "computedTotal": 29.0
+  }
+}

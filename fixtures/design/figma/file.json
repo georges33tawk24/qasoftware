@@ -1,0 +1,900 @@
+{
+  "name": "Fixture design",
+  "version": "1",
+  "lastModified": "2026-01-15T09:00:00Z",
+  "document": {
+    "id": "0:0",
+    "name": "Document",
+    "type": "DOCUMENT",
+    "children": [
+      {
+        "id": "0:1",
+        "name": "Page 1",
+        "type": "CANVAS",
+        "children": [
+          {
+            "id": "1:1",
+            "name": "Home / Desktop",
+            "type": "FRAME",
+            "visible": true,
+            "opacity": 1.0,
+            "absoluteBoundingBox": {
+              "x": 120.0,
+              "y": 240.0,
+              "width": 1440.0,
+              "height": 659.0
+            },
+            "fills": [
+              {
+                "blendMode": "NORMAL",
+                "type": "SOLID",
+                "color": {
+                  "r": 1.0,
+                  "g": 1.0,
+                  "b": 1.0,
+                  "a": 1.0
+                }
+              }
+            ],
+            "children": [
+              {
+                "id": "1:29202",
+                "name": "Nav",
+                "visible": true,
+                "opacity": 1.0,
+                "absoluteBoundingBox": {
+                  "x": 120.0,
+                  "y": 240.0,
+                  "width": 1440.0,
+                  "height": 57.0
+                },
+                "absoluteRenderBounds": {
+                  "x": 120.0,
+                  "y": 240.0,
+                  "width": 1440.0,
+                  "height": 57.0
+                },
+                "blendMode": "PASS_THROUGH",
+                "type": "FRAME",
+                "fills": [],
+                "strokes": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.066667,
+                      "g": 0.066667,
+                      "b": 0.066667,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "strokeWeight": 0.0,
+                "children": [
+                  {
+                    "id": "1:68895",
+                    "name": "Button/Home",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "absoluteBoundingBox": {
+                      "x": 144.0,
+                      "y": 259.0,
+                      "width": 44.45,
+                      "height": 18.0
+                    },
+                    "absoluteRenderBounds": {
+                      "x": 144.0,
+                      "y": 259.0,
+                      "width": 44.45,
+                      "height": 18.0
+                    },
+                    "blendMode": "PASS_THROUGH",
+                    "type": "TEXT",
+                    "characters": "Home",
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.066667,
+                          "g": 0.066667,
+                          "b": 0.066667,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 600,
+                      "fontSize": 16.0,
+                      "lineHeightPx": 24.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  },
+                  {
+                    "id": "1:1706",
+                    "name": "Button/About",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "absoluteBoundingBox": {
+                      "x": 212.45,
+                      "y": 259.0,
+                      "width": 46.2,
+                      "height": 18.0
+                    },
+                    "absoluteRenderBounds": {
+                      "x": 212.45,
+                      "y": 259.0,
+                      "width": 46.2,
+                      "height": 18.0
+                    },
+                    "blendMode": "PASS_THROUGH",
+                    "type": "TEXT",
+                    "characters": "About",
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.066667,
+                          "g": 0.066667,
+                          "b": 0.066667,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 600,
+                      "fontSize": 16.0,
+                      "lineHeightPx": 24.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  },
+                  {
+                    "id": "1:88521",
+                    "name": "Button/Contact",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "absoluteBoundingBox": {
+                      "x": 282.65999999999997,
+                      "y": 259.0,
+                      "width": 59.56,
+                      "height": 18.0
+                    },
+                    "absoluteRenderBounds": {
+                      "x": 282.65999999999997,
+                      "y": 259.0,
+                      "width": 59.56,
+                      "height": 18.0
+                    },
+                    "blendMode": "PASS_THROUGH",
+                    "type": "TEXT",
+                    "characters": "Contact",
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.066667,
+                          "g": 0.066667,
+                          "b": 0.066667,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 600,
+                      "fontSize": 16.0,
+                      "lineHeightPx": 24.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "1:26210",
+                "name": "Heading/Latest news",
+                "visible": true,
+                "opacity": 1.0,
+                "absoluteBoundingBox": {
+                  "x": 384.0,
+                  "y": 321.0,
+                  "width": 912.0,
+                  "height": 44.0
+                },
+                "absoluteRenderBounds": {
+                  "x": 384.0,
+                  "y": 321.0,
+                  "width": 912.0,
+                  "height": 44.0
+                },
+                "blendMode": "PASS_THROUGH",
+                "type": "TEXT",
+                "characters": "Latest news",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.066667,
+                      "g": 0.066667,
+                      "b": 0.066667,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "style": {
+                  "fontFamily": "-apple-system",
+                  "fontWeight": 700,
+                  "fontSize": 32.0,
+                  "lineHeightPx": 44.0,
+                  "letterSpacing": 0.0,
+                  "textAlignHorizontal": "START"
+                }
+              },
+              {
+                "id": "1:53373",
+                "name": "P",
+                "visible": true,
+                "opacity": 1.0,
+                "absoluteBoundingBox": {
+                  "x": 384.0,
+                  "y": 389.0,
+                  "width": 912.0,
+                  "height": 24.0
+                },
+                "absoluteRenderBounds": {
+                  "x": 384.0,
+                  "y": 389.0,
+                  "width": 912.0,
+                  "height": 24.0
+                },
+                "blendMode": "PASS_THROUGH",
+                "type": "TEXT",
+                "characters": "Three cards, one repeated group, one image and one call to action.",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.415686,
+                      "g": 0.431373,
+                      "b": 0.470588,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "style": {
+                  "fontFamily": "-apple-system",
+                  "fontWeight": 400,
+                  "fontSize": 16.0,
+                  "lineHeightPx": 28.0,
+                  "letterSpacing": 0.0,
+                  "textAlignHorizontal": "START"
+                }
+              },
+              {
+                "id": "1:43076",
+                "name": "Card",
+                "visible": true,
+                "opacity": 1.0,
+                "absoluteBoundingBox": {
+                  "x": 384.0,
+                  "y": 429.0,
+                  "width": 288.0,
+                  "height": 126.0
+                },
+                "absoluteRenderBounds": {
+                  "x": 384.0,
+                  "y": 429.0,
+                  "width": 288.0,
+                  "height": 126.0
+                },
+                "blendMode": "PASS_THROUGH",
+                "type": "FRAME",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1.0,
+                      "g": 1.0,
+                      "b": 1.0,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "strokes": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.898039,
+                      "g": 0.905882,
+                      "b": 0.921569,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "strokeWeight": 1.0,
+                "cornerRadius": 12.0,
+                "paddingTop": 24.0,
+                "paddingRight": 24.0,
+                "paddingBottom": 24.0,
+                "paddingLeft": 24.0,
+                "children": [
+                  {
+                    "id": "1:30480",
+                    "name": "Heading/First card",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "absoluteBoundingBox": {
+                      "x": 409.0,
+                      "y": 454.0,
+                      "width": 238.0,
+                      "height": 28.0
+                    },
+                    "absoluteRenderBounds": {
+                      "x": 409.0,
+                      "y": 454.0,
+                      "width": 238.0,
+                      "height": 28.0
+                    },
+                    "blendMode": "PASS_THROUGH",
+                    "type": "TEXT",
+                    "characters": "First card",
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.066667,
+                          "g": 0.066667,
+                          "b": 0.066667,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 600,
+                      "fontSize": 20.0,
+                      "lineHeightPx": 28.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  },
+                  {
+                    "id": "1:5124",
+                    "name": "P",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "absoluteBoundingBox": {
+                      "x": 409.0,
+                      "y": 490.0,
+                      "width": 238.0,
+                      "height": 24.0
+                    },
+                    "absoluteRenderBounds": {
+                      "x": 409.0,
+                      "y": 490.0,
+                      "width": 238.0,
+                      "height": 24.0
+                    },
+                    "blendMode": "PASS_THROUGH",
+                    "type": "TEXT",
+                    "characters": "Body copy for the first card.",
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.415686,
+                          "g": 0.431373,
+                          "b": 0.470588,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 400,
+                      "fontSize": 16.0,
+                      "lineHeightPx": 24.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  }
+                ],
+                "effects": [
+                  {
+                    "type": "DROP_SHADOW",
+                    "visible": true,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0.25
+                    },
+                    "offset": {
+                      "x": 0,
+                      "y": 8
+                    },
+                    "radius": 16,
+                    "spread": 0
+                  }
+                ]
+              },
+              {
+                "id": "1:53767",
+                "name": "Card",
+                "visible": true,
+                "opacity": 1.0,
+                "absoluteBoundingBox": {
+                  "x": 696.0,
+                  "y": 429.0,
+                  "width": 300.0,
+                  "height": 126.0
+                },
+                "absoluteRenderBounds": {
+                  "x": 696.0,
+                  "y": 429.0,
+                  "width": 288.0,
+                  "height": 126.0
+                },
+                "blendMode": "PASS_THROUGH",
+                "type": "FRAME",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1.0,
+                      "g": 1.0,
+                      "b": 1.0,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "strokes": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.898039,
+                      "g": 0.905882,
+                      "b": 0.921569,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "strokeWeight": 1.0,
+                "cornerRadius": 12.0,
+                "paddingTop": 24.0,
+                "paddingRight": 24.0,
+                "paddingBottom": 24.0,
+                "paddingLeft": 24.0,
+                "children": [
+                  {
+                    "id": "1:55412",
+                    "name": "Heading/Second card",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "absoluteBoundingBox": {
+                      "x": 721.0,
+                      "y": 454.0,
+                      "width": 238.0,
+                      "height": 28.0
+                    },
+                    "absoluteRenderBounds": {
+                      "x": 721.0,
+                      "y": 454.0,
+                      "width": 238.0,
+                      "height": 28.0
+                    },
+                    "blendMode": "PASS_THROUGH",
+                    "type": "TEXT",
+                    "characters": "Second card",
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.066667,
+                          "g": 0.066667,
+                          "b": 0.066667,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 600,
+                      "fontSize": 20.0,
+                      "lineHeightPx": 28.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  },
+                  {
+                    "id": "1:3290",
+                    "name": "P",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "absoluteBoundingBox": {
+                      "x": 721.0,
+                      "y": 490.0,
+                      "width": 238.0,
+                      "height": 24.0
+                    },
+                    "absoluteRenderBounds": {
+                      "x": 721.0,
+                      "y": 490.0,
+                      "width": 238.0,
+                      "height": 24.0
+                    },
+                    "blendMode": "PASS_THROUGH",
+                    "type": "TEXT",
+                    "characters": "Body copy for the 2nd card.",
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.415686,
+                          "g": 0.431373,
+                          "b": 0.470588,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 400,
+                      "fontSize": 16.0,
+                      "lineHeightPx": 24.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "1:7472",
+                "name": "Card",
+                "visible": true,
+                "opacity": 1.0,
+                "absoluteBoundingBox": {
+                  "x": 1014.0,
+                  "y": 429.0,
+                  "width": 288.0,
+                  "height": 126.0
+                },
+                "absoluteRenderBounds": {
+                  "x": 1014.0,
+                  "y": 429.0,
+                  "width": 288.0,
+                  "height": 126.0
+                },
+                "blendMode": "PASS_THROUGH",
+                "type": "FRAME",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1.0,
+                      "g": 1.0,
+                      "b": 1.0,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "strokes": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.898039,
+                      "g": 0.905882,
+                      "b": 0.921569,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "strokeWeight": 1.0,
+                "cornerRadius": 12.0,
+                "paddingTop": 24.0,
+                "paddingRight": 24.0,
+                "paddingBottom": 24.0,
+                "paddingLeft": 24.0,
+                "children": [
+                  {
+                    "id": "1:32812",
+                    "name": "Heading/Third card",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "absoluteBoundingBox": {
+                      "x": 1039.0,
+                      "y": 454.0,
+                      "width": 238.0,
+                      "height": 28.0
+                    },
+                    "absoluteRenderBounds": {
+                      "x": 1039.0,
+                      "y": 454.0,
+                      "width": 238.0,
+                      "height": 28.0
+                    },
+                    "blendMode": "PASS_THROUGH",
+                    "type": "TEXT",
+                    "characters": "Third card",
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.066667,
+                          "g": 0.066667,
+                          "b": 0.066667,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 600,
+                      "fontSize": 20.0,
+                      "lineHeightPx": 28.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  },
+                  {
+                    "id": "1:40889",
+                    "name": "P",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "absoluteBoundingBox": {
+                      "x": 1039.0,
+                      "y": 490.0,
+                      "width": 238.0,
+                      "height": 24.0
+                    },
+                    "absoluteRenderBounds": {
+                      "x": 1039.0,
+                      "y": 490.0,
+                      "width": 238.0,
+                      "height": 24.0
+                    },
+                    "blendMode": "PASS_THROUGH",
+                    "type": "TEXT",
+                    "characters": "Body copy for the third card.",
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.415686,
+                          "g": 0.431373,
+                          "b": 0.470588,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 400,
+                      "fontSize": 16.0,
+                      "lineHeightPx": 24.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "1:55491",
+                "name": "Image/logo",
+                "visible": true,
+                "opacity": 1.0,
+                "absoluteBoundingBox": {
+                  "x": 384.0,
+                  "y": 579.0,
+                  "width": 240.0,
+                  "height": 120.0
+                },
+                "absoluteRenderBounds": {
+                  "x": 384.0,
+                  "y": 579.0,
+                  "width": 240.0,
+                  "height": 120.0
+                },
+                "blendMode": "PASS_THROUGH",
+                "type": "RECTANGLE",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "IMAGE",
+                    "imageRef": "img-1",
+                    "scaleMode": "FILL"
+                  }
+                ]
+              },
+              {
+                "id": "1:26901",
+                "name": "Button/Read more",
+                "visible": true,
+                "opacity": 1.0,
+                "absoluteBoundingBox": {
+                  "x": 384.0,
+                  "y": 706.0,
+                  "width": 114.7,
+                  "height": 40.0
+                },
+                "absoluteRenderBounds": {
+                  "x": 384.0,
+                  "y": 706.0,
+                  "width": 114.7,
+                  "height": 40.0
+                },
+                "blendMode": "PASS_THROUGH",
+                "type": "FRAME",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.109804,
+                      "g": 0.392157,
+                      "b": 0.784314,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "children": [
+                  {
+                    "id": "1:26901:label",
+                    "name": "Label",
+                    "type": "TEXT",
+                    "visible": true,
+                    "opacity": 1.0,
+                    "characters": "Read more",
+                    "absoluteBoundingBox": {
+                      "x": 384.0,
+                      "y": 706.0,
+                      "width": 114.7,
+                      "height": 40.0
+                    },
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 1.0,
+                          "g": 1.0,
+                          "b": 1.0,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "style": {
+                      "fontFamily": "-apple-system",
+                      "fontWeight": 600,
+                      "fontSize": 16.0,
+                      "lineHeightPx": 24.0,
+                      "letterSpacing": 0.0,
+                      "textAlignHorizontal": "START"
+                    }
+                  }
+                ],
+                "cornerRadius": 12.0,
+                "paddingTop": 8.0,
+                "paddingRight": 16.0,
+                "paddingBottom": 8.0,
+                "paddingLeft": 16.0
+              },
+              {
+                "id": "1:90600",
+                "name": "Wrap",
+                "visible": true,
+                "opacity": 0.6,
+                "absoluteBoundingBox": {
+                  "x": 360.0,
+                  "y": 826.0,
+                  "width": 960.0,
+                  "height": 73.0
+                },
+                "absoluteRenderBounds": {
+                  "x": 360.0,
+                  "y": 826.0,
+                  "width": 960.0,
+                  "height": 73.0
+                },
+                "blendMode": "PASS_THROUGH",
+                "type": "TEXT",
+                "characters": "Fixture footer",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.415686,
+                      "g": 0.431373,
+                      "b": 0.470588,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "style": {
+                  "fontFamily": "-apple-system",
+                  "fontWeight": 400,
+                  "fontSize": 16.0,
+                  "lineHeightPx": 24.0,
+                  "letterSpacing": 0.0,
+                  "textAlignHorizontal": "START"
+                },
+                "strokes": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.898039,
+                      "g": 0.905882,
+                      "b": 0.921569,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "strokeWeight": 1.0,
+                "paddingTop": 24.0,
+                "paddingRight": 24.0,
+                "paddingBottom": 24.0,
+                "paddingLeft": 24.0
+              },
+              {
+                "id": "1:9001",
+                "name": "Heading/Newsletter",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1.0,
+                "characters": "Sign up to the newsletter",
+                "absoluteBoundingBox": {
+                  "x": 144.0,
+                  "y": 880.0,
+                  "width": 420,
+                  "height": 28
+                },
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.066667,
+                      "g": 0.066667,
+                      "b": 0.066667,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "style": {
+                  "fontFamily": "Helvetica",
+                  "fontWeight": 600,
+                  "fontSize": 20.0,
+                  "lineHeightPx": 28.0,
+                  "letterSpacing": 0.0,
+                  "textAlignHorizontal": "LEFT"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

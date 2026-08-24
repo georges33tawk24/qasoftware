@@ -1,0 +1,97 @@
+[
+  {
+    "url": "http://127.0.0.1:56980/broken/mobile.html",
+    "method": "GET",
+    "status": 200,
+    "type": "document",
+    "reqHeaders": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:56980",
+      "pragma": "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "1742",
+      "content-type": "text/html",
+      "date": "Sat, 22 Aug 2026 22:50:33 GMT",
+      "last-modified": "Sat, 22 Aug 2026 22:42:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": "b23d999fd94dfb21263e16f7cb977f0a89efb6ac40105031b27126a9968d61a8",
+    "resBodySample": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Broken fixture — responsive</title>\n    <meta name=\"description\" content=\"Responsive defects for the checker suite.\" />\n    <link rel=\"canonical\" href=\"/broken/mobile.html\" />\n    <link rel=\"icon\" href=\"/broken/square.png\" />\n    <link rel=\"stylesheet\" href=\"/broken/broken.css\" />\n    <style>\n      .too-wide { width: 620px; background: #f3f4f6; padding:",
+    "timing": {
+      "startMs": 1787439033268.12,
+      "ttfbMs": 0.5,
+      "durationMs": 1.05
+    },
+    "size": {
+      "transferBytes": 1973,
+      "resourceBytes": 1742
+    },
+    "initiator": "document",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:56980/broken/broken.css",
+    "method": "GET",
+    "status": 200,
+    "type": "stylesheet",
+    "reqHeaders": {
+      "accept": "text/css,*/*;q=0.1",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:56980",
+      "pragma": "no-cache",
+      "referer": "http://127.0.0.1:56980/broken/mobile.html",
+      "sec-fetch-dest": "style",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "1638",
+      "content-type": "text/css",
+      "date": "Sat, 22 Aug 2026 22:50:33 GMT",
+      "last-modified": "Sat, 22 Aug 2026 22:45:55 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": "9b1aed2be5148a2fb3123451dd12f8daacc75b9dace7a4c9153f034725a0488a",
+    "resBodySample": ":root { --ink: #111111; --line: #e5e7eb; }\n* { box-sizing: border-box; }\nbody { margin: 0; font-family: -apple-system, \"Segoe UI\", Helvetica, Arial, sans-serif;\n       font-size: 16px; line-height: 24px; color: var(--ink); background: #fff; }\n.wrap { max-width: 900px; margin: 0 auto; padding: 24px; }\nh1 { font-size: 36px; line-height: 44px; margin: 0 0 24px; }\nh2 { font-size: 20px; line-height: 28px; margin: 0 0 8px; }\np  { margin: 0 0 16px; }\nnav ul { display: flex; gap: 24px; list-style: none; margin: 0 0",
+    "timing": {
+      "startMs": 1787439033271.72,
+      "ttfbMs": 1.1,
+      "durationMs": 1.74
+    },
+    "size": {
+      "transferBytes": 1868,
+      "resourceBytes": 1638
+    },
+    "initiator": "stylesheet",
+    "sourceMapUrl": null,
+    "failure": null
+  }
+]

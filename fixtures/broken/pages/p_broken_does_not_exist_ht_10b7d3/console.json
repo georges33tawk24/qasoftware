@@ -1,0 +1,10 @@
+[
+  {
+    "level": "error",
+    "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "stack": null,
+    "url": "http://127.0.0.1:56980/broken/does-not-exist.html",
+    "line": 0,
+    "ts": "2026-08-22T22:50:35.654758Z"
+  }
+]

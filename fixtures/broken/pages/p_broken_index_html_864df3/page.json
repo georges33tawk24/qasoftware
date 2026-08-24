@@ -1,0 +1,14 @@
+{
+  "id": "p_broken_index_html_864df3",
+  "url": "http://127.0.0.1:56980/broken/index.html",
+  "path": "/broken/index.html",
+  "title": "Broken fixture — layout and content",
+  "status": 200,
+  "redirectChain": [],
+  "depth": 0,
+  "discoveredFrom": null,
+  "persona": "anonymous",
+  "domNodeCount": 76,
+  "security": null,
+  "crawlBlocked": null
+}

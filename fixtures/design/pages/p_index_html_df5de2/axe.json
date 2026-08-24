@@ -1,0 +1,97 @@
+{
+  "violations": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "tags": [
+        "cat.color",
+        "wcag2aa",
+        "wcag143",
+        "TTv5",
+        "TT13.c",
+        "EN-301-549",
+        "EN-9.1.4.3",
+        "ACT",
+        "RGAAv4",
+        "RGAA-3.2.1"
+      ],
+      "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=axeAPI",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#3b7dd8",
+                "contrastRatio": 4.1,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "messageKey": null,
+                "expectedContrastRatio": "4.5:1",
+                "shadowColor": null,
+                "colorParse": null
+              },
+              "relatedNodes": [
+                {
+                  "html": "<a class=\"cta\" data-testid=\"read-more\" href=\"/about.html\">Read more</a>",
+                  "target": [
+                    ".cta"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element has insufficient color contrast of 4.1 (foreground color: #ffffff, background color: #3b7dd8, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<a class=\"cta\" data-testid=\"read-more\" href=\"/about.html\">Read more</a>",
+          "target": [
+            ".cta"
+          ],
+          "box": {
+            "x": 264,
+            "y": 466,
+            "w": 114.7,
+            "h": 40
+          }
+        }
+      ]
+    }
+  ],
+  "incomplete": [],
+  "passes": [
+    "aria-hidden-body",
+    "bypass",
+    "color-contrast",
+    "document-title",
+    "empty-heading",
+    "heading-order",
+    "html-has-lang",
+    "html-lang-valid",
+    "image-alt",
+    "image-redundant-alt",
+    "landmark-contentinfo-is-top-level",
+    "landmark-main-is-top-level",
+    "landmark-no-duplicate-contentinfo",
+    "landmark-no-duplicate-main",
+    "landmark-one-main",
+    "landmark-unique",
+    "link-name",
+    "list",
+    "listitem",
+    "meta-viewport-large",
+    "meta-viewport",
+    "nested-interactive",
+    "page-has-heading-one",
+    "region"
+  ],
+  "testEngine": {
+    "name": "axe-core",
+    "version": "4.13.0"
+  }
+}

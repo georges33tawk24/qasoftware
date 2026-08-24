@@ -1,0 +1,179 @@
+[
+  {
+    "url": "http://127.0.0.1:63425/app",
+    "method": "GET",
+    "status": 200,
+    "type": "document",
+    "reqHeaders": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "host": "127.0.0.1:63425",
+      "pragma": "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "1455",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Sun, 23 Aug 2026 11:20:31 GMT",
+      "server": "BaseHTTP/0.6 Python/3.12.3"
+    },
+    "reqBody": null,
+    "resBodyHash": "09ab931c50fac86624bd058df95bd867b11903a400a777f6aeb3f4ed4a3bf1d9",
+    "resBodySample": "<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Fixture app</title><link rel=\"canonical\" href=\"/app\">\n<meta name=\"description\" content=\"Fixture application page.\">\n<link rel=\"icon\" href=\"data:,\">\n<style>body{font-family:-apple-system,Helvetica,Arial,sans-serif;margin:0;font-size:16px;\nline-height:24px;color:#111}main{max-width:640px;margin:0 auto;padding:24px}\nlabel{display:block;margin-bottom:8px;font-weight:600}\ninput",
+    "timing": {
+      "startMs": 1787484031447.27,
+      "ttfbMs": 1.78,
+      "durationMs": 5.38
+    },
+    "size": {
+      "transferBytes": 1609,
+      "resourceBytes": 1455
+    },
+    "initiator": "document",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:63425/api/items?owner=ada%40example.test",
+    "method": "GET",
+    "status": 200,
+    "type": "fetch",
+    "reqHeaders": {
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "host": "127.0.0.1:63425",
+      "pragma": "no-cache",
+      "referer": "http://127.0.0.1:63425/app",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "82",
+      "content-type": "application/json",
+      "date": "Sun, 23 Aug 2026 11:20:31 GMT",
+      "server": "BaseHTTP/0.6 Python/3.12.3"
+    },
+    "reqBody": null,
+    "resBodyHash": "3aada3e898abe2cdff5d7a88fbe4f3aa7cbc2121aadce2368fcc1af40d515dc6",
+    "resBodySample": "{\"items\": [{\"id\": 1, \"title\": \"Ada's private note\", \"owner\": \"ada@example.test\"}]}",
+    "timing": {
+      "startMs": 1787484031475.29,
+      "ttfbMs": 0.51,
+      "durationMs": 2.56
+    },
+    "size": {
+      "transferBytes": 226,
+      "resourceBytes": 82
+    },
+    "initiator": "fetch",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:63425/api/orders?page=1",
+    "method": "GET",
+    "status": 200,
+    "type": "fetch",
+    "reqHeaders": {
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "host": "127.0.0.1:63425",
+      "pragma": "no-cache",
+      "referer": "http://127.0.0.1:63425/app",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "25",
+      "content-type": "application/json",
+      "date": "Sun, 23 Aug 2026 11:20:31 GMT",
+      "server": "BaseHTTP/0.6 Python/3.12.3"
+    },
+    "reqBody": null,
+    "resBodyHash": "55c942d10ef7e82c6a139e33e237549f9ccd0413da6f5090a671a582f6c11d69",
+    "resBodySample": "{\"page\": 1, \"orders\": []}",
+    "timing": {
+      "startMs": 1787484031475.42,
+      "ttfbMs": 0.67,
+      "durationMs": 1.58
+    },
+    "size": {
+      "transferBytes": 169,
+      "resourceBytes": 25
+    },
+    "initiator": "fetch",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:63425/api/me",
+    "method": "GET",
+    "status": 401,
+    "type": "fetch",
+    "reqHeaders": {
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "host": "127.0.0.1:63425",
+      "pragma": "no-cache",
+      "referer": "http://127.0.0.1:63425/app",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "25",
+      "content-type": "application/json",
+      "date": "Sun, 23 Aug 2026 11:20:31 GMT",
+      "server": "BaseHTTP/0.6 Python/3.12.3"
+    },
+    "reqBody": null,
+    "resBodyHash": "8f47633ea705b1baa77d2b459587055afe5589120fb83e038c160bdff47e83bc",
+    "resBodySample": "{\"error\": \"unauthorised\"}",
+    "timing": {
+      "startMs": 1787484031475.75,
+      "ttfbMs": 0.97,
+      "durationMs": 2.11
+    },
+    "size": {
+      "transferBytes": 179,
+      "resourceBytes": 25
+    },
+    "initiator": "fetch",
+    "sourceMapUrl": null,
+    "failure": null
+  }
+]

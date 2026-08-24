@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "runId": "run_20260822T225024_291090",
+  "target": "http://127.0.0.1:56980/broken/index.html",
+  "status": "complete",
+  "startedAt": "2026-08-22T22:50:24.291090Z",
+  "finishedAt": "2026-08-22T22:50:40.371342Z",
+  "durationMs": 16080,
+  "checkersSha": "HEAD",
+  "projectId": null,
+  "config": {
+    "driver": "playwright",
+    "viewports": [
+      {
+        "name": "mobile_390",
+        "width": 390,
+        "height": 844,
+        "deviceScaleFactor": 2.0
+      },
+      {
+        "name": "desktop_1440",
+        "width": 1440,
+        "height": 900,
+        "deviceScaleFactor": 1.0
+      }
+    ],
+    "personas": [
+      "anonymous"
+    ],
+    "maxDepth": 3,
+    "maxPages": 10,
+    "include": [
+      "/broken/"
+    ],
+    "exclude": [],
+    "ignoreQueryParams": [],
+    "sameOriginOnly": true,
+    "respectRobots": true,
+    "maskSelectors": [],
+    "consentSelectors": [],
+    "maskRegions": [],
+    "figmaFileKey": null,
+    "figmaFrameMap": {},
+    "figmaPins": {},
+    "figmaTolerances": {
+      "positionPx": 2.0,
+      "sizePx": 2.0,
+      "sizeRatio": 0.01,
+      "colourDeltaE": 2.0,
+      "fontSizePx": 0.5,
+      "lineHeightPx": 1.0,
+      "letterSpacingPx": 0.2,
+      "spacingPx": 2.0,
+      "radiusPx": 1.0,
+      "borderWidthPx": 0.5,
+      "opacity": 0.02
+    },
+    "templateSample": 5,
+    "recordings": [],
+    "colourScheme": "light",
+    "pageTimeoutMs": 30000,
+    "settleMs": 120,
+    "maxElements": 5000,
+    "maxLinkProbes": 500,
+    "locale": "en-GB",
+    "timezone": "UTC",
+    "dictionary": [
+      "stylesheet",
+      "noindex",
+      "viewport"
+    ],
+    "authorisedBy": null,
+    "authorisedHosts": [],
+    "flows": true,
+    "apiProbes": true,
+    "flowRetries": 2
+  },
+  "pageIds": [
+    "p_broken_index_html_864df3",
+    "p_broken_a11y_html_659718",
+    "p_broken_seo_html_c77f7e",
+    "p_broken_mobile_html_17d869",
+    "p_broken_does_not_exist_ht_10b7d3",
+    "p_broken_redirect_3_1110c5"
+  ]
+}

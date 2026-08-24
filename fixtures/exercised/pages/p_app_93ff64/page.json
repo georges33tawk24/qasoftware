@@ -1,0 +1,14 @@
+{
+  "id": "p_app_93ff64",
+  "url": "http://127.0.0.1:63425/app",
+  "path": "/app",
+  "title": "Fixture app",
+  "status": 200,
+  "redirectChain": [],
+  "depth": 0,
+  "discoveredFrom": null,
+  "persona": "anonymous",
+  "domNodeCount": 25,
+  "security": null,
+  "crawlBlocked": null
+}

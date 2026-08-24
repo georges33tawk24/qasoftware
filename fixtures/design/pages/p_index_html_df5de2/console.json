@@ -1,0 +1,10 @@
+[
+  {
+    "level": "error",
+    "text": "Uncaught TypeError: analytics.init is not a function",
+    "stack": null,
+    "url": "http://127.0.0.1:59800/assets/app.js",
+    "line": 2,
+    "ts": "2026-08-22T23:42:00.656068Z"
+  }
+]

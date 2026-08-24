@@ -1,0 +1,49 @@
+[
+  {
+    "url": "http://127.0.0.1:56980/broken/does-not-exist.html",
+    "method": "GET",
+    "status": 404,
+    "type": "document",
+    "reqHeaders": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:56980",
+      "pragma": "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "51",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Sat, 22 Aug 2026 22:50:35 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": "334c2cafdacf1e26935d13bedd9d646016339f1e6f70e048adc5118dd8ccd48b",
+    "resBodySample": "<!doctype html><title>404</title><h1>Not found</h1>",
+    "timing": {
+      "startMs": 1787439035651.08,
+      "ttfbMs": 0.42,
+      "durationMs": 0.8
+    },
+    "size": {
+      "transferBytes": 256,
+      "resourceBytes": 51
+    },
+    "initiator": "document",
+    "sourceMapUrl": null,
+    "failure": null
+  }
+]

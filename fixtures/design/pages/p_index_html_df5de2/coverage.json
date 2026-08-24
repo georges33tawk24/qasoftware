@@ -1,0 +1,16 @@
+{
+  "js": {
+    "usedBytes": 207,
+    "totalBytes": 207,
+    "byUrl": {
+      "http://127.0.0.1:59800/assets/app.js": {
+        "usedBytes": 207,
+        "totalBytes": 207
+      }
+    }
+  },
+  "css": {
+    "usedBytes": 1514,
+    "totalBytes": 1514
+  }
+}

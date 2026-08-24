@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "runId": "run_tiny",
+  "target": "https://example.test/",
+  "status": "complete",
+  "startedAt": "2026-01-15T09:30:00Z",
+  "finishedAt": "2026-01-15T09:30:12Z",
+  "durationMs": 12000,
+  "checkersSha": "0000000000000000000000000000000000000000",
+  "projectId": null,
+  "config": {
+    "driver": "playwright",
+    "viewports": [
+      {
+        "name": "desktop_1440",
+        "width": 1440,
+        "height": 900,
+        "deviceScaleFactor": 1.0
+      }
+    ],
+    "personas": [
+      "anonymous"
+    ],
+    "maxDepth": 3,
+    "maxPages": 50,
+    "include": [],
+    "exclude": [],
+    "ignoreQueryParams": [],
+    "sameOriginOnly": true,
+    "respectRobots": true,
+    "maskSelectors": [],
+    "consentSelectors": [],
+    "maskRegions": [],
+    "figmaFileKey": null,
+    "figmaFrameMap": {},
+    "figmaPins": {},
+    "figmaTolerances": {
+      "positionPx": 2.0,
+      "sizePx": 2.0,
+      "sizeRatio": 0.01,
+      "colourDeltaE": 2.0,
+      "fontSizePx": 0.5,
+      "lineHeightPx": 1.0,
+      "letterSpacingPx": 0.2,
+      "spacingPx": 2.0,
+      "radiusPx": 1.0,
+      "borderWidthPx": 0.5,
+      "opacity": 0.02
+    },
+    "templateSample": 5,
+    "recordings": [],
+    "colourScheme": "light",
+    "pageTimeoutMs": 30000,
+    "settleMs": 300,
+    "maxElements": 5000,
+    "maxLinkProbes": 500,
+    "locale": "en-GB",
+    "timezone": "UTC",
+    "dictionary": [],
+    "authorisedBy": null,
+    "authorisedHosts": [],
+    "flows": true,
+    "apiProbes": true,
+    "flowRetries": 2
+  },
+  "pageIds": [
+    "p_home"
+  ]
+}

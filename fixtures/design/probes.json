@@ -1,0 +1,78 @@
+{
+  "links": [
+    {
+      "url": "http://127.0.0.1:59800/about.html",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_index_html_df5de2"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:59800/contact.html",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_index_html_df5de2"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:59800/index.html",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_index_html_df5de2"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:59800/private.html",
+      "status": 200,
+      "internal": true,
+      "error": null,
+      "foundOn": [
+        "p_index_html_df5de2"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "path": "/bureau-not-found-probe",
+      "status": 200,
+      "kind": "not-found-handling",
+      "bodySample": null
+    },
+    {
+      "path": "/.env",
+      "status": 200,
+      "kind": "exposed-path",
+      "bodySample": "DATABASE_URL=postgres://user:hunter2@db.internal/prod\nSTRIPE_KEY=sk_live_x\n"
+    },
+    {
+      "path": "/.git/config",
+      "status": 200,
+      "kind": "exposed-path",
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>"
+    },
+    {
+      "path": "/.DS_Store",
+      "status": 404,
+      "kind": "exposed-path",
+      "bodySample": null
+    },
+    {
+      "path": "/server-status",
+      "status": 200,
+      "kind": "exposed-path",
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>"
+    },
+    {
+      "path": "/debug",
+      "status": 200,
+      "kind": "exposed-path",
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>"
+    }
+  ]
+}
