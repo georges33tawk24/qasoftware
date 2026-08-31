@@ -3,10 +3,10 @@
   "runId": "run_20260822T225024_291090",
   "target": "http://127.0.0.1:56980/broken/index.html",
   "status": "complete",
-  "startedAt": "2026-08-22T22:50:24.291090Z",
-  "finishedAt": "2026-08-22T22:50:40.371342Z",
-  "durationMs": 16080,
-  "checkersSha": "HEAD",
+  "startedAt": "2026-08-31T21:44:14.954346Z",
+  "finishedAt": "2026-08-31T21:44:41.573219Z",
+  "durationMs": 26618,
+  "checkersSha": "15447cf26379ff3b2b00c15440fc61ef1d6b793d",
   "projectId": null,
   "config": {
     "driver": "playwright",
@@ -74,14 +74,23 @@
     "authorisedHosts": [],
     "flows": true,
     "apiProbes": true,
-    "flowRetries": 2
+    "flowRetries": 2,
+    "platform": "web",
+    "appPath": null,
+    "appPackage": null,
+    "appActivity": null,
+    "bundleId": null,
+    "appiumUrl": "http://127.0.0.1:4723",
+    "deviceName": null,
+    "automationName": null,
+    "mitmproxyPort": null
   },
   "pageIds": [
-    "p_broken_index_html_864df3",
-    "p_broken_a11y_html_659718",
-    "p_broken_seo_html_c77f7e",
-    "p_broken_mobile_html_17d869",
-    "p_broken_does_not_exist_ht_10b7d3",
-    "p_broken_redirect_3_1110c5"
+    "p_broken_index_html_f9edc5",
+    "p_broken_a11y_html_ed17bd",
+    "p_broken_seo_html_fe9cb3",
+    "p_broken_mobile_html_6521bf",
+    "p_broken_does_not_exist_ht_6b5672",
+    "p_broken_redirect_3_7a0687"
   ]
 }

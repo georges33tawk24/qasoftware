@@ -20,6 +20,7 @@ from engine.checkers import runner
 from engine.checkers.runner import CheckResult
 from engine.fixtures import load_fixture
 from engine.issues.models import Issue
+from tests.conftest import MakeElement
 
 DEFECTS = Path(__file__).parent / "fixtures" / "site" / "DEFECTS.md"
 _ROW = re.compile(r"^\|\s*`([^`]+)`\s*\|\s*`([^`]+)`\s*\|([^|]*)\|")
@@ -200,3 +201,34 @@ def test_a_live_capture_still_finds_the_planted_defects(
     fresh = runner.check(RunContext.open(result.paths.root))
     missing = sorted(set(documented()) - set(found(fresh)))
     assert not missing, "a live capture missed: " + ", ".join(f"{c}/{k}" for c, k in missing)
+
+
+def test_casing_ignores_elements_that_name_a_value(make_element: MakeElement) -> None:
+    """A brand filter holds database rows, not house style — SPEC §8.4 D.
+
+    The filter list on a real site held junk test rows in lower case alongside real
+    brands in title case, so lower case was the plurality and the *brands* came back as
+    the finding. House style is a rule about the interface, not about what it displays.
+    """
+    from engine.artifact.models import LayoutRecord, PageRecord, Viewport
+    from engine.checkers.content.casing import _control_groups
+    from engine.checkers.support import Surface
+
+    def control(eid: str, tag: str, text: str) -> object:
+        return make_element(
+            id=eid, tag=tag, text=text, textFull=text, role=None, clickable=True, parentId="p1"
+        )
+
+    elements = [
+        control("el_1", "label", "ForgeFlex Tools"),
+        control("el_2", "label", "some name"),
+        control("el_3", "a", "Sign in"),
+    ]
+    surface = Surface(
+        page=PageRecord(id="p", url="https://x.test/", path="/", status=200, depth=0),
+        viewport=Viewport(name="desktop_1440", width=1440, height=900),
+        elements=elements,  # type: ignore[arg-type]
+        layout=LayoutRecord(pageId="p", viewport="desktop_1440"),
+    )
+    grouped = [e.text for members in _control_groups(surface).values() for e in members]
+    assert grouped == ["Sign in"], "labels carry data, not a house style"

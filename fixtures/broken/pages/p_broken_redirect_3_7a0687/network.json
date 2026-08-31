@@ -1,0 +1,238 @@
+[
+  {
+    "url": "http://127.0.0.1:58073/broken/redirect/3",
+    "method": "GET",
+    "status": 302,
+    "type": "document",
+    "reqHeaders": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:58073",
+      "pragma": "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "0",
+      "date": "Mon, 31 Aug 2026 21:44:37 GMT",
+      "location": "/broken/redirect/2",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": null,
+    "resBodySample": null,
+    "timing": {
+      "startMs": 1788212677389.23,
+      "ttfbMs": 0.45,
+      "durationMs": 2.45
+    },
+    "size": {
+      "transferBytes": 190,
+      "resourceBytes": null
+    },
+    "initiator": "document",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:58073/broken/redirect/2",
+    "method": "GET",
+    "status": 302,
+    "type": "document",
+    "reqHeaders": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:58073",
+      "pragma": "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "0",
+      "date": "Mon, 31 Aug 2026 21:44:37 GMT",
+      "location": "/broken/redirect/1",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": null,
+    "resBodySample": null,
+    "timing": {
+      "startMs": 1788212677391.91,
+      "ttfbMs": 0.34,
+      "durationMs": 0.89
+    },
+    "size": {
+      "transferBytes": 190,
+      "resourceBytes": null
+    },
+    "initiator": "document",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:58073/broken/redirect/1",
+    "method": "GET",
+    "status": 302,
+    "type": "document",
+    "reqHeaders": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:58073",
+      "pragma": "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "0",
+      "date": "Mon, 31 Aug 2026 21:44:37 GMT",
+      "location": "/broken/deep.html",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": null,
+    "resBodySample": null,
+    "timing": {
+      "startMs": 1788212677393.01,
+      "ttfbMs": 0.37,
+      "durationMs": 0.7
+    },
+    "size": {
+      "transferBytes": 189,
+      "resourceBytes": null
+    },
+    "initiator": "document",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:58073/broken/deep.html",
+    "method": "GET",
+    "status": 200,
+    "type": "document",
+    "reqHeaders": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:58073",
+      "pragma": "no-cache",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "2236",
+      "content-type": "text/html",
+      "date": "Mon, 31 Aug 2026 21:44:37 GMT",
+      "last-modified": "Mon, 31 Aug 2026 21:39:58 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": "ebe7d50647d0d9e2112470ee094958d30a5c5cd25e558ab6980e4b3f5b08a1da",
+    "resBodySample": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Broken fixture — accessibility</title>\n    <meta name=\"description\" content=\"Accessibility defects for the checker suite.\" />\n    <link rel=\"canonical\" href=\"/broken/deep.html\" />\n    <link rel=\"icon\" href=\"/broken/square.png\" />\n    <link rel=\"stylesheet\" href=\"/broken/broken.css\" />\n    <style>\n      .overlay-host { position: relative; height: 80px; }",
+    "timing": {
+      "startMs": 1788212677393.89,
+      "ttfbMs": 0.67,
+      "durationMs": 2.09
+    },
+    "size": {
+      "transferBytes": 2467,
+      "resourceBytes": 2236
+    },
+    "initiator": "document",
+    "sourceMapUrl": null,
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:58073/broken/broken.css",
+    "method": "GET",
+    "status": 200,
+    "type": "stylesheet",
+    "reqHeaders": {
+      "accept": "text/css,*/*;q=0.1",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-GB",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "cookie": "fixture_session=«redacted»",
+      "host": "127.0.0.1:58073",
+      "pragma": "no-cache",
+      "referer": "http://127.0.0.1:58073/broken/deep.html",
+      "sec-fetch-dest": "style",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"macOS\""
+    },
+    "resHeaders": {
+      "content-length": "1638",
+      "content-type": "text/css",
+      "date": "Mon, 31 Aug 2026 21:44:37 GMT",
+      "last-modified": "Sat, 22 Aug 2026 22:45:55 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.12.3",
+      "set-cookie": "fixture_session=«redacted»; Path=/"
+    },
+    "reqBody": null,
+    "resBodyHash": "9b1aed2be5148a2fb3123451dd12f8daacc75b9dace7a4c9153f034725a0488a",
+    "resBodySample": ":root { --ink: #111111; --line: #e5e7eb; }\n* { box-sizing: border-box; }\nbody { margin: 0; font-family: -apple-system, \"Segoe UI\", Helvetica, Arial, sans-serif;\n       font-size: 16px; line-height: 24px; color: var(--ink); background: #fff; }\n.wrap { max-width: 900px; margin: 0 auto; padding: 24px; }\nh1 { font-size: 36px; line-height: 44px; margin: 0 0 24px; }\nh2 { font-size: 20px; line-height: 28px; margin: 0 0 8px; }\np  { margin: 0 0 16px; }\nnav ul { display: flex; gap: 24px; list-style: none; margin: 0 0",
+    "timing": {
+      "startMs": 1788212677398.61,
+      "ttfbMs": 1.55,
+      "durationMs": 2.44
+    },
+    "size": {
+      "transferBytes": 1868,
+      "resourceBytes": 1638
+    },
+    "initiator": "stylesheet",
+    "sourceMapUrl": null,
+    "failure": null
+  }
+]

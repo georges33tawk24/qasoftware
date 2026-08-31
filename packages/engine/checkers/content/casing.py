@@ -14,6 +14,12 @@ from engine.issues.models import Category, Finding, Severity
 MIN_MEMBERS = 3
 CONTROL_ROLES = frozenset({"link", "button", "menuitem", "tab"})
 
+NAMES_A_VALUE = frozenset({"label", "option", "legend", "optgroup"})
+"""Clickable, but not chrome. A `<label>` carries whatever it labels — here a brand name
+straight out of the database — so a filter list of real brands among junk test rows read
+as a casing defect *on the brands*. House style is a rule about the interface, not about
+the data the interface is showing."""
+
 EITHER_WAY = frozenset({"Title Case", "Sentence case"})
 """What a single capitalised word could equally be.
 
@@ -102,6 +108,8 @@ def _control_groups(surface: Surface) -> dict[str, list[ElementRecord]]:
     groups: dict[str, list[ElementRecord]] = {}
     for element in surface.laid_out:
         if not element.text.strip():
+            continue
+        if element.tag in NAMES_A_VALUE:
             continue
         if element.role not in CONTROL_ROLES and not element.clickable:
             continue

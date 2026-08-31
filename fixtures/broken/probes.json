@@ -1,60 +1,60 @@
 {
   "links": [
     {
-      "url": "http://127.0.0.1:56980/broken/a11y.html",
+      "url": "http://127.0.0.1:58073/broken/a11y.html",
       "status": 200,
       "internal": true,
       "error": null,
       "foundOn": [
-        "p_broken_index_html_864df3"
+        "p_broken_index_html_f9edc5"
       ]
     },
     {
-      "url": "http://127.0.0.1:56980/broken/does-not-exist.html",
+      "url": "http://127.0.0.1:58073/broken/does-not-exist.html",
       "status": 404,
       "internal": true,
       "error": null,
       "foundOn": [
-        "p_broken_index_html_864df3"
+        "p_broken_index_html_f9edc5"
       ]
     },
     {
-      "url": "http://127.0.0.1:56980/broken/index.html",
+      "url": "http://127.0.0.1:58073/broken/index.html",
       "status": 200,
       "internal": true,
       "error": null,
       "foundOn": [
-        "p_broken_a11y_html_659718",
-        "p_broken_index_html_864df3",
-        "p_broken_mobile_html_17d869",
-        "p_broken_seo_html_c77f7e"
+        "p_broken_a11y_html_ed17bd",
+        "p_broken_index_html_f9edc5",
+        "p_broken_mobile_html_6521bf",
+        "p_broken_seo_html_fe9cb3"
       ]
     },
     {
-      "url": "http://127.0.0.1:56980/broken/mobile.html",
+      "url": "http://127.0.0.1:58073/broken/mobile.html",
       "status": 200,
       "internal": true,
       "error": null,
       "foundOn": [
-        "p_broken_index_html_864df3"
+        "p_broken_index_html_f9edc5"
       ]
     },
     {
-      "url": "http://127.0.0.1:56980/broken/redirect/3",
+      "url": "http://127.0.0.1:58073/broken/redirect/3",
       "status": 200,
       "internal": true,
       "error": null,
       "foundOn": [
-        "p_broken_index_html_864df3"
+        "p_broken_index_html_f9edc5"
       ]
     },
     {
-      "url": "http://127.0.0.1:56980/broken/seo.html",
+      "url": "http://127.0.0.1:58073/broken/seo.html",
       "status": 200,
       "internal": true,
       "error": null,
       "foundOn": [
-        "p_broken_index_html_864df3"
+        "p_broken_index_html_f9edc5"
       ]
     }
   ],
@@ -63,22 +63,22 @@
       "path": "/bureau-not-found-probe",
       "status": 200,
       "kind": "not-found-handling",
-      "bodySample": null,
-      "bodyHash": null
+      "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>",
+      "bodyHash": "1ae2f51ed5b25bc090422e3bd5cdd51ce1b160fa"
     },
     {
       "path": "/.env",
       "status": 200,
       "kind": "exposed-path",
       "bodySample": "DATABASE_URL=postgres://user:hunter2@db.internal/prod\nSTRIPE_KEY=sk_live_x\n",
-      "bodyHash": null
+      "bodyHash": "af477efe01543533a6894be26e9337d11b74f1e7"
     },
     {
       "path": "/.git/config",
       "status": 200,
       "kind": "exposed-path",
       "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>",
-      "bodyHash": null
+      "bodyHash": "1ae2f51ed5b25bc090422e3bd5cdd51ce1b160fa"
     },
     {
       "path": "/.DS_Store",
@@ -92,14 +92,14 @@
       "status": 200,
       "kind": "exposed-path",
       "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>",
-      "bodyHash": null
+      "bodyHash": "1ae2f51ed5b25bc090422e3bd5cdd51ce1b160fa"
     },
     {
       "path": "/debug",
       "status": 200,
       "kind": "exposed-path",
       "bodySample": "<!doctype html><html lang=en><head><title>Not found</title></head><body><h1>Sorry, we could not find that page</h1></body></html>",
-      "bodyHash": null
+      "bodyHash": "1ae2f51ed5b25bc090422e3bd5cdd51ce1b160fa"
     }
   ]
 }

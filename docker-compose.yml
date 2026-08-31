@@ -3,7 +3,7 @@ name: bureau
 # One image for the API and the worker: the worker needs a browser, the API needs the
 # same engine code to read artifacts, and two images to keep in step is one too many.
 x-engine: &engine
-  image: mcr.microsoft.com/playwright/python:v1.49.0-noble
+  image: mcr.microsoft.com/playwright/python:v1.62.0-noble  # keep in step with the playwright pin
   working_dir: /srv
   volumes:
     - .:/srv
@@ -85,6 +85,16 @@ services:
 
   worker:
     <<: *engine
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      # Not just for ordering: both services `pip install -e` into the same bind-mounted
+      # /srv, and two of them writing .egg-info at once is a race. Waiting for the API to
+      # answer means its install has already finished.
+      api:
+        condition: service_healthy
     environment:
       <<: *engine-env
       # The scheduler ticks in the API, which is the process that is always up.

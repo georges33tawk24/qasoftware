@@ -28,7 +28,7 @@ are not covered by this file.
 | `layout.horizontal-overflow` | `body-horizontal-scroll` | index, mobile | `heavy.png` at 700px and `.too-wide` at 620px, in a 390px viewport |
 | `layout.container-overflow` | `overflows-container` | index, mobile | the same two elements against their own containers |
 | `layout.image-geometry` | `image-aspect-distorted` | index | `square.png` is 300×300, rendered 300×120 |
-| `layout.overlapping-clickables` | `overlapping-clickables` | deep | `.under` and `.over` buttons overlap by 60×30px |
+| `layout.overlapping-clickables` | `overlapping-clickables` | deep | `.under` and `.over` buttons overlap by 30×30px, clear of either centre |
 | `layout.occluded-clickable` | `occluded-clickable` | deep | `.lid` covers a button completely |
 
 ## Typography and tokens — group C

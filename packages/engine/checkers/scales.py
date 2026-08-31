@@ -26,13 +26,10 @@ FONT_SIZE_CLUSTER_PX = 1.0
 """Sizes within this of each other are one step. A fluid heading lands on 27.85px at one
 width and 28px at another; that is one decision, not two."""
 
-MIN_SIZE_USES = 2
-"""A size worn by exactly one element is a slip. Two is a decision.
+MIN_SCALE_USES = 2
+"""A value used exactly once is a slip. Twice is a decision.
 
-Note this is a floor, not a share. The share threshold is what broke: body copy is 90%
-of a page's text nodes, so every heading fell under 5% and the scale ended up describing
-only the body. Every size a page genuinely uses now counts the same, whatever its volume.
-"""
+A floor, not a share — the share threshold is what broke both scales."""
 
 
 def _dominant(counts: Counter[float] | Counter[int] | Counter[str]) -> list[object]:
@@ -87,6 +84,7 @@ def derive(layouts: list[LayoutRecord], tokens: Tokens | None = None) -> Scales:
 
 def _from_pages(layouts: list[LayoutRecord]) -> Scales:
     spacing: Counter[float] = Counter()
+    sizes: Counter[float] = Counter()
     weights: Counter[int] = Counter()
     families: Counter[str] = Counter()
     leading: Counter[float] = Counter()
@@ -97,6 +95,7 @@ def _from_pages(layouts: list[LayoutRecord]) -> Scales:
             if bucket.gap > 0:
                 spacing[bucket.gap] += bucket.count
         for style in layout.typeInventory:
+            sizes[style.fontSize] += style.count
             weights[style.fontWeight] += style.count
             families[style.fontFamily] += style.count
             if style.lineHeight:
@@ -105,8 +104,13 @@ def _from_pages(layouts: list[LayoutRecord]) -> Scales:
             palette[colour.colour] += colour.count
 
     return Scales(
+        # Spacing keeps the share-of-volume generator on purpose. It looks like the one
+        # replaced for type, but the spacing *checker* already refuses to report a gap the
+        # site uses three or more times (RARE_GAP_USES), which is the same "decision, not
+        # a slip" test by another route. Moving spacing onto `measured_scale` put every
+        # one-off gap on the scale and the checker went silent.
         spacing=sorted(v for v in _dominant(spacing) if isinstance(v, float)),
-        fontSizes=_type_scale(layouts),
+        fontSizes=measured_scale(sizes, FONT_SIZE_CLUSTER_PX),
         weights=sorted(v for v in _dominant(weights) if isinstance(v, int)),
         families=[v for v in _dominant(families) if isinstance(v, str)],
         palette=[v for v in _dominant(palette) if isinstance(v, str)],
@@ -114,41 +118,37 @@ def _from_pages(layouts: list[LayoutRecord]) -> Scales:
     )
 
 
-def _type_scale(layouts: list[LayoutRecord]) -> list[float]:
-    """The distinct sizes this site actually chose, clustered, not weighted by volume.
+def measured_scale(uses: Counter[float], tolerance: float) -> list[float]:
+    """The distinct values a page actually chose, clustered, not weighted by volume.
 
-    Counting nodes lets body copy bury the headings: a page with four hundred paragraphs
-    and two headings derives a scale containing no heading size, and then reports every
-    heading on the site as off-scale. What matters is how many separate *decisions* used
-    a size, so each distinct style counts once, however many nodes wear it.
+    Share-of-volume is the wrong generator and it broke the same way twice. For type,
+    body copy is most of a page's text nodes, so every heading fell under the 5% floor
+    and was then reported off a scale that described only the body. For spacing, small
+    gaps between adjacent items vastly outnumber the large ones between sections, so
+    every section gap on the site came back as an outlier against a scale of margins.
 
-    A size that only one style used, only once, is an accident and stays off the scale.
-    A site with no coherent scale gets an empty one, and `off_scale` then flags nothing —
-    silence beats flagging every heading on the page.
+    What matters is whether a value was *chosen*, not how many elements wear it. Two uses
+    is a decision; one is a slip and stays off the scale. Clustering pools near-identical
+    values — a fluid heading landing on 27.85px and 28px is one decision, and an 8px gap
+    beside a 1px border reads as 9px — and every member of a surviving cluster stays on
+    the scale, because keeping only the busiest re-flags the rest.
+
+    A page with no coherent scale gets an empty one, and `off_scale` then flags nothing.
+    Silence beats flagging everything.
     """
-    styles: Counter[float] = Counter()
-    elements: Counter[float] = Counter()
-    for layout in layouts:
-        for style in layout.typeInventory:
-            styles[style.fontSize] += 1
-            elements[style.fontSize] += style.count
-
     clusters: list[list[float]] = []
-    for size in sorted(elements):
+    for value in sorted(uses):
         # Against the anchor, not the last member: chained on the last, 11.2 reaches 12
         # reaches 13 reaches 14, and a whole page of body sizes collapses into one step.
-        if clusters and size - clusters[-1][0] <= FONT_SIZE_CLUSTER_PX:
-            clusters[-1].append(size)
+        if clusters and value - clusters[-1][0] <= tolerance:
+            clusters[-1].append(value)
         else:
-            clusters.append([size])
-
-    # Every member of a surviving cluster is on the scale, not just its busiest. Keeping
-    # one representative and dropping the rest reports 11.2px as off a scale it defines.
+            clusters.append([value])
     return sorted(
-        size
+        value
         for cluster in clusters
-        if sum(elements[s] for s in cluster) >= MIN_SIZE_USES
-        for size in cluster
+        if sum(uses[v] for v in cluster) >= MIN_SCALE_USES
+        for value in cluster
     )
 
 

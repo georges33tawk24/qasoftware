@@ -35,6 +35,18 @@ BODY_HASH = "bodyHash"
 """Set by any finding whose evidence is a response body, so a rule can compare it against
 the body the site serves for things that do not exist."""
 
+COUNTERPART = "counterpart"
+"""The *other* element a finding is about, when it is about a pair."""
+
+SUBSUMED_BY = "subsumedBy"
+"""Kinds that say everything this finding says, and more.
+
+A control whose centre point is covered is not additionally worth reporting as
+overlapping the thing covering it: same pair, same cause, and the occlusion is the
+sentence a person can act on. Declared by the weaker finding rather than encoded in a
+rule, so a checker decides for itself what outranks it.
+"""
+
 
 @dataclass(frozen=True)
 class Invalidation:
@@ -120,6 +132,30 @@ def _the_404_page_wearing_a_200(findings: list[Finding], ctx: RunContext) -> Ite
                 reason="the response body is byte-for-byte what this site serves for a "
                 "path that does not exist",
             )
+
+
+@rule("a-stronger-statement-about-the-same-pair-wins")
+def _subsumed(findings: list[Finding], ctx: RunContext) -> Iterable[Invalidation]:
+    """Withdraw a finding when one it named as outranking it covers the same pair."""
+    strong: set[tuple[str, str, str | None, str, object]] = {
+        (f.pageId, f.viewport, f.elementId, f.issueKind, f.data.get(COUNTERPART)) for f in findings
+    }
+    for finding in findings:
+        for kind in finding.data.get(SUBSUMED_BY) or []:
+            key = (
+                finding.pageId,
+                finding.viewport,
+                finding.elementId,
+                kind,
+                finding.data.get(COUNTERPART),
+            )
+            if key in strong:
+                yield Invalidation(
+                    finding=finding,
+                    rule="a-stronger-statement-about-the-same-pair-wins",
+                    reason=f"the same pair is already reported as {kind}, which says this and more",
+                )
+                break
 
 
 def resolve(findings: list[Finding], ctx: RunContext) -> Resolution:

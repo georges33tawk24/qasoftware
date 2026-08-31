@@ -6,6 +6,7 @@ from collections.abc import Iterable
 
 from engine.artifact.context import Capability, RunContext
 from engine.artifact.geometry import bottom, contains, right
+from engine.checkers import resolution
 from engine.checkers.base import checker
 from engine.checkers.support import clipped_away, element_finding, surfaces
 from engine.issues.models import Category, Finding, Severity
@@ -62,7 +63,13 @@ class OverlappingClickables:
                         expected="no overlap between separate controls",
                         actual=f"{area:.0f}px² shared",
                         groupAs="overlap",
-                        data={"other": second.selector, "area": area},
+                        data={
+                            "other": second.selector,
+                            "area": area,
+                            resolution.COUNTERPART: second.selector,
+                            # A covered centre point says this and more.
+                            resolution.SUBSUMED_BY: ["occluded-clickable"],
+                        },
                     )
 
 
@@ -93,7 +100,12 @@ class OccludedClickables:
                     expected="the control receives its own clicks",
                     actual=f"covered by {blocker.selector if blocker else 'another element'}",
                     groupAs="occluded",
-                    data={"occludedBy": blocker.selector if blocker else element.occludedBy},
+                    data={
+                        "occludedBy": blocker.selector if blocker else element.occludedBy,
+                        resolution.COUNTERPART: (
+                            blocker.selector if blocker else element.occludedBy
+                        ),
+                    },
                 )
 
 

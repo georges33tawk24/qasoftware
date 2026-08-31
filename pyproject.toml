@@ -9,7 +9,11 @@ description = "Autonomous QA platform — capture, check, reason, report"
 requires-python = ">=3.12"
 dependencies = [
   "pydantic>=2.7",
-  "playwright>=1.47",
+  # Pinned to the minor the compose image ships. Left open, `pip install -e` inside the
+  # container resolved past the image's bundled browsers and every run died with
+  # "Executable doesn't exist at /ms-playwright/chromium-…". The image tag in
+  # docker-compose.yml and this pin move together, deliberately.
+  "playwright>=1.62,<1.63",
   "pyspellchecker>=0.8",
   "pillow>=10.0",
 ]

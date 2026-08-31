@@ -298,8 +298,12 @@ async def _capture_page(
                     artifact.a11y = await cdp.accessibility_tree(session)
                 artifact.axe = await axe.run(page)
                 await recorder.drain()
-                artifact.console = recorder.console
-                artifact.network = recorder.network
+                # Copies, not the recorder's own lists. The vitals loads below are real
+                # navigations and the recorder keeps appending to whatever it holds — so
+                # assigning by reference put those requests in the artifact anyway, and
+                # moving the sampling later fixed nothing at all.
+                artifact.console = list(recorder.console)
+                artifact.network = list(recorder.network)
                 # Last of all: these re-loads are recorded like any other navigation.
                 artifact.vitals = await _sample_vitals(
                     page, config, url=record.url, first=first_vitals

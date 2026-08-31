@@ -88,8 +88,49 @@ def test_a_rule_matches_the_claim_not_the_checker(ctx: RunContext) -> None:
     assert newcomer not in outcome.kept
 
 
+def test_a_covered_centre_point_outranks_the_overlap_that_caused_it(ctx: RunContext) -> None:
+    """Same pair, same cause; the occlusion is the sentence a person can act on."""
+    pair = {resolution.COUNTERPART: "div.chat-widget"}
+    overlap = finding(
+        checkerId="layout.overlapping-clickables",
+        issueKind="overlapping-clickables",
+        category=Category.layout,
+        elementId="el_1",
+        data={**pair, resolution.SUBSUMED_BY: ["occluded-clickable"]},
+    )
+    occluded = finding(
+        checkerId="layout.occluded-clickable",
+        issueKind="occluded-clickable",
+        category=Category.layout,
+        elementId="el_1",
+        data=pair,
+    )
+    outcome = resolve([overlap, occluded], ctx)
+    assert occluded in outcome.kept
+    assert overlap not in outcome.kept
+    assert "says this and more" in outcome.notes()[0]
+
+
+def test_a_different_pair_is_not_subsumed(ctx: RunContext) -> None:
+    """Overlapping C is still worth saying when it is B that covers the centre."""
+    overlap = finding(
+        checkerId="layout.overlapping-clickables",
+        issueKind="overlapping-clickables",
+        category=Category.layout,
+        elementId="el_1",
+        data={resolution.COUNTERPART: "div.other", resolution.SUBSUMED_BY: ["occluded-clickable"]},
+    )
+    occluded = finding(
+        issueKind="occluded-clickable",
+        elementId="el_1",
+        data={resolution.COUNTERPART: "div.chat-widget"},
+    )
+    outcome = resolve([overlap, occluded], ctx)
+    assert overlap in outcome.kept
+
+
 def test_every_rule_has_a_distinct_id() -> None:
-    assert len(resolution.registry()) == 2
+    assert len(resolution.registry()) == 3
 
 
 def test_exposed_paths_rejects_html_shell_as_content() -> None:

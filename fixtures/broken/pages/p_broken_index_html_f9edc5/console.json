@@ -1,0 +1,18 @@
+[
+  {
+    "level": "error",
+    "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "stack": null,
+    "url": "http://127.0.0.1:58073/broken/missing-image.png",
+    "line": 0,
+    "ts": "2026-08-31T21:44:15.936046Z"
+  },
+  {
+    "level": "log",
+    "text": "broken fixture loaded",
+    "stack": null,
+    "url": "http://127.0.0.1:58073/broken/app.js",
+    "line": 0,
+    "ts": "2026-08-31T21:44:15.943944Z"
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "id": "p_broken_does_not_exist_ht_6b5672",
+  "url": "http://127.0.0.1:58073/broken/does-not-exist.html",
+  "path": "/broken/does-not-exist.html",
+  "title": "404",
+  "status": 404,
+  "redirectChain": [],
+  "depth": 1,
+  "discoveredFrom": "http://127.0.0.1:58073/broken/index.html",
+  "persona": "anonymous",
+  "domNodeCount": 5,
+  "security": null,
+  "crawlBlocked": null
+}

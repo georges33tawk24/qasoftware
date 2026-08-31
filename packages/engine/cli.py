@@ -8,13 +8,15 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import sys
 from pathlib import Path
 
 from engine import branding
+from engine.agents.provider import LLMProvider
 from engine.artifact import store
 from engine.artifact.context import RunContext
-from engine.artifact.models import VIEWPORT_PRESETS, PageRecord, RunConfig, Viewport
+from engine.artifact.models import VIEWPORT_PRESETS, PageRecord, RunConfig, RunStatus, Viewport
 from engine.capture.auth import ANONYMOUS, Persona
 from engine.capture.challenge import RunBlocked
 from engine.capture.driver import DRIVERS
@@ -54,6 +56,105 @@ def load_personas(path: Path | None) -> list[Persona]:
         return [ANONYMOUS]
     payload = json.loads(path.read_text())
     return [Persona.model_validate(entry) for entry in payload]
+
+
+def _run(args: argparse.Namespace) -> int:
+    """One URL in, everything the inputs allow, a report out.
+
+    Every stage already existed and `engine.run.execute` already chained them — but the
+    only caller was the worker, so from a terminal the product was three commands with
+    a run id copied between them. That is not what "point it at a URL" means.
+    """
+    from engine.progress import Event, Progress
+    from engine.run import RunRequest, execute
+
+    personas = load_personas(args.personas)
+    config = RunConfig(
+        driver=args.driver,
+        viewports=args.viewport or list(RunConfig().viewports),
+        personas=[p.name for p in personas],
+        maxDepth=args.max_depth,
+        maxPages=args.max_pages,
+        include=args.include,
+        exclude=args.exclude,
+        sameOriginOnly=not args.any_origin,
+        respectRobots=not args.ignore_robots,
+        maskSelectors=args.mask,
+        consentSelectors=args.consent or [],
+        pageTimeoutMs=args.timeout,
+        vitalsSamples=args.vitals_samples,
+        flows=args.flows,
+        apiProbes=args.probes,
+        authorisedBy=args.authorised_by,
+    )
+    if (args.flows or args.probes) and not args.authorised_by:
+        print(
+            "flows and probes need --authorised-by: this exercises somebody's system, so "
+            "who asked for it is recorded on the run (SPEC §5).",
+            file=sys.stderr,
+        )
+        return 2
+
+    def show(event: Event) -> None:
+        kind, data = event.kind, event.payload
+        if kind == "stage":
+            print(f"\n[{event.stage.value}]", file=sys.stderr)
+        elif kind == "page":
+            mark = "blocked" if data.get("blocked") else data.get("status", "")
+            print(f"  {str(data.get('path', ''))[:52]:<54} {mark}", file=sys.stderr)
+        elif kind == "issue":
+            print(
+                f"  {data.get('severity', ''):<9} {str(data.get('title', ''))[:64]}",
+                file=sys.stderr,
+            )
+        elif kind in ("note", "error"):
+            print(f"  {kind}: {data.get('text', '')}", file=sys.stderr)
+
+    request = RunRequest(
+        target=args.url,
+        out_dir=args.out,
+        config=config,
+        personas=personas,
+        figma_key=args.figma_key,
+        figma_token=resolve(args.figma_token) if args.figma_token else None,
+        provider=_provider_or_none(args),
+        report=not args.no_report,
+    )
+    summary = asyncio.run(execute(request, Progress(show)))
+
+    if summary.status is not RunStatus.complete:
+        print(f"\nrun {summary.status.value}: {summary.error or 'no detail'}", file=sys.stderr)
+        return 2
+
+    print(f"\n{summary.root}")
+    print(f"  pages    {summary.pages}")
+    print(f"  issues   {summary.issues}")
+    for name in ("blocker", "critical", "major", "minor", "trivial"):
+        if summary.counts.get(name):
+            print(f"    {name:<9} {summary.counts[name]}")
+    if summary.flows:
+        print(f"  flows    {summary.flows} ({summary.flowFailures} failed)")
+    if summary.aiFindings:
+        print(f"  ai       {summary.aiFindings} findings, ${summary.aiCostUsd:.2f}")
+    if summary.reportPath:
+        print(f"\n  {summary.reportPath}")
+    return 0
+
+
+def _provider_or_none(args: argparse.Namespace) -> LLMProvider | None:
+    """A model key turns the AI layer on; without one the run is the deterministic sweep,
+    which is a normal way to use this and not a failure (SPEC §9)."""
+    if args.no_ai:
+        return None
+    from engine.agents.providers import build
+
+    for name, variable in (("anthropic", "ANTHROPIC_API_KEY"), ("openai", "OPENAI_API_KEY")):
+        if os.environ.get(variable):
+            try:
+                return build(name)
+            except Exception:
+                return None
+    return None
 
 
 def _capture(args: argparse.Namespace) -> int:
@@ -448,6 +549,31 @@ def _prune(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog=branding.CLI_NAME, description=branding.DESCRIPTION)
     sub = parser.add_subparsers(dest="command", required=True)
+
+    run = sub.add_parser("run", help="point it at a URL and let it do everything")
+    run.add_argument("url")
+    run.add_argument("--out", type=Path, default=Path("runs"), help="run directory root")
+    run.add_argument("--viewport", action="append", help="repeatable; preset or name:WxH@S")
+    run.add_argument("--persona", dest="personas", help="personas JSON file")
+    run.add_argument("--driver", choices=sorted(DRIVERS), default=RunConfig().driver)
+    run.add_argument("--max-depth", type=int, default=RunConfig().maxDepth)
+    run.add_argument("--max-pages", type=int, default=RunConfig().maxPages)
+    run.add_argument("--include", action="append", help="regex, repeatable")
+    run.add_argument("--exclude", action="append", help="regex, repeatable")
+    run.add_argument("--mask", action="append", help="volatile CSS selector")
+    run.add_argument("--consent", action="append", help="a selector that dismisses an overlay")
+    run.add_argument("--any-origin", action="store_true", help="follow links off the seed origin")
+    run.add_argument("--ignore-robots", action="store_true", help="override robots.txt")
+    run.add_argument("--timeout", type=int, default=RunConfig().pageTimeoutMs)
+    run.add_argument("--vitals-samples", type=int, default=RunConfig().vitalsSamples)
+    run.add_argument("--figma-key", help="Figma file key to compare against")
+    run.add_argument("--figma-token", help="env:NAME or keychain:service/account")
+    run.add_argument("--flows", action="store_true", help="exercise functional flows")
+    run.add_argument("--probes", action="store_true", help="replay captured API requests")
+    run.add_argument("--authorised-by", help="who authorised flows and probes; required for them")
+    run.add_argument("--no-ai", action="store_true", help="deterministic sweep only")
+    run.add_argument("--no-report", action="store_true", help="skip the HTML report")
+    run.set_defaults(handler=_run)
 
     cap = sub.add_parser("capture", help="crawl a target and write a run artifact")
     cap.add_argument("url")

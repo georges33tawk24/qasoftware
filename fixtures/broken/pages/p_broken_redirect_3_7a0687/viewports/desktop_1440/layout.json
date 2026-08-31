@@ -1,0 +1,115 @@
+{
+  "pageId": "p_broken_redirect_3_7a0687",
+  "viewport": "desktop_1440",
+  "alignmentSets": [
+    {
+      "axis": "x",
+      "edge": "start",
+      "parentId": "el_00003",
+      "median": 294.0,
+      "elementIds": [
+        "el_00004",
+        "el_00005",
+        "el_00006",
+        "el_00009"
+      ],
+      "deviations": {
+        "el_00004": 0.0,
+        "el_00005": 0.0,
+        "el_00006": 0.0,
+        "el_00009": 0.0
+      }
+    }
+  ],
+  "repeatedGroups": [
+    {
+      "signature": "div.overlay-host",
+      "parentId": "el_00003",
+      "elementIds": [
+        "el_00006",
+        "el_00009"
+      ]
+    }
+  ],
+  "spacingHistogram": [
+    {
+      "gap": 16.0,
+      "count": 2
+    },
+    {
+      "gap": 0.0,
+      "count": 1
+    },
+    {
+      "gap": 24.0,
+      "count": 1
+    }
+  ],
+  "typeInventory": [
+    {
+      "fontFamily": "Arial",
+      "fontSize": 13.33,
+      "fontWeight": 400,
+      "lineHeight": null,
+      "count": 3
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "count": 2
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 36.0,
+      "fontWeight": 700,
+      "lineHeight": 44.0,
+      "count": 1
+    }
+  ],
+  "colourInventory": [
+    {
+      "colour": "rgb(0, 0, 0)",
+      "property": "borderColor",
+      "count": 3,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(0, 0, 0)",
+      "property": "color",
+      "count": 3,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(17, 17, 17)",
+      "property": "color",
+      "count": 3,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(239, 239, 239)",
+      "property": "backgroundColor",
+      "count": 3,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(238, 238, 255)",
+      "property": "backgroundColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(255, 255, 255)",
+      "property": "backgroundColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    }
+  ]
+}

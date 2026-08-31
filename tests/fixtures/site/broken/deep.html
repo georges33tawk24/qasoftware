@@ -11,7 +11,10 @@
     <style>
       .overlay-host { position: relative; height: 80px; }
       .under { position: absolute; left: 0; top: 0; width: 120px; height: 40px; }
-      .over  { position: absolute; left: 60px; top: 10px; width: 120px; height: 40px; }
+      /* Overlaps `.under`'s right edge but clears its centre: the two planted
+         defects have to stay distinct, or the overlap is just the occlusion said
+         twice and the resolution pass withdraws it. */
+      .over  { position: absolute; left: 90px; top: 10px; width: 120px; height: 40px; }
       .lid   { position: absolute; left: 0; top: 0; width: 260px; height: 60px; background: #eef; }
       .wide  { max-width: none; }
     </style>

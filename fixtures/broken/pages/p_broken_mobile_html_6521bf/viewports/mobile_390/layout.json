@@ -1,0 +1,268 @@
+{
+  "pageId": "p_broken_mobile_html_6521bf",
+  "viewport": "mobile_390",
+  "alignmentSets": [
+    {
+      "axis": "x",
+      "edge": "start",
+      "parentId": "el_00002",
+      "median": 24.0,
+      "elementIds": [
+        "el_00003",
+        "el_00004",
+        "el_00005",
+        "el_00008",
+        "el_00028"
+      ],
+      "deviations": {
+        "el_00003": 0.0,
+        "el_00004": 0.0,
+        "el_00005": 0.0,
+        "el_00008": 0.0,
+        "el_00028": 0.0
+      }
+    },
+    {
+      "axis": "x",
+      "edge": "start",
+      "parentId": "el_00009",
+      "median": 24.5,
+      "elementIds": [
+        "el_00010",
+        "el_00016",
+        "el_00022"
+      ],
+      "deviations": {
+        "el_00010": 0.0,
+        "el_00016": 0.0,
+        "el_00022": 0.0
+      }
+    },
+    {
+      "axis": "y",
+      "edge": "start",
+      "parentId": "el_00010",
+      "median": 192.5,
+      "elementIds": [
+        "el_00011",
+        "el_00012",
+        "el_00013",
+        "el_00014",
+        "el_00015"
+      ],
+      "deviations": {
+        "el_00011": 0.0,
+        "el_00012": 0.0,
+        "el_00013": 0.0,
+        "el_00014": 0.0,
+        "el_00015": 0.0
+      }
+    },
+    {
+      "axis": "y",
+      "edge": "start",
+      "parentId": "el_00016",
+      "median": 233.5,
+      "elementIds": [
+        "el_00017",
+        "el_00018",
+        "el_00019",
+        "el_00020",
+        "el_00021"
+      ],
+      "deviations": {
+        "el_00017": 0.0,
+        "el_00018": 0.0,
+        "el_00019": 0.0,
+        "el_00020": 0.0,
+        "el_00021": 0.0
+      }
+    },
+    {
+      "axis": "y",
+      "edge": "start",
+      "parentId": "el_00022",
+      "median": 274.5,
+      "elementIds": [
+        "el_00023",
+        "el_00024",
+        "el_00025",
+        "el_00026",
+        "el_00027"
+      ],
+      "deviations": {
+        "el_00023": 0.0,
+        "el_00024": 0.0,
+        "el_00025": 0.0,
+        "el_00026": 0.0,
+        "el_00027": 0.0
+      }
+    }
+  ],
+  "repeatedGroups": [
+    {
+      "signature": "p",
+      "parentId": "el_00002",
+      "elementIds": [
+        "el_00005",
+        "el_00028"
+      ]
+    },
+    {
+      "signature": "button.tiny-button",
+      "parentId": "el_00005",
+      "elementIds": [
+        "el_00006",
+        "el_00007"
+      ]
+    },
+    {
+      "signature": "tr",
+      "parentId": "el_00009",
+      "elementIds": [
+        "el_00010",
+        "el_00016",
+        "el_00022"
+      ]
+    },
+    {
+      "signature": "th",
+      "parentId": "el_00010",
+      "elementIds": [
+        "el_00011",
+        "el_00012",
+        "el_00013",
+        "el_00014",
+        "el_00015"
+      ]
+    },
+    {
+      "signature": "td",
+      "parentId": "el_00016",
+      "elementIds": [
+        "el_00017",
+        "el_00018",
+        "el_00019",
+        "el_00020",
+        "el_00021"
+      ]
+    },
+    {
+      "signature": "td",
+      "parentId": "el_00022",
+      "elementIds": [
+        "el_00023",
+        "el_00024",
+        "el_00025",
+        "el_00026",
+        "el_00027"
+      ]
+    }
+  ],
+  "spacingHistogram": [
+    {
+      "gap": 0.0,
+      "count": 13
+    },
+    {
+      "gap": 4.5,
+      "count": 1
+    },
+    {
+      "gap": 16.0,
+      "count": 1
+    },
+    {
+      "gap": 24.0,
+      "count": 1
+    }
+  ],
+  "typeInventory": [
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "count": 12
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 16.0,
+      "fontWeight": 700,
+      "lineHeight": 24.0,
+      "count": 5
+    },
+    {
+      "fontFamily": "Arial",
+      "fontSize": 13.33,
+      "fontWeight": 400,
+      "lineHeight": null,
+      "count": 2
+    },
+    {
+      "fontFamily": "-apple-system",
+      "fontSize": 36.0,
+      "fontWeight": 700,
+      "lineHeight": 44.0,
+      "count": 1
+    }
+  ],
+  "colourInventory": [
+    {
+      "colour": "rgb(17, 17, 17)",
+      "property": "color",
+      "count": 17,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(229, 231, 235)",
+      "property": "borderColor",
+      "count": 15,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(0, 0, 0)",
+      "property": "borderColor",
+      "count": 2,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(0, 0, 0)",
+      "property": "color",
+      "count": 2,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(239, 239, 239)",
+      "property": "backgroundColor",
+      "count": 2,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(0, 0, 238)",
+      "property": "color",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(243, 244, 246)",
+      "property": "backgroundColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    },
+    {
+      "colour": "rgb(255, 255, 255)",
+      "property": "backgroundColor",
+      "count": 1,
+      "nearestToken": null,
+      "deltaE": null
+    }
+  ]
+}
