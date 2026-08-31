@@ -553,15 +553,19 @@ def build_parser() -> argparse.ArgumentParser:
     run = sub.add_parser("run", help="point it at a URL and let it do everything")
     run.add_argument("url")
     run.add_argument("--out", type=Path, default=Path("runs"), help="run directory root")
-    run.add_argument("--viewport", action="append", help="repeatable; preset or name:WxH@S")
+    run.add_argument(
+        "--viewport", type=parse_viewport, action="append", help="repeatable; preset or name:WxH@S"
+    )
     run.add_argument("--persona", dest="personas", help="personas JSON file")
     run.add_argument("--driver", choices=sorted(DRIVERS), default=RunConfig().driver)
     run.add_argument("--max-depth", type=int, default=RunConfig().maxDepth)
     run.add_argument("--max-pages", type=int, default=RunConfig().maxPages)
-    run.add_argument("--include", action="append", help="regex, repeatable")
-    run.add_argument("--exclude", action="append", help="regex, repeatable")
-    run.add_argument("--mask", action="append", help="volatile CSS selector")
-    run.add_argument("--consent", action="append", help="a selector that dismisses an overlay")
+    run.add_argument("--include", action="append", default=[], help="regex, repeatable")
+    run.add_argument("--exclude", action="append", default=[], help="regex, repeatable")
+    run.add_argument("--mask", action="append", default=[], help="volatile CSS selector")
+    run.add_argument(
+        "--consent", action="append", default=[], help="a selector that dismisses an overlay"
+    )
     run.add_argument("--any-origin", action="store_true", help="follow links off the seed origin")
     run.add_argument("--ignore-robots", action="store_true", help="override robots.txt")
     run.add_argument("--timeout", type=int, default=RunConfig().pageTimeoutMs)
