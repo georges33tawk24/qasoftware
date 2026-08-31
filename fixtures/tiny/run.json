@@ -62,7 +62,16 @@
     "authorisedHosts": [],
     "flows": true,
     "apiProbes": true,
-    "flowRetries": 2
+    "flowRetries": 2,
+    "platform": "web",
+    "appPath": null,
+    "appPackage": null,
+    "appActivity": null,
+    "bundleId": null,
+    "appiumUrl": "http://127.0.0.1:4723",
+    "deviceName": null,
+    "automationName": null,
+    "mitmproxyPort": null
   },
   "pageIds": [
     "p_home"

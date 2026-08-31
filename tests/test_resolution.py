@@ -90,3 +90,14 @@ def test_a_rule_matches_the_claim_not_the_checker(ctx: RunContext) -> None:
 
 def test_every_rule_has_a_distinct_id() -> None:
     assert len(resolution.registry()) == 2
+
+
+def test_exposed_paths_rejects_html_shell_as_content() -> None:
+    from engine.checkers.free.security import _looks_like
+
+    html = '<!doctype html><html><head><meta charset="utf-8"></head><body>app</body></html>'
+    assert not _looks_like("/.env", html)
+    assert not _looks_like("/.git/config", html)
+    assert not _looks_like("/config.json", html)
+    assert _looks_like("/.env", "SECRET_KEY=12345\nDB_PASS=xyz")
+    assert _looks_like("/.git/config", "[core]\nrepositoryformatversion = 0")

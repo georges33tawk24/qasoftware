@@ -312,6 +312,100 @@ async def _capture_page(
     return _PageOutcome(artifact, links, notes=notes)
 
 
+async def capture_mobile(
+    out_dir: Path,
+    *,
+    config: RunConfig,
+    project_id: str | None = None,
+    on_page: Callable[[PageRecord], None] | None = None,
+) -> CaptureResult:
+    """Capture native Android/iOS mobile application state — SPEC §19 (Phase 11)."""
+    started = datetime.now(UTC)
+    run_id = f"run_{started:%Y%m%dT%H%M%S_%f}"
+    paths = RunPaths(Path(out_dir) / run_id)
+    target = config.appPath or config.appPackage or config.bundleId or "mobile_app"
+
+    manifest = RunManifest(
+        runId=run_id,
+        target=target,
+        status=RunStatus.running,
+        startedAt=started,
+        checkersSha=checkers_sha(),
+        projectId=project_id,
+        config=config,
+    )
+
+    from engine.capture.appium_driver import AppiumDriver, MobileAppConfig
+    from engine.capture.mitm import MitmCapture
+    from engine.capture.mobile import parse_mobile_hierarchy
+
+    app_config = MobileAppConfig(
+        platform=config.platform if config.platform in ("android", "ios") else "android",
+        appium_url=config.appiumUrl,
+        app_path=config.appPath,
+        app_package=config.appPackage,
+        app_activity=config.appActivity,
+        bundle_id=config.bundleId,
+        device_name=config.deviceName or "MobileDevice",
+        automation_name=config.automationName,
+    )
+    driver = AppiumDriver(app_config)
+    await driver.launch()
+
+    try:
+        source_xml = await driver.get_page_source()
+        screenshot_bytes = await driver.get_screenshot()
+        viewport = await driver.get_viewport()
+        config.viewports = [viewport]
+
+        pid = "p_main_screen"
+        record = PageRecord(
+            id=pid,
+            url=f"mobile://{app_config.platform}/{target}",
+            path="/",
+            status=200,
+            depth=0,
+            persona="anonymous",
+        )
+        artifact = PageArtifact(page=record)
+
+        elements = parse_mobile_hierarchy(source_xml, platform=app_config.platform)
+        artifact.elements[viewport.name] = elements
+        artifact.layout[viewport.name] = derive(pid, viewport.name, elements)
+        artifact.dom = source_xml
+
+        # Save screenshot
+        full_png = paths.full_png(pid, viewport.name)
+        full_png.parent.mkdir(parents=True, exist_ok=True)
+        full_png.write_bytes(screenshot_bytes)
+        paths.fold_png(pid, viewport.name).write_bytes(screenshot_bytes)
+
+        # Record network entries
+        mitm = MitmCapture()
+        artifact.network = mitm.export_entries()
+
+        store.write_page(paths, artifact)
+        manifest.pageIds.append(pid)
+        if on_page is not None:
+            on_page(record)
+
+    finally:
+        await driver.close()
+
+    finished = datetime.now(UTC)
+    manifest.status = RunStatus.complete
+    manifest.finishedAt = finished
+    manifest.durationMs = int((finished - started).total_seconds() * 1000)
+    store.write_run_manifest(paths, manifest)
+
+    return CaptureResult(
+        paths=paths,
+        manifest=manifest,
+        problems=store.validate(paths.root),
+        blocked=0,
+    )
+
+
 async def capture(
     url: str,
     out_dir: Path,
@@ -322,6 +416,9 @@ async def capture(
     on_page: Callable[[PageRecord], None] | None = None,
 ) -> CaptureResult:
     config = config or RunConfig()
+    if config.platform in ("android", "ios") or config.appPath is not None:
+        return await capture_mobile(out_dir, config=config, project_id=project_id, on_page=on_page)
+
     personas = personas or [ANONYMOUS]
     started = datetime.now(UTC)
     run_id = f"run_{started:%Y%m%dT%H%M%S_%f}"

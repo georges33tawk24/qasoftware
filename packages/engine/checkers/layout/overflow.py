@@ -113,7 +113,7 @@ class ClippedContent:
                 )
 
 
-def gutter_row(element: ElementRecord, parent: ElementRecord) -> bool:
+def gutter_row(element: ElementRecord, surface: Surface) -> bool:
     """The negative-margin row idiom, which is the framework working as designed.
 
     Bootstrap, Foundation and every grid built the same way give `.row` a negative
@@ -121,12 +121,23 @@ def gutter_row(element: ElementRecord, parent: ElementRecord) -> bool:
     up with content outside the grid. The row genuinely overhangs its parent's content
     box by the gutter and genuinely paints nothing there. Reporting it means reporting
     every page of every site built on a grid.
+
+    Component frameworks (Angular, Vue, React) wrap `.row` in custom host elements like
+    `<app-category>`, so the padding lives on an ancestor container rather than the
+    immediate parent.
     """
     overhang = -min(element.styles.marginLeft, element.styles.marginRight)
     if overhang <= 0:
         return False
-    padding = min(parent.styles.paddingLeft, parent.styles.paddingRight)
-    return padding + SLACK_PX >= overhang
+    current: ElementRecord | None = surface.by_id.get(element.parentId or "")
+    depth = 0
+    while current is not None and depth < 4:
+        padding = min(current.styles.paddingLeft, current.styles.paddingRight)
+        if padding + SLACK_PX >= overhang:
+            return True
+        current = surface.by_id.get(current.parentId or "")
+        depth += 1
+    return False
 
 
 @checker
@@ -146,7 +157,7 @@ class ContainerOverflow:
                     continue
                 if parent.styles.overflow in HIDDEN_OVERFLOW or parent.box.w <= 0:
                     continue
-                if gutter_row(element, parent):
+                if gutter_row(element, surface):
                     continue
                 spill = right(element.box) - right(parent.box)
                 if spill <= SLACK_PX:

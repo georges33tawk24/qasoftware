@@ -107,10 +107,14 @@ class RepeatedGroupGaps:
     def _run(
         self, surface: Surface, signature: str, members: list[ElementRecord]
     ) -> Iterable[Finding]:
+        if members[0].styles.display == "inline":
+            return  # inline text links inside prose have gaps decided by words, not layout
         gaps = list(sibling_gaps(members))
         if len(gaps) < 2:
             return
         values = [round(gap, 1) for _, _, gap in gaps]
+        if any(v < 0 for v in values):
+            return  # wrapped across lines or multi-column, not a single 1D row or column
         expected = median(values)
         for (_, second, _raw), value in zip(gaps, values, strict=True):
             if abs(value - expected) <= GAP_TOLERANCE_PX:

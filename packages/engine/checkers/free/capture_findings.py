@@ -88,6 +88,7 @@ class FailedRequests:
                 if not broken or entry.url in seen:
                     continue
                 seen.add(entry.url)
+                clean_url = urlsplit(entry.url)._replace(query="", fragment="").geturl()
                 yield page_finding(
                     self,
                     page,
@@ -99,7 +100,7 @@ class FailedRequests:
                     severity=Severity.major
                     if entry.type in ("script", "stylesheet", "document", "fetch", "xhr")
                     else Severity.minor,
-                    stable_key=synthetic_key(self.id, entry.url),
+                    stable_key=synthetic_key(self.id, clean_url),
                     data={"url": entry.url, "status": entry.status, "type": entry.type},
                 )
 

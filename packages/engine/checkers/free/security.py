@@ -206,9 +206,12 @@ every path on the site, so `critical` has to be earned by the body and not the s
 def _looks_like(path: str, sample: str | None) -> bool:
     if not sample:
         return False
+    lowered = sample[:400].lower()
+    if "<html" in lowered or "<!doctype" in lowered:
+        return False
     markers = SIGNATURES.get(path)
     if markers is None:
-        return "<html" not in sample[:400].lower()
+        return True
     return any(marker.lower() in sample.lower() for marker in markers)
 
 

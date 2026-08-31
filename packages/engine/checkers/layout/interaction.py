@@ -5,16 +5,21 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 from engine.artifact.context import Capability, RunContext
-from engine.artifact.geometry import contains, intersection_area
+from engine.artifact.geometry import bottom, contains, right
 from engine.checkers.base import checker
 from engine.checkers.support import clipped_away, element_finding, surfaces
 from engine.issues.models import Category, Finding, Severity
 
 MIN_OVERLAP_AREA = 16.0
+MIN_OVERLAP_SPAN = 2.0
 MAX_CLICKABLES = 400
 """ponytail: the overlap test is O(n²) on clickable elements. Four hundred is already an
 unusual page; beyond it the pairwise pass is skipped rather than run for a minute.
-Upgrade path is a sweep line if a real site ever needs it."""
+Upgrade path is a sweep line if a real site ever needs it.
+
+A 1px overlap (e.g. margin-left: -1px) is the standard CSS border-collapse idiom used
+across button groups, pagination, tabs, and input groups. Both width and height must
+overlap by more than a border seam to be an actual control overlap defect."""
 
 
 @checker
@@ -37,7 +42,11 @@ class OverlappingClickables:
                         continue
                     if contains(first.box, second.box) or contains(second.box, first.box):
                         continue
-                    area = intersection_area(first.box, second.box)
+                    w = min(right(first.box), right(second.box)) - max(first.box.x, second.box.x)
+                    h = min(bottom(first.box), bottom(second.box)) - max(first.box.y, second.box.y)
+                    if w < MIN_OVERLAP_SPAN or h < MIN_OVERLAP_SPAN:
+                        continue
+                    area = w * h
                     if area < MIN_OVERLAP_AREA:
                         continue
                     yield element_finding(

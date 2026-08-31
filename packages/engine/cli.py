@@ -72,6 +72,12 @@ def _capture(args: argparse.Namespace) -> int:
         maskSelectors=args.mask,
         pageTimeoutMs=args.timeout,
         vitalsSamples=args.vitals_samples,
+        platform=getattr(args, "platform", "web"),
+        appPath=getattr(args, "app_path", None),
+        appPackage=getattr(args, "app_package", None),
+        appActivity=getattr(args, "app_activity", None),
+        bundleId=getattr(args, "bundle_id", None),
+        appiumUrl=getattr(args, "appium_url", "http://127.0.0.1:4723"),
     )
 
     def announce(page: PageRecord) -> None:
@@ -466,6 +472,17 @@ def build_parser() -> argparse.ArgumentParser:
         default=RunConfig().vitalsSamples,
         help="page loads used to measure web vitals; 1 disables sampling",
     )
+    cap.add_argument(
+        "--platform",
+        choices=["web", "android", "ios"],
+        default="web",
+        help="target platform (web, android, ios)",
+    )
+    cap.add_argument("--app", dest="app_path", help="path to .apk (Android) or .ipa/.app (iOS)")
+    cap.add_argument("--package", dest="app_package", help="Android application package name")
+    cap.add_argument("--activity", dest="app_activity", help="Android launch activity")
+    cap.add_argument("--bundle-id", help="iOS application bundle identifier")
+    cap.add_argument("--appium-url", default="http://127.0.0.1:4723", help="Appium server endpoint")
     cap.set_defaults(handler=_capture)
 
     fig = sub.add_parser("figma", help="ingest a Figma file and match it to the run")

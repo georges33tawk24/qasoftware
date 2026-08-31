@@ -159,6 +159,25 @@ class RunConfig(ArtifactModel):
     """Per-project words the spell checker must accept: brand names, product names,
     jargon. Every false positive belongs here rather than in a lowered threshold."""
 
+    # Mobile native app settings (Phase 11 — SPEC §19)
+    platform: Literal["web", "android", "ios"] = "web"
+    appPath: str | None = None
+    """Absolute path or download URL to .apk (Android) or .ipa/.app (iOS)."""
+    appPackage: str | None = None
+    """Android application package name (e.g. com.example.app)."""
+    appActivity: str | None = None
+    """Android launch activity (e.g. .MainActivity)."""
+    bundleId: str | None = None
+    """iOS application bundle identifier (e.g. com.example.iosapp)."""
+    appiumUrl: str = "http://127.0.0.1:4723"
+    """Appium WebDriver server endpoint."""
+    deviceName: str | None = None
+    """Target simulator/emulator or physical device name."""
+    automationName: str | None = None
+    """UiAutomator2 (Android default) or XCUITest (iOS default)."""
+    mitmproxyPort: int | None = None
+    """Local proxy port for capturing mobile network traffic into network.json."""
+
 
 class RunManifest(ArtifactModel):
     """`run.json` — config, target, timings, status, git sha of the checker suite."""
